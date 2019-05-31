@@ -2,13 +2,13 @@
 
 The developers for this project was:
 
-##Eduardo de Rivero
+## Eduardo de Rivero
 
-##Yuleymi Sihuinta
+## Yuleymi Sihuinta
 
-##Maybol
+## Maybol
 
-##David Panibra
+## David Panibra
 
-##Renzo
+## Renzo
 
