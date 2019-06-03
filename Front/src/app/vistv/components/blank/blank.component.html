@@ -1,0 +1,75 @@
+<div class="container-fluid" id="cont">
+    <br>
+    <h4 class="">Información Actual de su Restaurant</h4>
+    <br>
+    
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-3 m-0 p-0">
+          <img src="http://placehold.it/310x250" alt="">
+        </div>
+    
+        <div class="col-md-3  m-0 p-0">
+          <mat-form-field  appearance="outline">
+              <mat-label>Nombre del Restaurant</mat-label>
+            <input matInput placeholder="Nombre del Restaurant" value="Tacos Mexi" readonly>
+          </mat-form-field>
+    
+          <mat-form-field appearance="outline">
+              <mat-label>Referencia de Dirección</mat-label>
+            <input matInput placeholder="Referencia de dirección" value="Frente al Mall Aventura Porongoche" readonly >
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="outline" id="textDesc">
+              <mat-label>Información del Negocio</mat-label>
+            <textarea matInput readonly placeholder="Información del negocio" 
+            value="Nos dedicamos a la venta de tacos ridiendo un homenaje a la comida mexicana con una pizca de sabor peruano"></textarea>
+          </mat-form-field>
+          
+    
+        </div>
+    
+        <div class="col-md-4  m-0 p-0">
+    
+        </div>
+    
+        <div class="col-md-2  m-0 p-0">
+          <br>
+          <br>
+          <br>
+          <div class="example-button-row">
+            <button class="btn-block m-10" mat-raised-button color="primary" (click)="openDialog()">Editar Información</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <hr>
+    
+    
+    <!-- BOTONES QUE LLAMAN A LOS DEMAS COMPONENTES -->
+    
+    <div class="row">
+      <div class="col-md-4 p-1">
+        <!-- <app-lista-usuarios></app-lista-usuarios> -->  
+          <div class="example-button-row">
+            <button class="btn-block p-1" mat-raised-button color="primary" [routerLink]="[ '/vistv/prin']"><strong> <a matLine >Dashboard</a></strong></button>
+          </div>
+      </div>
+      <div class="col-md-4 p-1">
+        <!-- <app-chat></app-chat> -->
+        <div class="example-button-row">
+          <button class="btn-block p-1" mat-raised-button color="primary" [routerLink]="[ '/vistv/edmen']"> <strong> <a matLine > Carta</a> </strong></button>      
+        </div>
+      </div>
+      <div class="col-md-4 p-1">
+        <!-- <app-chat></app-chat> -->
+        <div class="example-button-row">
+          <button class="btn-block p-1" mat-raised-button color="primary" [routerLink]="[ '/vistv/datsen']"> <strong>  <a matLine >Datos Sensibles</a> </strong></button>      
+        </div>
+      </div>
+    </div>
+    <router-outlet></router-outlet>
+    
+</div>
+

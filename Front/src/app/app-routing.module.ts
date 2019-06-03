@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { InicioComponent } from './components/inicio/inicio.component';
-import { PromocionesComponent } from './components/promociones/promociones.component';
+import { GestRestComponent } from './components/gest-rest/gest-rest.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: InicioComponent
+    component: GestRestComponent
   },
   {
-    path: 'promo',
-    component: PromocionesComponent
+    path: 'vistv',
+    loadChildren: './vistv/vistv.module#VistvModule'
   }
 ];
 

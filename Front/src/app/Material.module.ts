@@ -1,17 +1,59 @@
 import { NgModule } from '@angular/core';
-import { MatButtonModule, MatCheckboxModule } from '@angular/material';
-import { MatCardModule } from '@angular/material/card';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatListModule } from '@angular/material/list';
+import { CommonModule } from '@angular/common';
+import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import { ChartsModule } from 'ng2-charts';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import {MatTableModule} from '@angular/material/table';
+import {MatDialogModule} from '@angular/material/dialog';
+import { FormsModule} from '@angular/forms';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
+// import {MatTableDataSource} from '@angular/material/table';
+
+// import { ChartsModule, WavesModule } from 'angular-bootstrap-md'
+// import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 
 @NgModule({
   declarations: [],
-  imports: [MatButtonModule, MatCheckboxModule, MatCardModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatIconModule, MatDividerModule, MatListModule],
-  exports: [MatButtonModule, MatCheckboxModule, MatCardModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatIconModule, MatDividerModule, MatListModule]
+  imports: [
+    CommonModule,
+    MatButtonModule, 
+    MatCheckboxModule,
+    ChartsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
+    MatDialogModule,
+    FormsModule,
+    MatSnackBarModule
+    // MatTableDataSource
+
+
+
+  ],
+  exports:[
+    MatButtonModule, 
+    MatCheckboxModule,
+    ChartsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
+    MatDialogModule,
+    FormsModule,
+    MatSnackBarModule
+    // MatTableDataSource
+
+  ]
 })
 export class MaterialModule { }

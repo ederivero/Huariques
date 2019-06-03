@@ -1,5 +1,5 @@
 {
-  "name": "huariques",
+  "name": "gestion-rest",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@agm/core": "^1.0.0-beta.5",
+    "@agm/core": "^1.0.0-beta.6",
     "@angular/animations": "^8.0.0",
     "@angular/cdk": "^8.0.0",
     "@angular/common": "~8.0.0",
@@ -22,11 +22,15 @@
     "@angular/platform-browser": "~8.0.0",
     "@angular/platform-browser-dynamic": "~8.0.0",
     "@angular/router": "~8.0.0",
+    "angular-material-time-picker": "^1.0.8",
     "bootstrap": "^4.3.1",
+    "chart.js": "^2.5.0",
     "hammerjs": "^2.0.8",
     "jquery": "^3.4.1",
-    "popper.js": "^1.15.0",
-    "react-social-login-buttons": "^2.3.1",
+    "luxon": "^1.16.0",
+    "mdbootstrap": "^4.8.2",
+    "ng2-charts": "^2.2.4",
+    "ngx-material-timepicker": "^3.1.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"

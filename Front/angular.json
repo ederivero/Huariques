@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Huariques": {
+    "gestionRest": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Huariques",
+            "outputPath": "dist/gestionRest",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -28,11 +28,10 @@
             ],
             "styles": [
               "src/styles.scss"
+              
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.slim.js",
-              "node_modules/popper.js/dist/umd/popper.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "node_modules/chart.js/src/chart.js"
             ]
           },
           "configurations": {
@@ -65,18 +64,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Huariques:build"
+            "browserTarget": "gestionRest:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "Huariques:build:production"
+              "browserTarget": "gestionRest:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Huariques:build"
+            "browserTarget": "gestionRest:build"
           }
         },
         "test": {
@@ -113,15 +112,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "Huariques:serve"
+            "devServerTarget": "gestionRest:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "Huariques:serve:production"
+              "devServerTarget": "gestionRest:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "Huariques"
+  "defaultProject": "gestionRest"
 }

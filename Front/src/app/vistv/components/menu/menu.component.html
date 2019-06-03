@@ -1,0 +1,59 @@
+<br>
+<h2 class=""> Edite su Carta</h2>
+<br>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+      <img src="http://placehold.it/310x217" alt="">
+    </div>
+
+    <div class="col-md-3">
+      <mat-form-field>
+        <input matInput placeholder="Nombre del Producto" value="Taco al Pastor" >
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Precio del producto" value="S/. 4.00" >
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-select placeholder="Tacos" >
+          <mat-option value="option">Hamburguesas</mat-option>
+          <mat-option value="option">Emolientes</mat-option>
+          <mat-option value="option">Anticuchos</mat-option>
+          <mat-option value="option">Tacos</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <small style="color:green">*Sus precios no seran publicados</small>
+
+    </div>
+
+    <div class="col-md-4">
+      <mat-form-field id="textDesc">
+        <textarea matInput placeholder="Descripción del producto" 
+          value="Sus ingredientes principales son carne adobada, asada, servida en finas rebanadas sobre pequeñas tortillas de maíz, la carne puede ser una combinación de carne de cerdo y carne de ternera, aunque lo mas común es que sea solo carne de puerco."></textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-2">
+      <br>
+      <br>
+      <br>
+
+      <div class="example-button-row">
+        <button class="btn-block m-10" mat-raised-button color="primary" (click)="openSnackBar()">Agregar Producto</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<hr>
+
+
+
+<!-- TABLA -->
+
+<app-tabla-producto></app-tabla-producto>

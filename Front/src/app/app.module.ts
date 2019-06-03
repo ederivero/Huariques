@@ -3,32 +3,22 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './Material.module';
-import { InicioComponent } from './components/inicio/inicio.component';
-import { PromocionesComponent } from './components/promociones/promociones.component';
-
-import { AgmCoreModule } from '@agm/core';
-import { LoginComponent } from './components/login/login.component';
+import { GestRestComponent } from './components/gest-rest/gest-rest.component';
+import { MaterialModule } from './material.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+// import { MatTableDataSource } from '@angular/material';
 
 @NgModule({
   declarations: [
     AppComponent,
-    InicioComponent,
-    PromocionesComponent,
-    LoginComponent
+    GestRestComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
     MaterialModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBcjhtE0FIFEO92Z_7xKQWODx3I_QXq33E'
-    })
-  ],
-  entryComponents:[
-    LoginComponent
+    // MatTableDataSource
   ],
   providers: [],
   bootstrap: [AppComponent]

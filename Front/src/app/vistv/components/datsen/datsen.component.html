@@ -1,0 +1,47 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4 p-1">
+
+      <div>
+        Actualiza tus datos sensibles
+        <br>
+        <br>
+        <form action="" class="p-3">
+          <mat-form-field>
+            <input matInput placeholder="Dirección" value="Urb. Monterrey 102">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput type="number" placeholder="Teléfono" value="941271568">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Latitud" value="-16.4142104" readonly>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput type="number" placeholder="Longitud" value="-71.5398665" readonly>
+          </mat-form-field>
+
+
+          <br>
+          <small style="color:green">*Sus nuevos datos serán verificados y luego actualizados</small>
+          <br>
+          <br>
+          <div class="example-button-row">
+            <button class="m-10" mat-raised-button color="warn">Enviar Actualización de Datos</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-md-8 p-1">
+      <div>
+        Puntuaciones
+        <br>
+        <!-- <app-anillo-chart></app-anillo-chart> -->
+        <app-mapa-datasensible></app-mapa-datasensible>
+      </div>
+    </div>
+  </div>
+</div>
