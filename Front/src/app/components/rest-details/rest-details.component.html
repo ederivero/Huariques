@@ -1,0 +1,161 @@
+<div class="container mt-5 mb-3">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card mb-3">
+        <img style="height: 300px; width: 100%; display: block;"
+          src="https://okdiario.com/img/2019/05/27/dia-mundial-de-la-hamburguesa-655x368.jpg" alt="Card image">
+      </div>
+      <div id="titulo-imagen-restaurante" class="">
+        <h4 id="texto-titulo-imagen-restaurante">restaurante el comelon :v</h4>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" id="panelHorarios">
+        <mat-expansion-panel-header class="bg-primary">
+          <mat-panel-title>
+            Atencion
+          </mat-panel-title>
+          <mat-panel-description>
+            Abierto hasta las 6:00 PM &nbsp; &nbsp;<h6>
+              {{panelOpenState ? 'Cerrar' : 'ver mas horarios'}}
+            </h6>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>Lunes</p>
+        <p>Martes</p>
+        <p>Miercoles</p>
+        <p>Jueves</p>
+        <p>Viernes</p>
+        <p>Sabado</p>
+        <p>Domingo</p>
+      </mat-expansion-panel>
+      <small style="padding-left: 15px">tambien atendemos feriados</small><small class=""
+        style="float: right; padding-right:15px "><img height="50px" style="margin-right: -25px" width="50px"
+          src="../../assets/soles.svg" alt=""><img height="50px" style="margin-right: -25px" width="50px"
+          src="../../assets/soles.svg" alt=""><img height="50px" style="margin-right: -25px" width="50px"
+          src="../../assets/soles.svg" alt=""></small>
+    </div>
+  </div>
+</div>
+<div class="container mb-5 ">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+      <ngb-carousel *ngIf="images">
+        <ng-template ngbSlide>
+          <img width="100%"
+            src="https://www.eluniversal.com.mx/sites/default/files/styles/f03-651x400/public/2019/05/28/carls_junior_hamburgesa_a_1_peso.jpg?itok=D7e2Hwb6"
+            alt="Random first slide">
+          <div class="carousel-caption">
+            <h3>Imagen1</h3>
+            <p>Hamburguesas</p>
+          </div>
+        </ng-template>
+        <ng-template ngbSlide>
+          <img width="100%"
+            src="https://img.elcomercio.pe/files/ec_article_multimedia_gallery/uploads/2017/09/12/59b8587e1fdc8.jpeg"
+            alt="Random second slide">
+          <div class="carousel-caption">
+            <h3>Imagen2</h3>
+            <p>Anticuchos</p>
+          </div>
+        </ng-template>
+        <ng-template ngbSlide>
+          <img width="100%"
+            src="https://img.elcomercio.pe/files/ec_article_multimedia_gallery/uploads/2017/11/20/5a134daf63fca.jpeg"
+            alt="Random third slide">
+          <div class="carousel-caption">
+            <h3>Imagen3</h3>
+            <p>Salchipapa</p>
+          </div>
+        </ng-template>
+        <ng-template ngbSlide>
+          <img width="100%"
+            src="https://truffle-assets.imgix.net/1t1bxm43v4e3_2bWSDH2U1iuQ2SoYUawq4o_empanadas-de-carne-fritas_landscapeThumbnail_es.jpeg"
+            alt="Random fourth slide">
+          <div class="carousel-caption">
+            <h3>Imagen4</h3>
+            <p>Caparinas</p>
+          </div>
+        </ng-template>
+      </ngb-carousel>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+</div>
+<div class="container mb-5">
+  <div class="row mb-3">
+    <div class="col-md-8">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>Shiba Inu</mat-card-title>
+          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+            bred for hunting.
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-md-4 my-auto">
+      <star-rating size="large" labelText="5" [disabled]="true" [starType]="'icon'" [rating]="5"
+        [showHalfStars]="true"></star-rating>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-md-8">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>Shiba Inu</mat-card-title>
+          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+            bred for hunting.
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-md-4 my-auto">
+      <star-rating size="large" labelText="3" [disabled]="true" [starType]="'icon'" [rating]="3"
+        [showHalfStars]="true"></star-rating>
+    </div>
+  </div>
+  <div class="row mb-5">
+    <div class="col-md-8">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>Shiba Inu</mat-card-title>
+          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+            bred for hunting.
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-md-4 my-auto">
+      <star-rating size="large" labelText="1.5" [disabled]="true" [starType]="'icon'" [rating]="1.5"
+        [showHalfStars]="true"></star-rating>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <star-rating size="large" [starType]="'icon'"
+      [hoverEnabled]="true" [showHalfStars]="true"></star-rating>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+</div>
