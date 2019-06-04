@@ -16,10 +16,41 @@ agm-map {
     background: rgb(235,104,100);
     background: linear-gradient(90deg, rgba(235,104,100,60%) 0%,rgba(235,104,100,60%) 50%, rgba(167,5,5,0) 100%);
 }
+#imagen-huarique-detail-div{
+    width: 80%;
+    align-content: center;
+    margin: auto;
+    padding: auto;
+    height: 400px;
+    overflow: hidden;
+    z-index: 3;
+}
+#linea{
+    position: absolute;
+    align-content: center;
+    left: 50%;
+    height: 400px;
+    width: 5px;
+    background-color: rgb(235, 104, 100);
+}
+#estado{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    z-index: 4;
+}
+#panelHorarios{
+    background-color: beige;
+}
 
 @media (max-width:700px){
     #rest-title{
-
         color:white;
     }
     h1{
