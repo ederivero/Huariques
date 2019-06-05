@@ -37,7 +37,8 @@ import { CalificanosComponent } from './components/calificanos/calificanos.compo
     })
   ],
   entryComponents:[
-    LoginComponent
+    LoginComponent,
+    CalificanosComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

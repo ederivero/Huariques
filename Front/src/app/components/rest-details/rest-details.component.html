@@ -1,4 +1,5 @@
-<div style="background-color:">
+<div style="background: rgb(242,222,162);
+background: linear-gradient(0deg, rgba(242,222,162,0) 0%, rgba(242,222,162,1) 50%, rgba(242,222,162,1) 100%);">
   <div id="rest-title">
     <h1>{{ title }}</h1>
   </div>
@@ -20,7 +21,7 @@
             <mat-expansion-panel-header class="bg-primary">
               <mat-panel-title>
                 Atencion:
-                <b>&nbsp;&nbsp;&nbsp;Abierto hasta las {{horarioFin}} &nbsp; &nbsp;</b>
+                <b>&nbsp;&nbsp;&nbsp;Abierto hasta las {{horariofinActual}} &nbsp; &nbsp;</b>
               </mat-panel-title>
               <mat-panel-description>
                 <h6>
@@ -30,8 +31,8 @@
             </mat-expansion-panel-header>
             <div class="mt-3 row text-justify">
               <div class="col-md-12 mb-2">Abierto: </div>
-              <div class="col-md-12 mb-2" *ngFor="let day of horarios">{{day}} desde las {{horarioInicio}} hasta las
-                {{horarioFin}}</div>
+              <div class="col-md-12 mb-2" *ngFor="let horario of horarios">{{horario.rest_dAtencion}} desde las {{horario.rest_hApertura}} hasta las
+                {{horario.rest_hCierre}}</div>
             </div>
           </mat-expansion-panel>
         </div>
@@ -60,7 +61,7 @@
           <mat-card-header>
             <div mat-card-avatar class="example-header-image"></div>
             <mat-card-title>{{comentario.nombre}}</mat-card-title>
-            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+            <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
           </mat-card-header>
           <mat-card-content>
             <p class="ml-5">

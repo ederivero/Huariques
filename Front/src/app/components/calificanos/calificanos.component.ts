@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-calificanos',
@@ -8,8 +8,11 @@ import { MatDialog } from '@angular/material';
 })
 export class CalificanosComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
-  
+  constructor(public dialogRef: MatDialogRef<CalificanosComponent>) { }
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
 
   ngOnInit() {
   }
