@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <form>
+        <input id="nombre"type="text" placeholder="nombre">
+        <div id="contenedor"></div>
+        <input type="file" >
+        <button type="submit" onClick="">enviar gatitos</button>
+    </form>
+</body>
+<script>
+    window.onload=()=>{
+    let contenedor = document.getElementById("contenedor")
+    let obtenerCoords = () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.watchPosition((pos)=>{
+                contenedor.innerHTML=`latitud ${pos.coords.latitude} longitud ${pos.coords.longitude}`
+            },(error)=>{
+                switch(error.code){
+                    case error.PERMISSION_DENIED:
+                    contenedor.innerHTML="denegado por el usuario"
+                    break;
+                }
+            })
+        }else{
+            document.getElementById("contenedor").innerHTML="no tienes gps"
+        }
+    };
+    obtenerCoords();
+    handleSubmit=(e)=>{
+        e.preventDefault();
+        let formulario = e.target;
+        let objVideo = {
+            vid_titu: this.nomRef.value,
+            vid_desc: this.descRef.value,
+            vid_link: this.linkRef.value,
+        }
+        let headers = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(objVideo)
+        };
+        console.log(this.videoRef.current.files[0]);
+        // crear una variable en codigo
+        var formData = new FormData();
+        formData.append('archivo',
+            this.videoRef.current.files[0],
+            this.videoRef.current.files[0].name);
+
+        fetch('http://localhost:3700/api/video', headers).then(response => {
+            return response.json();
+        }).then(data => {
+            if (data.message === 'created') {
+                let headersVideo = {
+                    method: 'POST',
+                    body: formData
+                };
+                fetch(`http://localhost:3700/api/video/upload/${data.content._id}`, headersVideo)
+                    .then(response2 => {
+                        return response2.json();
+                    })
+                    .then(data2 => {
+                        if (data2.message === "updated") {
+                            // console.log(data2);
+                            formulario.reset();
+                            // e.target.reset();
+                            // this.setState({ open: true });
+                            this.handleClick();
+                            this.setState({
+                                idVideoCreado: data2.content._id
+                            })
+                        } else {
+                            console.log("Error");
+                        }
+                    })
+            }
+        })
+    }
+}
+</script>
+
+</html>
