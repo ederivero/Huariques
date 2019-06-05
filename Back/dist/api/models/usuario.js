@@ -43,6 +43,10 @@ exports.usuario_model = (sequelize, type) => {
         usu_tipo: {
             type: type.STRING(1),
             allowNull: false,
+        },
+        usu_foto: {
+            type: type.STRING(200),
+            allowNull: true
         }
     }, {
         timestamps: false,

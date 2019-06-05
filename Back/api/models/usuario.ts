@@ -45,6 +45,10 @@ export var usuario_model = (sequelize: Sequelize, type: any) => {
             usu_tipo:{
                 type: type.STRING(1),
                 allowNull: false,
+            },
+            usu_foto:{
+                type: type.STRING(200),
+                allowNull: true
             }
         },
         {

@@ -1,12 +1,34 @@
 // PRODUCTO CONTROLLERS
 
 import { Request, Response } from 'express';
-import { Producto } from './../config/sequelize'
+import { Producto } from './../config/sequelize';
+const Sequelize = require('sequelize');
 
+const Op = Sequelize.Op;
 export var producto_control = {
-
+    findByLike: (req: Request, res: Response) => {
+        let { palabra } = req.params;
+        Producto.findAll({
+            where: {
+                prod_nom: {
+                    [Op.like]: '%' + palabra + '%'
+                }
+            }
+        }).then((respuesta: any) => {
+            if (respuesta) {
+                res.status(200).json({
+                    message: 'Ok',
+                    content: respuesta
+                })
+            } else {
+                res.status(400).json({
+                    message: 'Not found'
+                })
+            }
+        })
+    },
     getAll: (req: Request, res: Response) => {
-        Producto.findAll().then((producto: any) => {  
+        Producto.findAll().then((producto: any) => {
             if (producto) {
                 let response = {
                     message: 'Ok',
@@ -20,12 +42,13 @@ export var producto_control = {
                 };
                 res.status(201).json(response);
             }
-        }).catch((error: any) => {console.log("Error => "+error);
+        }).catch((error: any) => {
+            console.log("Error => " + error);
         });
     },
     getById: (req: Request, res: Response) => {
         let { prod_id } = req.params;
-        Producto.findByPk(prod_id).then((producto: any) => {
+        Producto.findAll({ where: { prod_id } }).then((producto: any) => {
             if (producto) {
                 let response = {
                     message: 'Ok',
@@ -39,8 +62,9 @@ export var producto_control = {
                 };
                 res.status(201).json(response);
             }
-        }).catch((error: any) => {console.log("Error => "+error);
-    });
+        }).catch((error: any) => {
+            console.log("Error => " + error);
+        });
     },
     create: (req: Request, res: Response) => {
         Producto.create(req.body).then((producto: any) => {
@@ -57,38 +81,16 @@ export var producto_control = {
                 };
                 res.status(400).json(response);
             }
-        }).catch((error: any) => {console.log("Error => "+error);
-    });
-    },    
-    deleteById: (req: Request, res: Response) => {
-        let { prod_id } = req.params;
-        Producto.destroy({
-            where: {
-                prod_id: prod_id
-            }
-        }).then((producto: any) => {
-            if (producto) {
-                let response = {
-                    message: 'Ok',
-                    content: producto
-                };
-                res.status(200).json(response);
-            } else {
-                let response = {
-                    message: 'Error al eliminar producto',
-                    content: producto
-                };
-                res.status(201).json(response);
-            }
-        }).catch((error: any) => {console.log("Error => "+error);
-    });
+        }).catch((error: any) => {
+            console.log("Error => " + error);
+        });
     },
     upDateById: (req: Request, res: Response) => {
 
         let { prod_id } = req.params;
 
         Producto.update(req.body, {
-            where: { prod_id:prod_id }
+            where: { prod_id: prod_id }
         }
         ).then((producto: any) => {
             if (producto) {
@@ -104,8 +106,9 @@ export var producto_control = {
                 };
                 res.status(201).json(response);
             }
-        }).catch((error: any) => {console.log("Error => "+error);
-    });
+        }).catch((error: any) => {
+            console.log("Error => " + error);
+        });
     }
 
 }
