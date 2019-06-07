@@ -1,10 +1,10 @@
 "use strict";
-// OFERTA CONTROLLERS
+// PUNTUACION CONTROLLERS
 Object.defineProperty(exports, "__esModule", { value: true });
-const sequelize_1 = require("./../config/sequelize");
-exports.oferta_control = {
+const sequelize_1 = require("../config/sequelize");
+exports.puntuacion_control = {
     create: (req, res) => {
-        sequelize_1.Oferta.create(req.body).then((respuesta) => {
+        sequelize_1.Puntuaciones.create(req.body).then((respuesta) => {
             if (respuesta) {
                 let response = {
                     message: 'Ok',
@@ -23,22 +23,24 @@ exports.oferta_control = {
             console.log("Error => " + error);
         });
     },
-    update: (req, res) => {
-        let { prod_id } = req.params;
-        sequelize_1.Oferta.update(req.body, {
-            where: { prod_id }
-        }).then((restaurante) => {
-            if (restaurante) {
+    mostrar: (req, res) => {
+        let { id_cliente } = req.params;
+        sequelize_1.Puntuaciones.findAll({
+            where: {
+                regCliente_id: id_cliente
+            }
+        }).then((respuesta) => {
+            if (respuesta) {
                 let response = {
                     message: 'Ok',
-                    content: restaurante
+                    content: respuesta
                 };
                 res.status(200).json(response);
             }
             else {
                 let response = {
-                    message: 'Error al actualizar restaurante',
-                    content: restaurante
+                    message: 'Error',
+                    content: 'usuuto no encontrado'
                 };
                 res.status(201).json(response);
             }

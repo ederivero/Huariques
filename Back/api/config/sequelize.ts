@@ -15,7 +15,7 @@ export const sequelize = new Sequelize('UipUxZkjnm','UipUxZkjnm','70MzF37DVG',{
     host:'remotemysql.com',
     dialect:'mysql',
     timezone:'-05:00',
-    logging: console.log
+    // logging: console.log
 });
 export const Usuario:any  = usuario_model(sequelize,Sequelize);
 export const Restaurante:any = restaurante_model(sequelize,Sequelize);

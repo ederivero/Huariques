@@ -3,7 +3,7 @@
 import { Request, Response } from 'express';
 import { Oferta } from './../config/sequelize';
 
-export var ofertas_control = {
+export var oferta_control = {
     create: (req: Request, res: Response) => {
         Oferta.create(req.body).then((respuesta: any) => {
             if (respuesta) {

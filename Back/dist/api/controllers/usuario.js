@@ -24,8 +24,8 @@ exports.usuario_control = {
         });
     },
     getByEmail: (req, res) => {
-        let { usu_email } = req.params;
-        sequelize_1.Usuario.findAll({ where: { usu_email } }).then((usuario) => {
+        let { correo } = req.params;
+        sequelize_1.Usuario.findAll({ where: { usu_email: correo } }).then((usuario) => {
             if (usuario) {
                 let response = {
                     message: 'Ok',
@@ -91,9 +91,9 @@ exports.usuario_control = {
     },
     */
     upDateById: (req, res) => {
-        let { usu_id } = req.params;
+        let { id } = req.params;
         sequelize_1.Usuario.update(req.body, {
-            where: { usu_id }
+            where: { usu_id: id }
         }).then((usuario) => {
             if (usuario) {
                 let response = {

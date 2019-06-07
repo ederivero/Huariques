@@ -25,8 +25,8 @@ export var usuario_control = {
         });
     },
     getByEmail: (req: Request, res: Response) => {
-        let { usu_email } = req.params;
-        Usuario.findAll({ where: { usu_email }  }).then((usuario: any) => {
+        let { correo } = req.params;
+        Usuario.findAll({ where: { usu_email:correo }  }).then((usuario: any) => {
             if (usuario) {
                 let response = {
                     message: 'Ok',
@@ -91,10 +91,10 @@ export var usuario_control = {
     */
     upDateById: (req: Request, res: Response) => {
 
-        let { usu_id } = req.params;
+        let { id } = req.params;
 
         Usuario.update(req.body, {
-            where: { usu_id }
+            where: { usu_id:id }
         }
         ).then((usuario: any) => {
             if (usuario) {

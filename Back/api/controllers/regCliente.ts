@@ -27,9 +27,9 @@ export var regcliente_control = {
         });
     },
     findByRestaurante: (req: Request, res: Response) => {
-        let { rest_id } = req.params;
+        let { id_rest } = req.params;
         RegCliente.findAll({
-            where: { rest_id }
+            where: { rest_id: id_rest }
         }).then((respuesta: any) => {
             if (respuesta) {
                 res.status(200).json({
@@ -44,9 +44,9 @@ export var regcliente_control = {
         })
     },
     findByRestauranteAndUsuario: (req: Request, res: Response) => {
-        let { usu_id, rest_id } = req.params;
+        let { id_usu, id_rest } = req.params;
         RegCliente.findAll({
-            where: { usu_id, rest_id }
+            where: { usu_id: id_usu, rest_id: id_rest }
         }).then((respuesta: any) => {
             if (respuesta) {
                 res.status(200).json({
@@ -61,9 +61,9 @@ export var regcliente_control = {
         })
     },
     findByUsuario: (req: Request, res: Response) => {
-        let { usu_id } = req.params;
+        let { id_usu } = req.params;
         RegCliente.findAll({
-            where: { usu_id }
+            where: { usu_id: id_usu }
         }).then((respuesta: any) => {
             if (respuesta) {
                 res.status(200).json({

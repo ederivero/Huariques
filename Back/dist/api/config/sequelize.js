@@ -15,7 +15,6 @@ exports.sequelize = new Sequelize('UipUxZkjnm', 'UipUxZkjnm', '70MzF37DVG', {
     host: 'remotemysql.com',
     dialect: 'mysql',
     timezone: '-05:00',
-    logging: console.log
 });
 exports.Usuario = usuario_1.usuario_model(exports.sequelize, Sequelize);
 exports.Restaurante = restaurante_1.restaurante_model(exports.sequelize, Sequelize);

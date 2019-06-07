@@ -26,9 +26,9 @@ exports.regcliente_control = {
         });
     },
     findByRestaurante: (req, res) => {
-        let { rest_id } = req.params;
+        let { id_rest } = req.params;
         sequelize_1.RegCliente.findAll({
-            where: { rest_id }
+            where: { rest_id: id_rest }
         }).then((respuesta) => {
             if (respuesta) {
                 res.status(200).json({
@@ -44,9 +44,9 @@ exports.regcliente_control = {
         });
     },
     findByRestauranteAndUsuario: (req, res) => {
-        let { usu_id, rest_id } = req.params;
+        let { id_usu, id_rest } = req.params;
         sequelize_1.RegCliente.findAll({
-            where: { usu_id, rest_id }
+            where: { usu_id: id_usu, rest_id: id_rest }
         }).then((respuesta) => {
             if (respuesta) {
                 res.status(200).json({
@@ -62,9 +62,9 @@ exports.regcliente_control = {
         });
     },
     findByUsuario: (req, res) => {
-        let { usu_id } = req.params;
+        let { id_usu } = req.params;
         sequelize_1.RegCliente.findAll({
-            where: { usu_id }
+            where: { usu_id: id_usu }
         }).then((respuesta) => {
             if (respuesta) {
                 res.status(200).json({
