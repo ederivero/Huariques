@@ -28,7 +28,7 @@ export var producto_model = (sequelize: Sequelize, type: any) => {
                 allowNull: false,
             },
             prod_img: {
-                type: type.STRING(200),
+                type: type.STRING(50),
                 allowNull: false,
             },
         },

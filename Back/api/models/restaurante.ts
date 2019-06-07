@@ -36,7 +36,7 @@ export var restaurante_model = (sequelize: Sequelize, type: any) => {
                 allowNull: false,
             },
             rest_img: {
-                type: type.STRING(100),
+                type: type.STRING(50),
                 allowNull: false,
             },
             rest_refUbicacion: {
@@ -60,11 +60,11 @@ export var restaurante_model = (sequelize: Sequelize, type: any) => {
                 allowNull: true,
             },
             rest_estado:{
-                type:type.BOOLEAN,
+                type:type.STRING(1),
                 allowNull: false
             },
             rest_verificacion:{
-                type:type.BOOLEAN,
+                type:type.STRING(1),
                 allowNull:false
             }
             

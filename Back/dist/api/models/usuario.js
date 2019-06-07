@@ -12,7 +12,7 @@ exports.usuario_model = (sequelize, type) => {
             allowNull: false,
         },
         usu_email: {
-            type: type.STRING(60),
+            type: type.STRING(50),
             allowNull: false,
             unique: true
         },
@@ -20,16 +20,12 @@ exports.usuario_model = (sequelize, type) => {
             type: type.STRING(45),
             allowNull: false,
         },
-        usu_ape_pate: {
-            type: type.STRING(45),
-            allowNull: false,
-        },
-        usu_ape_mate: {
-            type: type.STRING(45),
+        usu_ape: {
+            type: type.STRING(60),
             allowNull: false,
         },
         usu_tel: {
-            type: type.STRING(50),
+            type: type.STRING(15),
             allowNull: true,
         },
         usu_hash: {
@@ -45,7 +41,7 @@ exports.usuario_model = (sequelize, type) => {
             allowNull: false,
         },
         usu_foto: {
-            type: type.STRING(200),
+            type: type.STRING(50),
             allowNull: true
         }
     }, {

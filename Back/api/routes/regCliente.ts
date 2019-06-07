@@ -1,5 +1,5 @@
 // REGISTRO CLIENTE ROUTER
-import {regcliente_control} from '../controllers/regcliente'
+import {regcliente_control} from '../controllers/regCliente'
 import {Router} from 'express';
 export var regcliente_router = Router();
 regcliente_router.post('/regcli/crear',regcliente_control.create);

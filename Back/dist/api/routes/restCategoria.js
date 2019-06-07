@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 // RSTAURANTE CATEGORIA ROUTER
-const restcategoria_1 = require("../controllers/restcategoria");
+const restCategoria_1 = require("../controllers/restCategoria");
 const express_1 = require("express");
 exports.restcategoria_router = express_1.Router();
-exports.restcategoria_router.post('/restcategoria/crear', restcategoria_1.restcategoria_control.create);
-exports.restcategoria_router.delete('/restcategoria/eliminar', restcategoria_1.restcategoria_control.delete);
+exports.restcategoria_router.post('/restcategoria/crear', restCategoria_1.restcategoria_control.create);
+exports.restcategoria_router.delete('/restcategoria/eliminar', restCategoria_1.restcategoria_control.delete);

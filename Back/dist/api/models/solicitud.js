@@ -10,11 +10,11 @@ exports.solicitud_model = (sequelize, type) => {
             allowNull: false,
         },
         sol_rSocial: {
-            type: type.STRING(60),
+            type: type.STRING(45),
             allowNull: false,
         },
         sol_direccion: {
-            type: type.STRING(100),
+            type: type.STRING(60),
             allowNull: false,
         },
         sol_lat: {
@@ -30,11 +30,11 @@ exports.solicitud_model = (sequelize, type) => {
             allowNull: false,
         },
         sol_tipo: {
-            type: type.BOOLEAN,
+            type: type.STRING(1),
             allowNull: false,
         },
         sol_desc: {
-            type: type.STRING(300),
+            type: type.STRING(100),
             allowNull: true
         }
     }, {

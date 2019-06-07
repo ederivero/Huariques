@@ -3,6 +3,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("./../config/sequelize");
 const Sequelize = require('sequelize');
+var path_module = require('path');
+var fs = require('fs');
 const Op = Sequelize.Op;
 exports.restaurante_control = {
     findByLike: (req, res) => {
@@ -50,11 +52,10 @@ exports.restaurante_control = {
     create: (req, res) => {
         if (req.files) {
             let ruta = req.files.rest_img.path;
-            let ruta2 = '';
-            for (let i = 7; i < ruta.length; i++) {
-                ruta2 = ruta2 + ruta[i];
-            }
-            //let nombreYExtension = ruta.split('images\\')[1];
+            // LOCALMENTE SE USA '\\'
+            // let nombreYExtension = ruta.split('\\')[1];
+            //PARA HEROKU SE USA '/'
+            let nombreYExtension = ruta.split('/')[1];
             let { rest_rSocial, rest_direccion, rest_telefono, rest_lat, rest_lng, rest_info, rest_refUbicacion, rest_dAtencion, rest_hApertura, rest_hCierre, rest_avisos, rest_estado, rest_verificacion, usu_id } = req.body;
             sequelize_1.Restaurante.create({
                 rest_rSocial,
@@ -63,7 +64,7 @@ exports.restaurante_control = {
                 rest_lat,
                 rest_lng,
                 rest_info,
-                rest_img: ruta2,
+                rest_img: nombreYExtension,
                 rest_refUbicacion,
                 rest_dAtencion,
                 rest_hApertura,
@@ -142,5 +143,15 @@ exports.restaurante_control = {
         }).catch((error) => {
             console.log("Error => " + error);
         });
+    },
+    getImagenByName: (req, res) => {
+        let ruta = `images/${req.params.name}`;
+        let rutaDefault = `images/default.png`;
+        if (fs.existsSync(ruta)) {
+            return res.sendFile(path_module.resolve(ruta));
+        }
+        else {
+            return res.sendFile(path_module.resolve(rutaDefault));
+        }
     }
 };

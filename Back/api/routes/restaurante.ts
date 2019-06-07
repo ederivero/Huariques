@@ -11,3 +11,4 @@ restaurante_router.put('/restaurante/actualizar/:prod_id',restaurante_control.up
 restaurante_router.get('/restaurante/traertodos',restaurante_control.getAll);
 restaurante_router.get('/restaurante//borrar/:rest_id',restaurante_control.deleteById);
 restaurante_router.get('/restaurante//encontrar/:palabra',restaurante_control.findByLike);
+restaurante_router.get('/restaurante/getImagenByName/:name',restaurante_control.getImagenByName);
