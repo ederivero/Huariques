@@ -48,8 +48,12 @@ export var restaurante_control = {
     },
     create: (req: Request, res: Response) => {
         if (req.files) {
-            let ruta = req.files.archivo.path;
-            let nombreYExtension = ruta.split('\\')[1];
+            let ruta = req.files.rest_img.path;
+            let ruta2='';
+            for (let i = 7; i < ruta.length; i++) {
+                ruta2=ruta2+ruta[i]
+            }
+            //let nombreYExtension = ruta.split('images\\')[1];
             let { rest_rSocial, rest_direccion, rest_telefono, rest_lat, rest_lng, rest_info, rest_refUbicacion, rest_dAtencion, rest_hApertura, rest_hCierre, rest_avisos, rest_estado, rest_verificacion, usu_id } = req.body;
             Restaurante.create({
                 rest_rSocial,
@@ -58,7 +62,7 @@ export var restaurante_control = {
                 rest_lat,
                 rest_lng,
                 rest_info,
-                rest_img: nombreYExtension,
+                rest_img: ruta2,
                 rest_refUbicacion,
                 rest_dAtencion,
                 rest_hApertura,

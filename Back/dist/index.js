@@ -5,7 +5,7 @@ const sequelize_1 = require("./api/config/sequelize");
 const restaurante_1 = require("./api/routes/restaurante");
 var express = require('express');
 var bodyParser = require('body-parser');
-const PUERTO = process.env.PORT || 3001;
+const PUERTO = process.env.PORT || 3000;
 var app = express();
 // configuración de bodyParser
 app.use(bodyParser.urlencoded({ extended: false }));

@@ -6,7 +6,7 @@ import { restaurante_router } from './api/routes/restaurante';
 
 var express = require('express');
 var bodyParser = require('body-parser');
-const PUERTO = process.env.PORT || 3001;
+const PUERTO = process.env.PORT || 3000;
 
 var app = express();
 
