@@ -1,3 +1,6 @@
-<agm-map [latitude]="lat" [longitude]="lng" [zoom]="13">
-  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="13"
+ (mapClick)="agregarMarcador($event)"
+ >
+  <agm-marker  [latitude]="objMarcador.lat" [longitude]="objMarcador.lng">
+  </agm-marker>
 </agm-map>

@@ -38,8 +38,7 @@ import { SnackbarProductComponent } from './components/snackbar-product/snackbar
   entryComponents:[
     ModalProductoComponent,
     ModelInforestComponent,
-    SnackbarProductComponent
-    
+    SnackbarProductComponent 
   ]
 })
 export class VistvModule { }
