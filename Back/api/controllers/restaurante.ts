@@ -3,6 +3,10 @@
 import { Request, Response } from 'express';
 import { Restaurante } from './../config/sequelize';
 const Sequelize = require('sequelize');
+
+const formidable = require('formidable');
+
+
 var path_module = require('path');
 var fs = require('fs');
 
@@ -48,6 +52,18 @@ export var restaurante_control = {
         });
     },
     create: (req: Request, res: Response) => {
+        new formidable.IncomingForm().parse(req, (err:any, fields:any, files:any) => {
+            if (err) {
+              console.error('Error', err)
+              throw err
+            }
+            // console.log('Fields', fields)
+            console.log('Files', files)
+            // files.map(file => {
+            //   console.log(file)
+            // })
+          })
+        /*
         if (req.files) {
             let ruta = req.files.rest_img.path;
             // LOCALMENTE SE USA '\\'
@@ -90,6 +106,7 @@ export var restaurante_control = {
                 console.log("Error => " + error);
             });
         }
+        */
 
     },
     deleteById: (req: Request, res: Response) => {
@@ -147,6 +164,28 @@ export var restaurante_control = {
         }else{
             return res.sendFile(path_module.resolve(rutaDefault));
         }
+    },
+    getById: (req: Request, res: Response) => {
+        let {id} = req.params;
+        Restaurante.findAll({
+            where:{
+                rest_id:id
+            }
+        }).then((restaurante: any) => {
+            if (restaurante) {
+                res.status(201).json({
+                    message: 'Ok',
+                    content: restaurante
+                });
+            } else {
+                res.status(400).json({
+                    message: 'Error',
+                    content: 'Error al traer restaurante'
+                });
+            }
+        }).catch((error: any) => {
+            console.log("Error => " + error);
+        });
     }
 
 }

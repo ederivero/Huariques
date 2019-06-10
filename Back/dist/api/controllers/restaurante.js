@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("./../config/sequelize");
 const Sequelize = require('sequelize');
+const formidable = require('formidable');
 var path_module = require('path');
 var fs = require('fs');
 const Op = Sequelize.Op;
@@ -49,14 +50,28 @@ exports.restaurante_control = {
         });
     },
     create: (req, res) => {
+        new formidable.IncomingForm().parse(req, (err, fields, files) => {
+            if (err) {
+                console.error('Error', err);
+                throw err;
+            }
+            // console.log('Fields', fields)
+            console.log('Files', files);
+            // files.map(file => {
+            //   console.log(file)
+            // })
+        });
+        /*
         if (req.files) {
             let ruta = req.files.rest_img.path;
             // LOCALMENTE SE USA '\\'
             // let nombreYExtension = ruta.split('\\')[1];
+            
             //PARA HEROKU SE USA '/'
             let nombreYExtension = ruta.split('/')[1];
+            
             let { rest_rSocial, rest_direccion, rest_telefono, rest_lat, rest_lng, rest_info, rest_refUbicacion, rest_dAtencion, rest_hApertura, rest_hCierre, rest_avisos, rest_estado, rest_verificacion, usu_id } = req.body;
-            sequelize_1.Restaurante.create({
+            Restaurante.create({
                 rest_rSocial,
                 rest_direccion,
                 rest_telefono,
@@ -72,24 +87,24 @@ exports.restaurante_control = {
                 rest_estado,
                 rest_verificacion,
                 usu_id
-            }).then((restaurante) => {
+            }).then((restaurante: any) => {
                 if (restaurante) {
                     res.status(201).json({
                         message: 'Ok',
                         content: restaurante
                     });
-                }
-                else {
-                    res.status(400).json({
+                } else {
+                    res.status(400).json( {
                         message: 'Error',
                         content: 'Error al crear restaurante'
                     });
                 }
-            }).catch((error) => {
+            }).catch((error: any) => {
                 res.send(error);
                 console.log("Error => " + error);
             });
         }
+        */
     },
     deleteById: (req, res) => {
         let { rest_id } = req.params;
@@ -146,5 +161,28 @@ exports.restaurante_control = {
         else {
             return res.sendFile(path_module.resolve(rutaDefault));
         }
+    },
+    getById: (req, res) => {
+        let { id } = req.params;
+        sequelize_1.Restaurante.findAll({
+            where: {
+                rest_id: id
+            }
+        }).then((restaurante) => {
+            if (restaurante) {
+                res.status(201).json({
+                    message: 'Ok',
+                    content: restaurante
+                });
+            }
+            else {
+                res.status(400).json({
+                    message: 'Error',
+                    content: 'Error al traer restaurante'
+                });
+            }
+        }).catch((error) => {
+            console.log("Error => " + error);
+        });
     }
 };
