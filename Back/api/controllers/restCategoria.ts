@@ -7,17 +7,15 @@ export var restcategoria_control = {
     create: (req: Request, res: Response) => {
         RestCategoria.create(req.body).then((respuesta: any) => {
             if (respuesta) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: respuesta
-                };
-                res.status(201).json(response);
+                });
             } else {
-                let response = {
+                res.status(400).json({
                     message: 'Error',
                     content: 'Error al crear categoria con restaurante'
-                };
-                res.status(400).json(response);
+                });
             }
         }).catch((error: any) => {
             console.log("Error => " + error);
@@ -27,17 +25,15 @@ export var restcategoria_control = {
         let { rest_id, cat_id } = req.body
         RestCategoria.destroy({ where: { rest_id, cat_id } }).then((respuesta: any) => {
             if (respuesta) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: respuesta
-                };
-                res.status(201).json(response);
+                });
             } else {
-                let response = {
+                res.status(400).json({
                     message: 'Error',
-                    content: 'Error al crear categoria con restaurante'
-                };
-                res.status(400).json(response);
+                    content: 'Error al eliminar categoria con restaurante'
+                });
             }
 
         }).catch((error: any) => {

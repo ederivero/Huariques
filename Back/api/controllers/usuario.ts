@@ -8,17 +8,15 @@ export var usuario_control = {
     getAll: (req: Request, res: Response) => {
         Usuario.findAll().then((usuario: any) => {
             if (usuario) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: usuario
-                };
-                res.status(200).json(response);
+                });
             } else {
-                let response = {
+                res.status(400).json({
                     message: 'Error',
                     content: 'Error al traer usuarios'
-                };
-                res.status(201).json(response);
+                });
             }
         }).catch((error: any) => {
             console.log("Error => " + error);
@@ -26,19 +24,17 @@ export var usuario_control = {
     },
     getByEmail: (req: Request, res: Response) => {
         let { correo } = req.params;
-        Usuario.findAll({ where: { usu_email:correo }  }).then((usuario: any) => {
+        Usuario.findAll({ where: { usu_email: correo } }).then((usuario: any) => {
             if (usuario) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: usuario
-                };
-                res.status(200).json(response);
+                });
             } else {
-                let response = {
+                res.status(400).json({
                     message: 'Error',
-                    content: 'usuuto no encontrado'
-                };
-                res.status(201).json(response);
+                    content: 'Usuario no encontrado'
+                });
             }
         }).catch((error: any) => {
             console.log("Error => " + error);
@@ -47,17 +43,15 @@ export var usuario_control = {
     create: (req: Request, res: Response) => {
         Usuario.create(req.body).then((usuario: any) => {
             if (usuario) {
-                let response = {
+                res.status(400).json({
                     message: 'Ok',
                     content: usuario
-                };
-                res.status(201).json(response);
+                });
             } else {
-                let response = {
+                res.status(400).json({
                     message: 'Error',
                     content: 'Error al crear usuario'
-                };
-                res.status(400).json(response);
+                });
             }
         }).catch((error: any) => {
             console.log("Error => " + error);
@@ -77,13 +71,13 @@ export var usuario_control = {
                     message: 'Ok',
                     content: usuario
                 };
-                res.status(200).json(response);
+                res.status(201).json(response);
             } else {
                 let response = {
                     message: 'Error al eliminar usuario',
                     content: usuario
                 };
-                res.status(201).json(response);
+                res.status(400).json(response);
             }
         }).catch((error: any) => {console.log("Error => "+error);
     });
@@ -94,21 +88,19 @@ export var usuario_control = {
         let { id } = req.params;
 
         Usuario.update(req.body, {
-            where: { usu_id:id }
+            where: { usu_id: id }
         }
         ).then((usuario: any) => {
             if (usuario) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: usuario
-                };
-                res.status(200).json(response);
+                });
             } else {
-                let response = {
-                    message: 'Error al actualizar usuario',
-                    content: usuario
-                };
-                res.status(201).json(response);
+                res.status(400).json({
+                    message: 'Error',
+                    content: 'Error al actualizar usuario'
+                });
             }
         }).catch((error: any) => {
             console.log("Error => " + error);

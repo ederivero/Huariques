@@ -6,18 +6,16 @@ exports.puntuacion_control = {
     create: (req, res) => {
         sequelize_1.Puntuaciones.create(req.body).then((respuesta) => {
             if (respuesta) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: respuesta
-                };
-                res.status(201).json(response);
+                });
             }
             else {
-                let response = {
+                res.status(400).json({
                     message: 'Error',
-                    content: 'Error al crear categoria con restaurante'
-                };
-                res.status(400).json(response);
+                    content: 'Error al crear puntuacion con restaurante'
+                });
             }
         }).catch((error) => {
             console.log("Error => " + error);
@@ -31,18 +29,16 @@ exports.puntuacion_control = {
             }
         }).then((respuesta) => {
             if (respuesta) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: respuesta
-                };
-                res.status(200).json(response);
+                });
             }
             else {
-                let response = {
+                res.status(400).json({
                     message: 'Error',
-                    content: 'usuuto no encontrado'
-                };
-                res.status(201).json(response);
+                    content: 'Puntuacion de usuario no encontrado'
+                });
             }
         }).catch((error) => {
             console.log("Error => " + error);

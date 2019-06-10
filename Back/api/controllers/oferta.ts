@@ -7,17 +7,15 @@ export var oferta_control = {
     create: (req: Request, res: Response) => {
         Oferta.create(req.body).then((respuesta: any) => {
             if (respuesta) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: respuesta
-                };
-                res.status(201).json(response);
+                });
             } else {
-                let response = {
+                res.status(400).json({
                     message: 'Error',
-                    content: 'Error al crear categoria con restaurante'
-                };
-                res.status(400).json(response);
+                    content: 'Error al crear oferta'
+                });
             }
         }).catch((error: any) => {
             console.log("Error => " + error);
@@ -30,17 +28,15 @@ export var oferta_control = {
         }
         ).then((restaurante: any) => {
             if (restaurante) {
-                let response = {
+                res.status(200).json({
                     message: 'Ok',
                     content: restaurante
-                };
-                res.status(200).json(response);
+                });
             } else {
-                let response = {
-                    message: 'Error al actualizar restaurante',
-                    content: restaurante
-                };
-                res.status(201).json(response);
+                res.status(400).json( {
+                    message: 'Error',
+                    content: 'Error al actualizar restaurante'
+                });
             }
         }).catch((error: any) => {
             console.log("Error => " + error);

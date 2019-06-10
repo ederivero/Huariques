@@ -6,18 +6,16 @@ exports.usuario_control = {
     getAll: (req, res) => {
         sequelize_1.Usuario.findAll().then((usuario) => {
             if (usuario) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: usuario
-                };
-                res.status(200).json(response);
+                });
             }
             else {
-                let response = {
+                res.status(400).json({
                     message: 'Error',
                     content: 'Error al traer usuarios'
-                };
-                res.status(201).json(response);
+                });
             }
         }).catch((error) => {
             console.log("Error => " + error);
@@ -27,18 +25,16 @@ exports.usuario_control = {
         let { correo } = req.params;
         sequelize_1.Usuario.findAll({ where: { usu_email: correo } }).then((usuario) => {
             if (usuario) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: usuario
-                };
-                res.status(200).json(response);
+                });
             }
             else {
-                let response = {
+                res.status(400).json({
                     message: 'Error',
-                    content: 'usuuto no encontrado'
-                };
-                res.status(201).json(response);
+                    content: 'Usuario no encontrado'
+                });
             }
         }).catch((error) => {
             console.log("Error => " + error);
@@ -47,18 +43,16 @@ exports.usuario_control = {
     create: (req, res) => {
         sequelize_1.Usuario.create(req.body).then((usuario) => {
             if (usuario) {
-                let response = {
+                res.status(400).json({
                     message: 'Ok',
                     content: usuario
-                };
-                res.status(201).json(response);
+                });
             }
             else {
-                let response = {
+                res.status(400).json({
                     message: 'Error',
                     content: 'Error al crear usuario'
-                };
-                res.status(400).json(response);
+                });
             }
         }).catch((error) => {
             console.log("Error => " + error);
@@ -78,13 +72,13 @@ exports.usuario_control = {
                     message: 'Ok',
                     content: usuario
                 };
-                res.status(200).json(response);
+                res.status(201).json(response);
             } else {
                 let response = {
                     message: 'Error al eliminar usuario',
                     content: usuario
                 };
-                res.status(201).json(response);
+                res.status(400).json(response);
             }
         }).catch((error: any) => {console.log("Error => "+error);
     });
@@ -96,18 +90,16 @@ exports.usuario_control = {
             where: { usu_id: id }
         }).then((usuario) => {
             if (usuario) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: usuario
-                };
-                res.status(200).json(response);
+                });
             }
             else {
-                let response = {
-                    message: 'Error al actualizar usuario',
-                    content: usuario
-                };
-                res.status(201).json(response);
+                res.status(400).json({
+                    message: 'Error',
+                    content: 'Error al actualizar usuario'
+                });
             }
         }).catch((error) => {
             console.log("Error => " + error);

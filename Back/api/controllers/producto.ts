@@ -16,13 +16,14 @@ export var producto_control = {
             }
         }).then((respuesta: any) => {
             if (respuesta) {
-                res.status(200).json({
+                res.status(201).json({
                     message: 'Ok',
                     content: respuesta
                 })
             } else {
                 res.status(400).json({
-                    message: 'Not found'
+                    message: 'Error',
+                    content: 'Error al actualizar producto'
                 })
             }
         })
@@ -30,17 +31,15 @@ export var producto_control = {
     getAll: (req: Request, res: Response) => {
         Producto.findAll().then((producto: any) => {
             if (producto) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: producto
-                };
-                res.status(200).json(response);
+                });
             } else {
-                let response = {
+                res.status(400).json({
                     message: 'Error',
                     content: 'Error al traer productos'
-                };
-                res.status(201).json(response);
+                });
             }
         }).catch((error: any) => {
             console.log("Error => " + error);
@@ -50,17 +49,15 @@ export var producto_control = {
         let { prod_id } = req.params;
         Producto.findAll({ where: { prod_id } }).then((producto: any) => {
             if (producto) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: producto
-                };
-                res.status(200).json(response);
+                });
             } else {
-                let response = {
+                res.status(400).json({
                     message: 'Error',
                     content: 'Produto no encontrado'
-                };
-                res.status(201).json(response);
+                });
             }
         }).catch((error: any) => {
             console.log("Error => " + error);
@@ -69,42 +66,36 @@ export var producto_control = {
     create: (req: Request, res: Response) => {
         Producto.create(req.body).then((producto: any) => {
             if (producto) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: producto
-                };
-                res.status(201).json(response);
+                });
             } else {
-                let response = {
+                res.status(400).json({
                     message: 'Error',
                     content: 'Error al crear producto'
-                };
-                res.status(400).json(response);
+                });
             }
         }).catch((error: any) => {
             console.log("Error => " + error);
         });
     },
     upDateById: (req: Request, res: Response) => {
-
         let { prod_id } = req.params;
-
         Producto.update(req.body, {
-            where: { prod_id: prod_id }
+            where: { prod_id }
         }
         ).then((producto: any) => {
             if (producto) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: producto
-                };
-                res.status(200).json(response);
+                });
             } else {
-                let response = {
-                    message: 'Error al actualizar producto',
-                    content: producto
-                };
-                res.status(201).json(response);
+                res.status(400).json({
+                    message: 'Error',
+                    content: 'Error al actualizar producto'
+                });
             }
         }).catch((error: any) => {
             console.log("Error => " + error);

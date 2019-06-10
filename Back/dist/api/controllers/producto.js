@@ -15,14 +15,15 @@ exports.producto_control = {
             }
         }).then((respuesta) => {
             if (respuesta) {
-                res.status(200).json({
+                res.status(201).json({
                     message: 'Ok',
                     content: respuesta
                 });
             }
             else {
                 res.status(400).json({
-                    message: 'Not found'
+                    message: 'Error',
+                    content: 'Error al actualizar producto'
                 });
             }
         });
@@ -30,18 +31,16 @@ exports.producto_control = {
     getAll: (req, res) => {
         sequelize_1.Producto.findAll().then((producto) => {
             if (producto) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: producto
-                };
-                res.status(200).json(response);
+                });
             }
             else {
-                let response = {
+                res.status(400).json({
                     message: 'Error',
                     content: 'Error al traer productos'
-                };
-                res.status(201).json(response);
+                });
             }
         }).catch((error) => {
             console.log("Error => " + error);
@@ -51,18 +50,16 @@ exports.producto_control = {
         let { prod_id } = req.params;
         sequelize_1.Producto.findAll({ where: { prod_id } }).then((producto) => {
             if (producto) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: producto
-                };
-                res.status(200).json(response);
+                });
             }
             else {
-                let response = {
+                res.status(400).json({
                     message: 'Error',
                     content: 'Produto no encontrado'
-                };
-                res.status(201).json(response);
+                });
             }
         }).catch((error) => {
             console.log("Error => " + error);
@@ -71,18 +68,16 @@ exports.producto_control = {
     create: (req, res) => {
         sequelize_1.Producto.create(req.body).then((producto) => {
             if (producto) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: producto
-                };
-                res.status(201).json(response);
+                });
             }
             else {
-                let response = {
+                res.status(400).json({
                     message: 'Error',
                     content: 'Error al crear producto'
-                };
-                res.status(400).json(response);
+                });
             }
         }).catch((error) => {
             console.log("Error => " + error);
@@ -91,21 +86,19 @@ exports.producto_control = {
     upDateById: (req, res) => {
         let { prod_id } = req.params;
         sequelize_1.Producto.update(req.body, {
-            where: { prod_id: prod_id }
+            where: { prod_id }
         }).then((producto) => {
             if (producto) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: producto
-                };
-                res.status(200).json(response);
+                });
             }
             else {
-                let response = {
-                    message: 'Error al actualizar producto',
-                    content: producto
-                };
-                res.status(201).json(response);
+                res.status(400).json({
+                    message: 'Error',
+                    content: 'Error al actualizar producto'
+                });
             }
         }).catch((error) => {
             console.log("Error => " + error);

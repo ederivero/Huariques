@@ -8,18 +8,16 @@ exports.regcliente_control = {
     create: (req, res) => {
         sequelize_1.RegCliente.create(req.body).then((respuesta) => {
             if (respuesta) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: respuesta
-                };
-                res.status(201).json(response);
+                });
             }
             else {
-                let response = {
+                res.status(400).json({
                     message: 'Error',
-                    content: 'Error al crear categoria con restaurante'
-                };
-                res.status(400).json(response);
+                    content: 'Error al crear registro de cliente'
+                });
             }
         }).catch((error) => {
             console.log("Error => " + error);
@@ -38,7 +36,8 @@ exports.regcliente_control = {
             }
             else {
                 res.status(400).json({
-                    message: 'Not found'
+                    message: 'Error',
+                    content: 'Error al encotrar registro de cliente'
                 });
             }
         });
@@ -56,7 +55,8 @@ exports.regcliente_control = {
             }
             else {
                 res.status(400).json({
-                    message: 'Not found'
+                    message: 'Error',
+                    content: 'Error al encotrar registro de cliente con usuario'
                 });
             }
         });
@@ -74,7 +74,8 @@ exports.regcliente_control = {
             }
             else {
                 res.status(400).json({
-                    message: 'Not found'
+                    message: 'Error',
+                    content: 'Error al encotrar registro de usuario'
                 });
             }
         });

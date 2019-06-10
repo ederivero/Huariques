@@ -18,13 +18,14 @@ export var restaurante_control = {
             }
         }).then((respuesta: any) => {
             if (respuesta) {
-                res.status(200).json({
+                res.status(201).json({
                     message: 'Ok',
                     content: respuesta
                 })
             } else {
                 res.status(400).json({
-                    message: 'Not found'
+                    message: 'Error',
+                    content: 'Error al encontrar restaurante'
                 })
             }
         })
@@ -32,17 +33,15 @@ export var restaurante_control = {
     getAll: (req: Request, res: Response) => {
         Restaurante.findAll().then((restaurante: any) => {
             if (restaurante) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: restaurante
-                };
-                res.status(200).json(response);
+                });
             } else {
-                let response = {
+                res.status(400).json({
                     message: 'Error',
                     content: 'Error al traer restaurantes'
-                };
-                res.status(201).json(response);
+                });
             }
         }).catch((error: any) => {
             console.log("Error => " + error);
@@ -76,17 +75,15 @@ export var restaurante_control = {
                 usu_id
             }).then((restaurante: any) => {
                 if (restaurante) {
-                    let response = {
+                    res.status(201).json({
                         message: 'Ok',
                         content: restaurante
-                    };
-                    res.status(201).json(response);
+                    });
                 } else {
-                    let response = {
+                    res.status(400).json( {
                         message: 'Error',
                         content: 'Error al crear restaurante'
-                    };
-                    res.status(400).json(response);
+                    });
                 }
             }).catch((error: any) => {
                 res.send(error);
@@ -105,17 +102,15 @@ export var restaurante_control = {
                 }
             }).then((restaurante: any) => {
                 if (restaurante) {
-                    let response = {
+                    res.status(201).json({
                         message: 'Ok',
                         content: restaurante
-                    };
-                    res.status(200).json(response);
+                    });
                 } else {
-                    let response = {
-                        message: 'Error al eliminar restaurante',
-                        content: restaurante
-                    };
-                    res.status(201).json(response);
+                    res.status(400).json({
+                        message: 'Error',
+                        content: 'Error al eliminar restaurante'
+                    });
                 }
             }).catch((error: any) => {
                 console.log("Error => " + error);
@@ -130,17 +125,15 @@ export var restaurante_control = {
         }
         ).then((restaurante: any) => {
             if (restaurante) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: restaurante
-                };
-                res.status(200).json(response);
+                });
             } else {
-                let response = {
-                    message: 'Error al actualizar restaurante',
-                    content: restaurante
-                };
-                res.status(201).json(response);
+                res.status(400).json({
+                    message: 'Error',
+                    content: 'Error al actualizar restaurante'
+                });
             }
         }).catch((error: any) => {
             console.log("Error => " + error);

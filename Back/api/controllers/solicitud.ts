@@ -6,17 +6,15 @@ export var solicitud_control = {
     create: (req: Request, res: Response) => {
         Solicitud.create(req.body).then((respuesta: any) => {
             if (respuesta) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: respuesta
-                };
-                res.status(201).json(response);
+                });
             } else {
-                let response = {
+                res.status(400).json({
                     message: 'Error',
                     content: 'Error al crear la solicitud'
-                };
-                res.status(400).json(response);
+                });
             }
         }).catch((error: any) => {
             console.log("Error => " + error);
@@ -26,17 +24,15 @@ export var solicitud_control = {
         let { sol_id } = req.params
         Solicitud.destroy({ where: { sol_id } }).then((respuesta: any) => {
             if (respuesta) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: respuesta
-                };
-                res.status(201).json(response);
+                });
             } else {
-                let response = {
+                res.status(400).json({
                     message: 'Error',
-                    content: 'Error al eliminar'
-                };
-                res.status(400).json(response);
+                    content: 'Error al eliminar la solicitud'
+                });
             }
 
         }).catch((error: any) => {
