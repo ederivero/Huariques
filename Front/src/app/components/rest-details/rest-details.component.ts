@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CalificanosComponent } from '../calificanos/calificanos.component';
 import { MatDialog } from '@angular/material/dialog';
+import { asapScheduler } from 'rxjs';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class RestDetailsComponent implements OnInit {
   title: string = 'Anticucheria la ultima cena';
   lat: number = -16.4310132;
   lng: number = -71.5189799;
-  dias:Array<String>=["Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"]
+  dias:Array<String>=["Lun","Mar","Mier","Jue","Vier","Sab","Dom"]
   horarios:Array<any>=[{
     rest_dAtencion:"Lunes",
     rest_hApertura:"18:00",
@@ -75,6 +76,24 @@ export class RestDetailsComponent implements OnInit {
   
   constructor(public dialog:MatDialog) {
     this.obtenerDiaActual()
+    fetch('https://huariquesback.herokuapp.com/api/restaurante/traertodos').then((response)=>{
+      return response.json()
+    }).then((data)=>{
+      console.log(data.content[40])
+      this.title=data.content[40].rest_rSocial;
+      this.lat=+data.content[40].rest_lat;
+      this.lng=+data.content[40].rest_lng;
+      this.horarios=[]
+      console.log(data.content[40].rest_dAtencion.split(','))
+      data.content[40].rest_dAtencion.split(',').forEach(dia => {
+        this.horarios.push({
+          rest_dAtencion:dia,
+          rest_hApertura:data.content[40].rest_hApertura,
+          rest_hCierre:data.content[40].rest_hCierre
+        });
+      });
+      this.obtenerDiaActual()
+    })
   }
 
   ngOnInit() {
@@ -90,9 +109,11 @@ export class RestDetailsComponent implements OnInit {
     });
   }
   obtenerDiaActual(){
-    
     var diaActualN= new Date();
     let diaDeSemanaActual = this.dias[diaActualN.getDay()-1]
+    let horaActual = diaActualN.getHours()
+    // console.log(horaActual)
+    console.log(diaDeSemanaActual)
     this.horarios.forEach(horario => {
       if (diaDeSemanaActual==horario.rest_dAtencion) {
         this.horariofinActual=horario.rest_hCierre
