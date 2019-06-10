@@ -5,6 +5,7 @@ import { componentFactoryName } from '@angular/compiler';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { DatsenComponent } from './components/datsen/datsen.component';
+import { MapaDatasensibleComponent } from './components/mapa-datasensible/mapa-datasensible.component';
 
 const routes: Routes = [
   {
@@ -21,7 +22,7 @@ const routes: Routes = [
       },
       {
         path:'datsen',
-        component: DatsenComponent
+        component: MapaDatasensibleComponent
       }
     ]
   }  

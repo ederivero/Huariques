@@ -2,7 +2,7 @@
 // PUNTUACIONES MODEL
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.puntuaciones_model = (sequelize, type) => {
-    var puntuaciones_model = sequelize.define('t_puntuaciones', {
+    var puntuaciones_model = sequelize.define('t_puntuacion', {
         punt_id: {
             type: type.INTEGER,
             primaryKey: true,
@@ -31,7 +31,7 @@ exports.puntuaciones_model = (sequelize, type) => {
         },
     }, {
         timestamps: false,
-        tableName: 't_puntuaciones'
+        tableName: 't_puntuacion'
     });
     return puntuaciones_model;
 };

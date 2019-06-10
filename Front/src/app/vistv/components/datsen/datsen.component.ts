@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , ViewChild} from '@angular/core';
+import {MapaDatasensibleComponent} from '../mapa-datasensible/mapa-datasensible.component';
+import { Marcador } from './../../models/Marcador';
+
 
 @Component({
   selector: 'app-datsen',
@@ -8,6 +11,8 @@ import { Component, OnInit } from '@angular/core';
 export class DatsenComponent implements OnInit {
 
   constructor() { }
+
+  objMarcadorDat:Marcador;
 
   ngOnInit() {
   }

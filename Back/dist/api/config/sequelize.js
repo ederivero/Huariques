@@ -9,12 +9,12 @@ const restCategoria_1 = require("../models/restCategoria");
 const categoria_1 = require("../models/categoria");
 const producto_1 = require("../models/producto");
 const oferta_1 = require("../models/oferta");
+const solicitud_1 = require("../models/solicitud");
 const Sequelize = require('sequelize');
 exports.sequelize = new Sequelize('UipUxZkjnm', 'UipUxZkjnm', '70MzF37DVG', {
     host: 'remotemysql.com',
     dialect: 'mysql',
     timezone: '-05:00',
-    logging: console.log
 });
 exports.Usuario = usuario_1.usuario_model(exports.sequelize, Sequelize);
 exports.Restaurante = restaurante_1.restaurante_model(exports.sequelize, Sequelize);
@@ -25,6 +25,7 @@ exports.RestCategoria = restCategoria_1.restCategoria_model(exports.sequelize, S
 exports.Categoria = categoria_1.categoria_model(exports.sequelize, Sequelize);
 exports.Producto = producto_1.producto_model(exports.sequelize, Sequelize);
 exports.Oferta = oferta_1.oferta_model(exports.sequelize, Sequelize);
+exports.Solicitud = solicitud_1.solicitud_model(exports.sequelize, Sequelize);
 exports.Usuario.hasMany(exports.Restaurante, { foreignKey: 'usu_id' });
 exports.Usuario.hasMany(exports.Busquedas, { foreignKey: 'usu_id' });
 exports.Usuario.hasMany(exports.RegCliente, { foreignKey: 'usu_id' });

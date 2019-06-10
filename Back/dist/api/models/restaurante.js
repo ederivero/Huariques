@@ -34,7 +34,7 @@ exports.restaurante_model = (sequelize, type) => {
             allowNull: false,
         },
         rest_img: {
-            type: type.BLOB("medium"),
+            type: type.STRING(50),
             allowNull: false,
         },
         rest_refUbicacion: {
@@ -55,8 +55,16 @@ exports.restaurante_model = (sequelize, type) => {
         },
         rest_avisos: {
             type: type.STRING(45),
-            allowNull: false,
+            allowNull: true,
         },
+        rest_estado: {
+            type: type.STRING(1),
+            allowNull: false
+        },
+        rest_verificacion: {
+            type: type.STRING(1),
+            allowNull: false
+        }
     }, {
         timestamps: false,
         tableName: 't_restaurante'

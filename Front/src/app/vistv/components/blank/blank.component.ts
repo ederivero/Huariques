@@ -23,6 +23,8 @@ export class BlankComponent implements OnInit {
   animal: string;
   name: string;
 
+  checked = true;
+
 
   inputNom;
   inputRef;
@@ -31,12 +33,14 @@ export class BlankComponent implements OnInit {
   inpuths;
   BtnEdit;
   CheckDay;
-  btnEdit;
-  btnGuardar;
+  selectHor;
+  selectDia;
+  h_abierto;
+  h_cerrado;
+  a;
   estadoBtnEdit = true;
   estadoBtnGuard = false;
-  mostH = true;
-  editH = false;
+
 
   horario = {
     h_abierto: '',
@@ -49,8 +53,16 @@ export class BlankComponent implements OnInit {
   constructor(public dialog: MatDialog) { 
     if(localStorage.getItem('horarios')){
       this.listHorarios = JSON.parse(localStorage.getItem('horarios'));
+    
+      console.log(this.listHorarios.map((cont)=>{
+        return (cont.h_abierto );
+      }));
     }
   }
+
+
+
+
 
   ngOnInit() {
     console.log(this.listHorarios);
@@ -75,16 +87,18 @@ export class BlankComponent implements OnInit {
     this.inputhi = document.getElementById("h_abierto").removeAttribute("readonly");
     this.inpuths = document.getElementById("h_cerrado").removeAttribute("readonly");
     
-    // this.mostH = false;
-    // this.editH = true;
+    this.selectHor = document.getElementById("selectHor").removeAttribute("hidden");
+    this.selectDia = document.getElementById("selectDia").removeAttribute("hidden");
+    this.h_abierto = document.getElementById("h_abierto").removeAttribute("hidden");
+    this.h_cerrado = document.getElementById("h_cerrado").removeAttribute("hidden");
+    // this.a= document.getElementById("a").removeAttribute("hidden");
     
+
     this.BtnEdit = document.getElementById("checkDia").removeAttribute("hidden");
     this.CheckDay = document.getElementById("divBtnEdit").removeAttribute("hidden");
 
-    this.estadoBtnEdit = false
-    this.estadoBtnGuard = true
-    // this.btnEdit = document.getElementById("btnEditInfo").setAttribute("hidden","hidden");
-    // this.btnGuardar = document.getElementById("btnGuarInfo").removeAttribute("hidden");
+    this.estadoBtnEdit = false;
+    this.estadoBtnGuard = true;
   };
 
   guardarInfo(){
@@ -95,16 +109,19 @@ export class BlankComponent implements OnInit {
     this.inputhi = document.getElementById("h_abierto").setAttribute("readonly","readonly");
     this.inpuths = document.getElementById("h_cerrado").setAttribute("readonly","readonly");
     
-    // this.mostH = true;
-    // this.editH = false;
+    this.selectHor =  document.getElementById("selectHor").setAttribute("hidden","readonly");
+    this.selectDia = document.getElementById("selectDia").setAttribute("hidden","readonly");
+    this.h_abierto =  document.getElementById("h_abierto").setAttribute("hidden","readonly");
+    this.h_cerrado = document.getElementById("h_cerrado").setAttribute("hidden","readonly");
+    // this.a = document.getElementById("a").setAttribute("hidden","readonly");
+
+
     this.BtnEdit = document.getElementById("checkDia").setAttribute("hidden","readonly");
     this.CheckDay = document.getElementById("divBtnEdit").setAttribute("hidden","readonly");
     
     this.estadoBtnEdit = true
     this.estadoBtnGuard = false
 
-    // this.btnEdit = document.getElementById("btnEditInfo").removeAttribute("hidden");
-    // this.btnGuardar = document.getElementById("btnGuarInfo").setAttribute("hidden","hidden");
 
 
   };
@@ -112,9 +129,9 @@ export class BlankComponent implements OnInit {
   crearHorario(){
     let objMarcador = this.horario;
     this.listHorarios.push(objMarcador);
-    localStorage.setItem("horarios",JSON.stringify(this.listHorarios));
+     localStorage.setItem("horarios",JSON.stringify(this.listHorarios));
 
-    console.log(this.listHorarios);
+
   }
 
 }
