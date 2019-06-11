@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class McrearRestComponent implements OnInit {
 
+  lat: number = -16.4142104;
+  lng: number = -71.5398665;
+
+
   constructor() { }
 
   ngOnInit() {

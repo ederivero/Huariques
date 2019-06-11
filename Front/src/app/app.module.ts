@@ -7,6 +7,8 @@ import { GestRestComponent } from './components/gest-rest/gest-rest.component';
 import { MaterialModule } from './material.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { McrearRestComponent } from './components/mcrear-rest/mcrear-rest.component';
+import { AgmCoreModule } from '@agm/core';
+
 // import { MatTableDataSource } from '@angular/material';
 
 @NgModule({
@@ -20,6 +22,10 @@ import { McrearRestComponent } from './components/mcrear-rest/mcrear-rest.compon
     BrowserAnimationsModule,
     AppRoutingModule,
     MaterialModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBcjhtE0FIFEO92Z_7xKQWODx3I_QXq33E'
+    })
+    // AgmCoreModule
     // MatTableDataSource
   ],
   entryComponents:[

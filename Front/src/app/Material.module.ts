@@ -13,6 +13,8 @@ import { FormsModule} from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCardModule} from '@angular/material/card';
+import { AgmCoreModule } from '@agm/core';
+
 
 
 @NgModule({
@@ -32,7 +34,8 @@ import {MatCardModule} from '@angular/material/card';
     FormsModule,
     MatSnackBarModule,
     MatExpansionModule,
-    MatCardModule
+    MatCardModule,
+    AgmCoreModule
     // MatTableDataSource
 
 
@@ -52,7 +55,8 @@ import {MatCardModule} from '@angular/material/card';
     FormsModule,
     MatSnackBarModule,
     MatExpansionModule,
-    MatCardModule
+    MatCardModule,
+    AgmCoreModule
     // MatTableDataSource
 
   ]
