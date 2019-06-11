@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Marcador } from './../../models/Marcador';
+// import {DatsenComponent} from '../datsen/datsen.component';
 
 @Component({
   selector: 'app-mapa-datasensible',
@@ -7,13 +9,47 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MapaDatasensibleComponent implements OnInit {
 
-  title: string = 'My first AGM project';
+  objMarcador:Marcador;
+
+  latitud;
+  longitud;
+
+  // @ViewChild("") dataSen:DatsenComponent
+
+  // title: string = 'My first AGM project';
   lat: number = -16.4142104;
   lng: number = -71.5398665;
 
-  constructor() { }
+
+
+  icon = { 
+          url: '../../../img/tacaspastor.jpg', 
+          scaledSize: {height: 40, width: 40}}
+
+  constructor() { 
+    // this.objMarcador = data.marcador;
+    if(localStorage.getItem('horarios')){
+      this.objMarcador = JSON.parse(localStorage.getItem('horarios'));    
+    }
+
+
+
+  }
 
   ngOnInit() {
+    // console.log(this.objMarcador);
+    
+  }
+
+  agregarMarcador(evento){
+    let objMarcador = new Marcador(evento.coords.lat,evento.coords.lng);    
+    localStorage.setItem("marcadores",JSON.stringify(objMarcador));
+
+
+    
+    this.latitud= this.objMarcador.lat;
+    this.longitud= this.objMarcador.lng;
+    
   }
 
 }

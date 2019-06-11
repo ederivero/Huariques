@@ -11,11 +11,10 @@ import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import { FormsModule} from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatCardModule} from '@angular/material/card';
+import { AgmCoreModule } from '@agm/core';
 
-// import {MatTableDataSource} from '@angular/material/table';
-
-// import { ChartsModule, WavesModule } from 'angular-bootstrap-md'
-// import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 
 @NgModule({
@@ -33,7 +32,10 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatTableModule,
     MatDialogModule,
     FormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatExpansionModule,
+    MatCardModule,
+    AgmCoreModule
     // MatTableDataSource
 
 
@@ -51,7 +53,10 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatTableModule,
     MatDialogModule,
     FormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatExpansionModule,
+    MatCardModule,
+    AgmCoreModule
     // MatTableDataSource
 
   ]

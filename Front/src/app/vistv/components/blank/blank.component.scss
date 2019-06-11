@@ -1,3 +1,15 @@
+#btnDia{
+  margin: 1px;
+  width: 1%;
+  padding: 0px;
+}
+
+#contBtnDia{
+  width: 100%;
+
+}
+
+
 .example-button-row button,
 .example-button-row a {
   margin-right: 8px;
@@ -10,7 +22,7 @@ a{
 
 mat-form-field {
   // display: flex;
-  flex-direction: column;
+  flex-direction: row;
   width: 100%;
 }
 
@@ -19,4 +31,30 @@ mat-form-field {
   overflow-x: hidden;
   margin: 0;
   padding: 0;
+}
+
+.hora{
+  font-size: 12px;
+  width: 38%;
+  height: 25%;
+
+}
+
+
+
+
+
+.example-h2 {
+  margin: 5px;
+}
+
+.example-section {
+  // display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.example-margin {
+  margin: 0 10px;
 }

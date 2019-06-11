@@ -3,7 +3,7 @@
 import { Sequelize } from 'sequelize';
 
 export var puntuaciones_model = (sequelize: Sequelize, type: any) => {
-    var puntuaciones_model = sequelize.define('t_puntuaciones',
+    var puntuaciones_model = sequelize.define('t_puntuacion',
         {
             punt_id: {
                 type: type.INTEGER,
@@ -34,7 +34,7 @@ export var puntuaciones_model = (sequelize: Sequelize, type: any) => {
         },
         {
             timestamps: false,
-            tableName: 't_puntuaciones'
+            tableName: 't_puntuacion'
         });
 
     return puntuaciones_model;

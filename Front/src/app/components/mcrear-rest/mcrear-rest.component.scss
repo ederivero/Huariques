@@ -1,0 +1,26 @@
+mat-form-field {
+    // display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  
+  #mapa {
+      height: 350px;
+      width: 100%;
+      border: 1px solid red;
+  }
+
+  #mapita {
+      height: 400px;
+      width: 100%;
+  }
+
+  #mapa2 {
+      height: 350px;
+      width: 100%
+  }
+
+  agm-map {
+    height: 300px;
+  }

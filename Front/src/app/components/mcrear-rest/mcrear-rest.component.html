@@ -1,0 +1,83 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <mat-dialog-content>
+                <form action="">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nombre del Restaurant</mat-label>
+                        <input id="rest_nom" matInput placeholder="Nombre del Restaurant" value="Tacos Mexi">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nombre del Restaurant</mat-label>
+                        <input type="number" id="rest_fono" matInput placeholder="Telefono del Restaurant"
+                            value="941575658">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Referencia de Dirección</mat-label>
+                        <input id="rest_ref" matInput placeholder="Referencia de dirección"
+                            value="Frente al Mall Aventura Porongoche">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" id="textDesc">
+                        <mat-label>Información del Negocio</mat-label>
+                        <textarea id="rest_info" rows="5" matInput placeholder="Información del negocio"
+                            value="Nos dedicamos a la venta de tacos ridiendo un homenaje a la comida mexicana con una pizca de sabor peruano"></textarea>
+                    </mat-form-field>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field appearance="outline" class="hora">
+                                <input type="time" [(ngModel)]="horario.h_abierto" name="h_abierto" matInput>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6">
+                            <mat-form-field appearance="outline" class="hora m-1">
+                                <input type="time" [(ngModel)]="horario.h_cerrado" name="h_cerrado" matInput>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <!-- HORARIOS DE ATENCION -->
+                    <section class="example-section" id="checkDia">
+                        <mat-checkbox class="example-margin" [(ngModel)]="checked">Lun</mat-checkbox>
+                        <mat-checkbox class="example-margin" [(ngModel)]="checked">Mar</mat-checkbox>
+                        <mat-checkbox class="example-margin" [(ngModel)]="checked">Mier</mat-checkbox>
+                        <mat-checkbox class="example-margin" [(ngModel)]="checked">Jue</mat-checkbox>
+                        <mat-checkbox class="example-margin" [(ngModel)]="checked">Vie</mat-checkbox>
+                        <mat-checkbox class="example-margin" [(ngModel)]="checked">Sab</mat-checkbox>
+                        <mat-checkbox class="example-margin" [(ngModel)]="checked">Dom</mat-checkbox>
+                    </section>
+
+                    <mat-form-field>
+                        <input matInput type="number" placeholder="Latitud" [(ngModel)]="latitud">
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input matInput type="number" placeholder="Longitud">
+                    </mat-form-field>
+
+                    <!-- MAPA -->
+
+                    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="13">
+
+                    </agm-map>
+
+                    <mat-form-field id="iFile" appearance="outline" class="hora m-1">
+                        <input type="file" matInput>
+                    </mat-form-field>
+
+                    <mat-dialog-actions>
+                        <button mat-button mat-dialog-close>Cancelar</button>
+                        <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="crearRest()">Crear
+                            Restaurant</button>
+
+                    </mat-dialog-actions>
+
+
+
+                </form>
+            </mat-dialog-content>
+        </div>
+    </div>
+</div>

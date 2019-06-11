@@ -1,75 +1,124 @@
 <div class="container-fluid" id="cont">
-    <br>
-    <h4 class="">Información Actual de su Restaurant</h4>
-    <br>
-    
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-3 m-0 p-0">
-          <img src="http://placehold.it/310x250" alt="">
-        </div>
-    
-        <div class="col-md-3  m-0 p-0">
-          <mat-form-field  appearance="outline">
-              <mat-label>Nombre del Restaurant</mat-label>
-            <input matInput placeholder="Nombre del Restaurant" value="Tacos Mexi" readonly>
-          </mat-form-field>
-    
-          <mat-form-field appearance="outline">
-              <mat-label>Referencia de Dirección</mat-label>
-            <input matInput placeholder="Referencia de dirección" value="Frente al Mall Aventura Porongoche" readonly >
-          </mat-form-field>
-          <br>
-          <mat-form-field appearance="outline" id="textDesc">
-              <mat-label>Información del Negocio</mat-label>
-            <textarea matInput readonly placeholder="Información del negocio" 
-            value="Nos dedicamos a la venta de tacos ridiendo un homenaje a la comida mexicana con una pizca de sabor peruano"></textarea>
-          </mat-form-field>
-          
-    
-        </div>
-    
-        <div class="col-md-4  m-0 p-0">
-    
-        </div>
-    
-        <div class="col-md-2  m-0 p-0">
-          <br>
-          <br>
-          <br>
-          <div class="example-button-row">
-            <button class="btn-block m-10" mat-raised-button color="primary" (click)="openDialog()">Editar Información</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <hr>
-    
-    
-    <!-- BOTONES QUE LLAMAN A LOS DEMAS COMPONENTES -->
-    
-    <div class="row">
-      <div class="col-md-4 p-1">
-        <!-- <app-lista-usuarios></app-lista-usuarios> -->  
-          <div class="example-button-row">
-            <button class="btn-block p-1" mat-raised-button color="primary" [routerLink]="[ '/vistv/prin']"><strong> <a matLine >Dashboard</a></strong></button>
-          </div>
-      </div>
-      <div class="col-md-4 p-1">
-        <!-- <app-chat></app-chat> -->
-        <div class="example-button-row">
-          <button class="btn-block p-1" mat-raised-button color="primary" [routerLink]="[ '/vistv/edmen']"> <strong> <a matLine > Carta</a> </strong></button>      
-        </div>
-      </div>
-      <div class="col-md-4 p-1">
-        <!-- <app-chat></app-chat> -->
-        <div class="example-button-row">
-          <button class="btn-block p-1" mat-raised-button color="primary" [routerLink]="[ '/vistv/datsen']"> <strong>  <a matLine >Datos Sensibles</a> </strong></button>      
-        </div>
-      </div>
-    </div>
-    <router-outlet></router-outlet>
-    
-</div>
+  <br>
+  <h4 class="">Información Actual de su Restaurant</h4>
+  <br>
 
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3 m-0 p-0">
+        <img src="http://placehold.it/310x250" alt="">
+      </div>
+
+      <div class="col-md-3  m-0 p-0">
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre del Restaurant</mat-label>
+          <input id="rest_nom" matInput placeholder="Nombre del Restaurant" value="Tacos Mexi" readonly>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Referencia de Dirección</mat-label>
+          <input id="rest_ref" matInput placeholder="Referencia de dirección" value="Frente al Mall Aventura Porongoche" readonly>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="outline" id="textDesc">
+          <mat-label>Información del Negocio</mat-label>
+          <textarea id="rest_info" rows="5" matInput readonly placeholder="Información del negocio"
+            value="Nos dedicamos a la venta de tacos ridiendo un homenaje a la comida mexicana con una pizca de sabor peruano"></textarea>
+        </mat-form-field>
+
+
+      </div>
+
+      <div class="col-md-4  m-0 pl-3 pr-0">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3 text-right">
+               <h6 hidden="hidden" id="selectHor">Seleccione su Horario (AM / PM)</h6>
+               <br>
+               <h6 hidden="hidden" id="selectDia">Seleccione el o los días para ese horario</h6>
+            </div>
+            <div class="col-md-9 m-0 text-center">
+                <mat-form-field id="h_abierto"  hidden="hidden" appearance="outline" class="hora">
+                  <input  type="time" [(ngModel)]="horario.h_abierto" name="h_abierto" matInput readonly> 
+                </mat-form-field>       
+                <!-- <div id="a" hidden="hidden">  a </div> -->
+                <mat-form-field id="h_cerrado" hidden="hidden"  appearance="outline" class="hora m-1">
+                  <input  type="time" [(ngModel)]="horario.h_cerrado" name="h_cerrado" matInput readonly>
+                </mat-form-field>
+                <br>
+                <br>
+                <section class="example-section" id="checkDia" hidden="hidden">
+                  <mat-checkbox class="example-margin" [(ngModel)]="checked">Lun</mat-checkbox>
+                  <mat-checkbox class="example-margin" [(ngModel)]="checked">Mar</mat-checkbox>
+                  <mat-checkbox class="example-margin" [(ngModel)]="checked">Mier</mat-checkbox>
+                  <mat-checkbox class="example-margin" [(ngModel)]="checked">Jue</mat-checkbox>
+                  <mat-checkbox class="example-margin" [(ngModel)]="checked">Vie</mat-checkbox>
+                  <mat-checkbox class="example-margin" [(ngModel)]="checked">Sab</mat-checkbox>
+                  <mat-checkbox class="example-margin" [(ngModel)]="checked">Dom</mat-checkbox>
+                </section>
+
+                <br>
+
+                <div class="example-button-row" id="divBtnEdit" hidden="hidden">
+                  <button class="btn-block" mat-stroked-button color="primary" (click)="crearHorario()"> 
+                    <strong> Agregar Horario </strong>
+                  </button>
+                </div>
+            </div>
+            <div>
+
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-2  m-0 p-0">
+        <br>
+        <br>
+        <br>
+        <div *ngIf="estadoBtnEdit" class="example-button-row" id="btnEditInfo">
+          <button class="btn-block" mat-raised-button color="primary" (click)="habilitarEdicion()">Editar
+            Información</button>
+        </div>
+        <div *ngIf="estadoBtnGuard" class="example-button-row" id="btnGuarInfo" >
+          <button class="btn-block" mat-raised-button color="warn" (click)="guardarInfo()">Guardar
+            Información</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+
+  <!-- BOTONES QUE LLAMAN A LOS DEMAS COMPONENTES -->
+
+  <div class="row">
+    <div class="col-md-4 p-1">
+      <!-- <app-lista-usuarios></app-lista-usuarios> -->
+      <div class="example-button-row">
+        <button class="btn-block p-1" mat-raised-button color="primary" [routerLink]="[ '/vistv/prin']"><strong> <a
+              matLine>Dashboard</a></strong></button>
+      </div>
+    </div>
+    <div class="col-md-4 p-1">
+      <!-- <app-chat></app-chat> -->
+      <div class="example-button-row">
+        <button class="btn-block p-1" mat-raised-button color="primary" [routerLink]="[ '/vistv/edmen']"> <strong> <a
+              matLine> Productos</a> </strong></button>
+      </div>
+    </div>
+    <div class="col-md-4 p-1">
+      <!-- <app-chat></app-chat> -->
+      <div class="example-button-row">
+        <button class="btn-block p-1" mat-raised-button color="primary" [routerLink]="[ '/vistv/datsen']"> <strong> <a
+              matLine>Datos Sensibles</a> </strong></button>
+      </div>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+
+</div>
