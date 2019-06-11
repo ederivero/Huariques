@@ -14,6 +14,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCardModule} from '@angular/material/card';
 import { AgmCoreModule } from '@agm/core';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list';
+
 
 
 
@@ -35,7 +38,10 @@ import { AgmCoreModule } from '@agm/core';
     MatSnackBarModule,
     MatExpansionModule,
     MatCardModule,
-    AgmCoreModule
+    AgmCoreModule,
+    MatDividerModule,
+    MatListModule
+
     // MatTableDataSource
 
 
@@ -56,7 +62,9 @@ import { AgmCoreModule } from '@agm/core';
     MatSnackBarModule,
     MatExpansionModule,
     MatCardModule,
-    AgmCoreModule
+    AgmCoreModule,
+    MatDividerModule,
+    MatListModule
     // MatTableDataSource
 
   ]

@@ -8,6 +8,10 @@ import { MaterialModule } from './material.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { McrearRestComponent } from './components/mcrear-rest/mcrear-rest.component';
 import { AgmCoreModule } from '@agm/core';
+import { InicioComponent } from './components/inicio/inicio.component';
+import {MatInputModule} from '@angular/material/input';
+
+
 
 // import { MatTableDataSource } from '@angular/material';
 
@@ -16,12 +20,15 @@ import { AgmCoreModule } from '@agm/core';
     AppComponent,
     GestRestComponent,
     McrearRestComponent,
+    InicioComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     MaterialModule,
+    MatInputModule,
+    // InicioComponent,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBcjhtE0FIFEO92Z_7xKQWODx3I_QXq33E'
     })

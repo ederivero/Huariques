@@ -1,19 +1,31 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-5">
-      <img src="../../img/gestionempresarial2.png" width="500px" height="375px" alt="">
+    <div class="col-md-8" id="divImg">
+      <img src="./../../../assets/yy.png" alt="Smiley face" height="590" width="110%">
     </div>
-    <div class="col-md-7 text-center bg-dark">
+    <div class="col-md-4 text-center" id="divBtn">
       <div class="example-button-row">
-        <button class="m-10" (click)="openDialog()" mat-raised-button color="primary">Añade un restaurante</button>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <button class="m-10" class="btn btn-block" (click)="openDialog()" mat-raised-button color="primary">
+           <strong> Añade un restaurante </strong>
+        </button>
       </div>
     </div>
   </div>
 </div>
+<hr>
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12 text-center bg-default">
-        <h2> Tus Restaurantes</h2>
+      <h2> Tus Restaurantes</h2>
     </div>
 
 
@@ -21,19 +33,16 @@
       <mat-card class="example-card mb-5">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>Shiba Inu</mat-card-title>
-          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+          <mat-card-title>Nombre del Restaurant</mat-card-title>
         </mat-card-header>
         <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-        <mat-card-content>
+        <mat-card-content class="text-justify">
           <p>
-            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-            bred for hunting.
+              Nos dedicamos a la venta de tacos ridiendo un homenaje a la comida mexicana con una pizca de sabor peruano
           </p>
         </mat-card-content>
         <mat-card-actions class="text-center">
-          <button color="primary" mat-raised-button>Administrar</button>
+          <button color="primary" mat-raised-button> <a matLine [routerLink]="[ '/vistv']">Administrar</a></button>
         </mat-card-actions>
       </mat-card>
     </div>
