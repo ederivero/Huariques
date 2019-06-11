@@ -14,7 +14,7 @@ const routes: Routes = [
     component: PromocionesComponent
   },
   {
-    path: 'rest-details',
+    path: 'rest-details/:id',
     component: RestDetailsComponent
   }
 ];

@@ -49,9 +49,17 @@ agm-map {
     background-color: beige;
 }
 
-@media (max-width:700px){
+@media (max-width:1000px){
     #rest-title{
         color:white;
+    }
+    #linea{
+        position: absolute;
+        align-content: center;
+        left: 50%;
+        height: 0px;
+        width: 5px;
+        background-color: rgb(235, 104, 100);
     }
     h1{
         font-size: 20px
