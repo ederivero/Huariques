@@ -1,11 +1,19 @@
 "use strict";
 // RESTAURANTE CONTROLLERS
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("./../config/sequelize");
 const Sequelize = require('sequelize');
 const formidable = require('formidable');
 var path_module = require('path');
 var fs = require('fs');
+const firebase = __importStar(require("firebase"));
 const Op = Sequelize.Op;
 exports.restaurante_control = {
     findByLike: (req, res) => {
@@ -50,13 +58,37 @@ exports.restaurante_control = {
         });
     },
     create: (req, res) => {
+        var firebaseConfig = {
+            apiKey: "AIzaSyCjnrjecGjB6lN1P7BmJDH_CnhXOoAgVVI",
+            authDomain: "api-project-161182547768.firebaseapp.com",
+            databaseURL: "https://api-project-161182547768.firebaseio.com",
+            projectId: "api-project-161182547768",
+            storageBucket: "api-project-161182547768.appspot.com",
+            messagingSenderId: "161182547768",
+            appId: "1:161182547768:web:482e5f8c565fb2a4"
+        };
         new formidable.IncomingForm().parse(req, (err, fields, files) => {
             if (err) {
                 console.error('Error', err);
                 throw err;
             }
             // console.log('Fields', fields)
-            console.log('Files', files);
+            let metadata = {
+                contentType: files.rest_img.type
+            };
+            firebase.initializeApp(firebaseConfig);
+            // console.log(files.rest_img.name);
+            // console.log(files.rest_img.type);
+            // console.log(files.rest_img.path);
+            console.log(files);
+            res.status(200).json(files.rest_img);
+            let referenciasStorage = firebase.storage().ref();
+            referenciasStorage.child(`restaurantes/${files.rest_img.name}`).put(files.rest_img, metadata).then(respuesta => {
+                console.log(respuesta.ref.getDownloadURL());
+            });
+            // console.log(files.rest_img.name);
+            // console.log(files.rest_img.type);
+            // console.log(files.rest_img.path);
             // files.map(file => {
             //   console.log(file)
             // })

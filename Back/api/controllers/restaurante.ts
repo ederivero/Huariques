@@ -6,10 +6,10 @@ const Sequelize = require('sequelize');
 
 const formidable = require('formidable');
 
-
 var path_module = require('path');
 var fs = require('fs');
 
+import * as firebase from 'firebase';
 const Op = Sequelize.Op;
 export var restaurante_control = {
     findByLike: (req: Request, res: Response) => {
@@ -52,17 +52,45 @@ export var restaurante_control = {
         });
     },
     create: (req: Request, res: Response) => {
-        new formidable.IncomingForm().parse(req, (err:any, fields:any, files:any) => {
+
+        var firebaseConfig = {
+            apiKey: "AIzaSyCjnrjecGjB6lN1P7BmJDH_CnhXOoAgVVI",
+            authDomain: "api-project-161182547768.firebaseapp.com",
+            databaseURL: "https://api-project-161182547768.firebaseio.com",
+            projectId: "api-project-161182547768",
+            storageBucket: "api-project-161182547768.appspot.com",
+            messagingSenderId: "161182547768",
+            appId: "1:161182547768:web:482e5f8c565fb2a4"
+        };
+
+        new formidable.IncomingForm().parse(req, (err: any, fields: any, files: any) => {
             if (err) {
-              console.error('Error', err)
-              throw err
+                console.error('Error', err)
+                throw err
             }
             // console.log('Fields', fields)
-            console.log('Files', files)
+            let metadata = {
+                contentType: files.rest_img.type
+            };
+            firebase.initializeApp(firebaseConfig);
+            // console.log(files.rest_img.name);
+            // console.log(files.rest_img.type);
+            // console.log(files.rest_img.path);
+            console.log(files); 
+            res.status(200).json(files.rest_img);
+            let referenciasStorage = firebase.storage().ref();
+            referenciasStorage.child(`restaurantes/${files.rest_img.name}`).put(files.rest_img, metadata).then(respuesta => {
+                console.log(respuesta.ref.getDownloadURL());
+            });
+
+            // console.log(files.rest_img.name);
+            // console.log(files.rest_img.type);
+            // console.log(files.rest_img.path);
+
             // files.map(file => {
             //   console.log(file)
             // })
-          })
+        })
         /*
         if (req.files) {
             let ruta = req.files.rest_img.path;
@@ -156,20 +184,20 @@ export var restaurante_control = {
             console.log("Error => " + error);
         });
     },
-    getImagenByName:(req:Request, res:Response)=>{
+    getImagenByName: (req: Request, res: Response) => {
         let ruta = `images/${req.params.name}`;
         let rutaDefault = `images/default.png`;
-        if(fs.existsSync(ruta)){
+        if (fs.existsSync(ruta)) {
             return res.sendFile(path_module.resolve(ruta));
-        }else{
+        } else {
             return res.sendFile(path_module.resolve(rutaDefault));
         }
     },
     getById: (req: Request, res: Response) => {
-        let {id} = req.params;
+        let { id } = req.params;
         Restaurante.findAll({
-            where:{
-                rest_id:id
+            where: {
+                rest_id: id
             }
         }).then((restaurante: any) => {
             if (restaurante) {
