@@ -1,0 +1,3 @@
+
+*.cmd
+Back/node_modules/.bin/semver
