@@ -19,9 +19,13 @@ background: linear-gradient(0deg, rgba(242,222,162,0) 0%, rgba(253,215,30,1) 50%
         <div>
           <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" id="panelHorarios">
             <mat-expansion-panel-header class="" style="background: rgba(196,40,0,1);">
-              <mat-panel-title style="color:white">
+              <mat-panel-title style="color:white" *ngIf="estado">
                 Atencion:
                 <b style="color:white">&nbsp;&nbsp;&nbsp;Abierto hasta las {{horariofinActual}} &nbsp; &nbsp;</b>
+              </mat-panel-title>
+              <mat-panel-title style="color:white" *ngIf="!estado">
+                Cerrado:
+                <b style="color:white">&nbsp;&nbsp;&nbsp;abrimos a las  {{horarioaperturaActual}} &nbsp; &nbsp;</b>
               </mat-panel-title>
               <mat-panel-description>
                 <h6 style="color:white">
