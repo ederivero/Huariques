@@ -9,7 +9,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
-import { FormsModule} from '@angular/forms';
+import { FormsModule,  ReactiveFormsModule   } from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCardModule} from '@angular/material/card';
@@ -40,7 +40,8 @@ import {MatListModule} from '@angular/material/list';
     MatCardModule,
     AgmCoreModule,
     MatDividerModule,
-    MatListModule
+    MatListModule,
+    ReactiveFormsModule
 
     // MatTableDataSource
 
@@ -64,7 +65,8 @@ import {MatListModule} from '@angular/material/list';
     MatCardModule,
     AgmCoreModule,
     MatDividerModule,
-    MatListModule
+    MatListModule,
+    ReactiveFormsModule
     // MatTableDataSource
 
   ]

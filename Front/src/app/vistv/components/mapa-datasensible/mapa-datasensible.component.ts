@@ -1,6 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Marcador } from './../../models/Marcador';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
+
 // import {DatsenComponent} from '../datsen/datsen.component';
+
+
+// console.log(ctrl.value)
 
 @Component({
   selector: 'app-mapa-datasensible',
@@ -14,13 +20,16 @@ export class MapaDatasensibleComponent implements OnInit {
   latitud;
   longitud;
 
+
+
+
   // @ViewChild("") dataSen:DatsenComponent
 
   // title: string = 'My first AGM project';
   lat: number = -16.4142104;
   lng: number = -71.5398665;
 
-
+  espacio = 10;
 
   icon = { 
           url: '../../../img/tacaspastor.jpg', 

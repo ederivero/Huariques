@@ -10,28 +10,25 @@
                     <br>
                     <h5>Información del Negocio</h5>
                     <hr>
-                <form action="">
+                <form action=""  [formGroup]="crearRestautante" (ngSubmit)="onSubmit()">
                     <mat-form-field appearance="outline">
                         <mat-label>Nombre del Restaurant</mat-label>
-                        <input id="rest_nom" matInput placeholder="Nombre del Restaurant" value="Tacos Mexi">
+                        <input id="rest_nom" matInput placeholder="Nombre del Restaurant" >
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
-                        <mat-label> Direccion del Restaurant</mat-label>
-                        <input type="number" id="rest_fono" matInput placeholder="Telefono del Restaurant"
-                            value="941575658">
+                        <mat-label> Direccion</mat-label>
+                        <input type="text" id="rest_fono" matInput placeholder="Telefono del Restaurant">
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
                         <mat-label>Referencia de Dirección</mat-label>
-                        <input id="rest_ref" matInput placeholder="Referencia de dirección"
-                            value="Frente al Mall Aventura Porongoche">
+                        <input id="rest_ref" matInput placeholder="Referencia de dirección">
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" id="textDesc">
                         <mat-label>Información del Negocio</mat-label>
-                        <textarea id="rest_info" rows="5" matInput placeholder="Información del negocio"
-                            value="Nos dedicamos a la venta de tacos ridiendo un homenaje a la comida mexicana con una pizca de sabor peruano"></textarea>
+                        <textarea id="rest_info" rows="5" matInput placeholder="Información del negocio"></textarea>
                     </mat-form-field>
 
                     <h5>Horario de Atención</h5>
@@ -84,7 +81,7 @@
                     <!-- MAPA -->
 
                     <agm-map [latitude]="lat" [longitude]="lng" [zoom]="13">
-
+                        <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
                     </agm-map>
 
 
@@ -96,7 +93,7 @@
 
                     <hr>
                     <div class="text-center">
-                        <mat-dialog-actions >
+                        <mat-dialog-actions>
                             <button color="warn" mat-raised-button mat-dialog-close>Cancelar</button>
                             <button color="primary" mat-raised-button [mat-dialog-close]="true" cdkFocusInitial
                                 (click)="crearRest()">

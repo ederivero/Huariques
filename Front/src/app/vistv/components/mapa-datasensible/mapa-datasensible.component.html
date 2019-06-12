@@ -8,7 +8,7 @@
         <br>
         <form action="" class="p-3">
           <mat-form-field>
-            <input matInput  placeholder="Dirección" value="Urb. Monterrey 102">
+            <input matInput   placeholder="Dirección" value="Urb. Monterrey 102">
           </mat-form-field>
       
           <mat-form-field>
@@ -16,9 +16,9 @@
           </mat-form-field>
       
           <mat-form-field>
-            <input matInput type="number" placeholder="Latitud" [(ngModel)]="latitud"   >
+            <input matInput type="number" placeholder="Latitud"  value={{objMarcador.lat}} >
           </mat-form-field>
-      
+          {{objMarcador.lat}}
           <mat-form-field>
             <input matInput type="number" placeholder="Longitud"  >
           </mat-form-field>

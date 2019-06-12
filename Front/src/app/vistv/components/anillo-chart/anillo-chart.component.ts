@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AnilloChartComponent implements OnInit {
 
-  public doughnutChartLabels = ['Sales Q1', 'Sales Q2', 'Sales Q3', 'Sales Q4'];
-  public doughnutChartData = [120, 150, 180, 90];
+  public doughnutChartLabels = ['1 Estrella', '2 Estrellas', '3 estrellas', '4 Estrellas', '5 Estrellas'];
+  public doughnutChartData = [120, 150, 180, 90, 200];
   public doughnutChartType = 'doughnut';
 
   constructor() { }
