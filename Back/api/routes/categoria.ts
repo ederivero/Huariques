@@ -5,3 +5,4 @@ export var categoria_router = Router();
 categoria_router.post('/categoria/crear',categoria_control.create);
 categoria_router.get('/categoria/traertodos',categoria_control.getAll);
 categoria_router.get('/categoria/encontrar/:palabra',categoria_control.findByLike);
+categoria_router.get('/categoria/encontrarporid/:id',categoria_control.findById);

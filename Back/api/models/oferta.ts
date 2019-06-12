@@ -12,14 +12,14 @@ export var oferta_model = (sequelize: Sequelize, type: any) => {
                 allowNull: false,
             },
             ofer_tipo: {
-                type: type.STRING(45),
+                type: type.STRING(150),
                 allowNull: false,
             },
             ofer_disp: {
                 type: type.STRING(1),
                 allowNull: false,
             },ofer_img:{
-                type: type.STRING(50),
+                type: type.STRING(1000),
                 allowNull: false,
             }
         },

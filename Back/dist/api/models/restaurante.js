@@ -34,7 +34,7 @@ exports.restaurante_model = (sequelize, type) => {
             allowNull: false,
         },
         rest_img: {
-            type: type.STRING(50),
+            type: type.STRING(1000),
             allowNull: false,
         },
         rest_refUbicacion: {
