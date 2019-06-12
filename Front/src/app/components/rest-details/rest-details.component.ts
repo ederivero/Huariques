@@ -13,69 +13,20 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class RestDetailsComponent implements OnInit {
 
-  imagen="https://firebasestorage.googleapis.com/v0/b/api-project-161182547768.appspot.com/o/restaurantes%2Ffotito.png?alt=media&token=9b1da490-016c-4c08-b7f2-69e07f8137e9";
+  imagen = "https://firebasestorage.googleapis.com/v0/b/api-project-161182547768.appspot.com/o/restaurantes%2Ffotito.png?alt=media&token=9b1da490-016c-4c08-b7f2-69e07f8137e9";
   horarioaperturaActual = "12:00"
   horariofinActual = "12:00";
   feriadors: Boolean = true;
   estado: Boolean = false;
   title: string = 'Anticucheria la ultima cena';
+  direccion:string=''
+  telefono:string=''
   lat: number = -16.4310132;
   lng: number = -71.5189799;
-  categoriasruta=[]
-  categorias=[
-    {
-      nombre:"POLLERIA"
-    },
-    {
-      nombre:"HAMBURGUESERIA"
-    },
-    {
-      nombre:"CHORIPAN"
-    },
-    {
-      nombre:"PARRILLADA"
-    },
-    {
-      nombre:"CAPARINAS"
-    }
-  ]
-  
+  categoriasruta = []
+  categorias = []
   dias: Array<String> = ["Lun", "Mar", "Mier", "Jue", "Vier", "Sab", "Dom"]
-  horarios: Array<any> = [{
-    rest_dAtencion: "Lunes",
-    rest_hApertura: "18:00",
-    rest_hCierre: "22:00"
-  },
-  {
-    rest_dAtencion: "Martes",
-    rest_hApertura: "18:00",
-    rest_hCierre: "22:00"
-  },
-  {
-    rest_dAtencion: "Miercoles",
-    rest_hApertura: "18:00",
-    rest_hCierre: "22:00"
-  },
-  {
-    rest_dAtencion: "Jueves",
-    rest_hApertura: "18:00",
-    rest_hCierre: "22:00"
-  },
-  {
-    rest_dAtencion: "Viernes",
-    rest_hApertura: "16:00",
-    rest_hCierre: "22:00"
-  },
-  {
-    rest_dAtencion: "Sabado",
-    rest_hApertura: "13:00",
-    rest_hCierre: "22:00"
-  },
-  {
-    rest_dAtencion: "Domingo",
-    rest_hApertura: "13:00",
-    rest_hCierre: "22:00"
-  }]
+  horarios: Array<any> = []
   comentarios: Array<any> = [{
     id: 1,
     nombre: "Joel",
@@ -96,21 +47,28 @@ export class RestDetailsComponent implements OnInit {
   }]
 
   constructor(public dialog: MatDialog, private ruta: ActivatedRoute) {
-    // console.log(this.categorias)
     
-    this.categorias.forEach(categoria => {
-      this.categoriasruta.push({ruta:`./assets/images/${categoria.nombre}.png`})
-    });
-    console.log(this.categoriasruta)
+    // console.log(this.categorias)
+    // console.log(this.categoriasruta)
     // console.log(ruta.snapshot.params.id)
-    var rutaActual = ruta.snapshot.params.id-1
-    fetch(`https://huariquesback.herokuapp.com/api/restcategoria/${rutaActual}`).then(response=>{
-        return response.json()
-      }).then(datacat=>{
-        console.log(datacat)
+    var rutaActual = ruta.snapshot.params.id - 1
+    fetch(`https://huariquesback.herokuapp.com/api/restcategoria/rest/${rutaActual+1}`).then(response => {
+      return response.json()
+    }).then(datacat => {
+      // console.log(datacat.content)
+      datacat.content.forEach(idcat => {
+        // fetch(`https://huariquesback.herokuapp.com/api/categoria/encontrarporid/${idcat.cat_id}`).then(response=>{
+        //   return response.json()
+        // }).then(data=>{
+        //   // console.log(data.content[0])
+        //   this.categoriasruta.push({ruta:`./assets/images/${data.content[0].cat_nom}.png`})
+        // })
+        // console.log(idcat.cat_id)
+        this.categoriasruta.push({ruta:"./assets/images/"+idcat.cat_id+".png"})
       })
+    })
     this.obtenerDiaActual()
-    this.comentarios=[]
+    this.comentarios = []
     fetch(`https://huariquesback.herokuapp.com/api/regcli/encontrarporrest/${rutaActual}`).then(response => {
       return response.json();
     }).then(datareg => {
@@ -126,9 +84,9 @@ export class RestDetailsComponent implements OnInit {
             // console.log(data.content[0].usu_nom)
             this.comentarios.push({
               id: registro.usu_id,
-              nombre:data.content[0].usu_nom,
-              comentario:data1.content[0].punt_coment,
-              rating:data1.content[0].punt_total
+              nombre: data.content[0].usu_nom,
+              comentario: data1.content[0].punt_coment,
+              rating: data1.content[0].punt_total
             })
           })
         })
@@ -138,15 +96,16 @@ export class RestDetailsComponent implements OnInit {
     fetch('https://huariquesback.herokuapp.com/api/restaurante/traertodos').then((response) => {
       return response.json()
     }).then((data) => {
-      // console.log(data.content[rutaActual])
-      this.imagen=data.content[rutaActual].rest_img;
+      console.log(data.content[rutaActual])
+      this.imagen = data.content[rutaActual].rest_img;
       if (!this.imagen) {
-        this.imagen="https://firebasestorage.googleapis.com/v0/b/api-project-161182547768.appspot.com/o/restaurantes%2Ffotito.png?alt=media&token=9b1da490-016c-4c08-b7f2-69e07f8137e9"
+        this.imagen = "https://firebasestorage.googleapis.com/v0/b/api-project-161182547768.appspot.com/o/restaurantes%2Ffotito.png?alt=media&token=9b1da490-016c-4c08-b7f2-69e07f8137e9"
       }
+      this.telefono=data.content[rutaActual].rest_telefono;
+      this.direccion=data.content[rutaActual].rest_direccion;
       this.title = data.content[rutaActual].rest_rSocial;
       this.lat = +data.content[rutaActual].rest_lat;
       this.lng = +data.content[rutaActual].rest_lng;
-      this.horarios = []
       // console.log(data.content[rutaActual].rest_dAtencion.split(','))
       data.content[rutaActual].rest_dAtencion.split(',').forEach(dia => {
         this.horarios.push({

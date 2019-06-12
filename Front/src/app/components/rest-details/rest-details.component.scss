@@ -51,7 +51,10 @@ agm-map {
 
 @media (max-width:1000px){
     #rest-title{
-        color:white;
+        position:absolute;
+        z-index: 2;
+        width: 100%;
+        color: #000000;
     }
     #linea{
         position: absolute;
@@ -62,6 +65,6 @@ agm-map {
         background-color: rgb(235, 104, 100);
     }
     h1{
-        font-size: 20px
+        font-size: 30px
     }
 }
