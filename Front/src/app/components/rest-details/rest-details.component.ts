@@ -13,6 +13,7 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class RestDetailsComponent implements OnInit {
 
+  imagen="https://firebasestorage.googleapis.com/v0/b/api-project-161182547768.appspot.com/o/restaurantes%2Ffotito.png?alt=media&token=9b1da490-016c-4c08-b7f2-69e07f8137e9";
   horarioaperturaActual = "12:00"
   horariofinActual = "12:00";
   feriadors: Boolean = true;
@@ -20,6 +21,25 @@ export class RestDetailsComponent implements OnInit {
   title: string = 'Anticucheria la ultima cena';
   lat: number = -16.4310132;
   lng: number = -71.5189799;
+  categoriasruta=[]
+  categorias=[
+    {
+      nombre:"POLLERIA"
+    },
+    {
+      nombre:"HAMBURGUESERIA"
+    },
+    {
+      nombre:"CHORIPAN"
+    },
+    {
+      nombre:"PARRILLADA"
+    },
+    {
+      nombre:"CAPARINAS"
+    }
+  ]
+  
   dias: Array<String> = ["Lun", "Mar", "Mier", "Jue", "Vier", "Sab", "Dom"]
   horarios: Array<any> = [{
     rest_dAtencion: "Lunes",
@@ -76,8 +96,19 @@ export class RestDetailsComponent implements OnInit {
   }]
 
   constructor(public dialog: MatDialog, private ruta: ActivatedRoute) {
+    // console.log(this.categorias)
+    
+    this.categorias.forEach(categoria => {
+      this.categoriasruta.push({ruta:`./assets/images/${categoria.nombre}.png`})
+    });
+    console.log(this.categoriasruta)
     // console.log(ruta.snapshot.params.id)
-    var rutaActual = ruta.snapshot.params.id
+    var rutaActual = ruta.snapshot.params.id-1
+    fetch(`https://huariquesback.herokuapp.com/api/restcategoria/${rutaActual}`).then(response=>{
+        return response.json()
+      }).then(datacat=>{
+        console.log(datacat)
+      })
     this.obtenerDiaActual()
     this.comentarios=[]
     fetch(`https://huariquesback.herokuapp.com/api/regcli/encontrarporrest/${rutaActual}`).then(response => {
@@ -102,12 +133,16 @@ export class RestDetailsComponent implements OnInit {
           })
         })
       });
-      console.log(this.comentarios)
+      // console.log(this.comentarios)
     })
     fetch('https://huariquesback.herokuapp.com/api/restaurante/traertodos').then((response) => {
       return response.json()
     }).then((data) => {
       // console.log(data.content[rutaActual])
+      this.imagen=data.content[rutaActual].rest_img;
+      if (!this.imagen) {
+        this.imagen="https://firebasestorage.googleapis.com/v0/b/api-project-161182547768.appspot.com/o/restaurantes%2Ffotito.png?alt=media&token=9b1da490-016c-4c08-b7f2-69e07f8137e9"
+      }
       this.title = data.content[rutaActual].rest_rSocial;
       this.lat = +data.content[rutaActual].rest_lat;
       this.lng = +data.content[rutaActual].rest_lng;
