@@ -15,6 +15,7 @@ import { AgmCoreModule } from '@agm/core';
 import { LoginComponent } from './components/login/login.component';
 import { RestDetailsComponent } from './components/rest-details/rest-details.component';
 import { CalificanosComponent } from './components/calificanos/calificanos.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { CalificanosComponent } from './components/calificanos/calificanos.compo
     PromocionesComponent,
     LoginComponent,
     RestDetailsComponent,
-    CalificanosComponent
+    CalificanosComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

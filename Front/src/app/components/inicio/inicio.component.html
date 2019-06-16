@@ -1,58 +1,9 @@
-<h1>{{ title }}</h1>
-
-<!-- this creates a google map on the page with the given lat/lng from -->
-<!-- the component as the initial center of the map: -->
-<agm-map [latitude]="lat" [longitude]="lng" [zoom]="16">
-  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-</agm-map>
-<br>
-<div class="container">
-  <div class="row">
-    <div class="col-md-6">
-      <mat-card class="example-card">
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>Recomendaciones</mat-card-title>
-          <mat-card-subtitle>En base a tus ultimas busquedas</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            <mat-list>
-                <mat-list-item>Recomendacion 1</mat-list-item>
-                <mat-divider></mat-divider>
-                <mat-list-item>Recomendacion 2</mat-list-item>
-                <mat-divider></mat-divider>
-                <mat-list-item>Recomendacion 3</mat-list-item>
-              </mat-list>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button>LIKE</button>
-          <button mat-button>SHARE</button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
-
-    <div class="col-md-6">
-      <mat-card class="example-card">
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>Promociones</mat-card-title>
-          <mat-card-subtitle>Te mostramos las promociones del momento!!</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <mat-list>
-            <mat-list-item>Oferta 1</mat-list-item>
-            <mat-divider></mat-divider>
-            <mat-list-item>Oferta 2</mat-list-item>
-            <mat-divider></mat-divider>
-            <mat-list-item>Oferta 3</mat-list-item>
-          </mat-list>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button>LIKE</button>
-          <button mat-button>SHARE</button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
-
+<div class="all">
+  <div>
+    <img class="logo" src="../../../assets/images/logoSinFondo.png" style="height: 55%;" alt="">
+  </div>
+  <div class="search" [ngClass]="status ? 'active' : 'inactive'">
+    <input type="text" placeholder="Que quieres tragar hoy...">
+    <div class="icon" (click)="abrirBusqueda()"></div>
   </div>
 </div>
