@@ -20,20 +20,28 @@ agm-map {
 }
 .search {
   position:absolute;
-  top:80%;
+  top:83%;
   left:50%;
   transform:translate(-50%,-50%);
   width:80px;
   height:80px;
-  background:#fff;
+  background:#ffe61d;
   box-shadow:0 5px 20px rgba(0,0,0,.5);
   border-radius:4px;
   transition:width .5s;
   overflow:hidden;
 }
+.search #search {
+  background:#ffe61d;
+}
+.search.active #search {
+  background:#ffef64;
+}
+
 .search.active {
   width:600px;
 }
+::placeholder { color: rgba(94, 19, 0, 0.5); }
 .search input {
   position:absolute;
   top:10px;
@@ -48,7 +56,7 @@ agm-map {
   
 }
 .search.active .icon {
-  background:#ff355a;
+  background:#c42800;
 }
 .icon {
   position:absolute;
@@ -69,10 +77,13 @@ agm-map {
   height:30px;
   background:transparent;
   border:none;
-  border-right:2px solid #fff;
+  border-right:2px solid #fee113;
   border-radius:0;
   transition:.5%;
   transform:rotate(45deg);
+}
+#search{
+  background:#fee113;
 }
 .search.active .icon:after {
   content:'';
@@ -83,7 +94,7 @@ agm-map {
   height:30px;
   background:transparent;
   border:none;
-  border-right:2px solid #fff;
+  border-right:2px solid #fee113;
   border-radius:0;
   transition:.5%;
   transform:rotate(-45deg);
@@ -96,7 +107,7 @@ agm-map {
   width:24px;
   height:24px;
   background:transparent;
-  border:2px solid #262626;
+  border:2px solid #5e1300;
   border-radius:50%;
   transition:.5%;
 }
@@ -108,7 +119,7 @@ agm-map {
   width:18px;
   height:18px;
   background:transparent;
-  border-left:2px solid #262626;
+  border-left:2px solid #5e1300;
   border-radius:0;
   transform:rotate(-45deg);
   transition:.5%;
