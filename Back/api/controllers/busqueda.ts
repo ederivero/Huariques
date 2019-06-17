@@ -10,17 +10,15 @@ export var busqueda_control = {
     create: (req: Request, res: Response) => {
         Busquedas.create(req.body).then((respuesta: any) => {
             if (respuesta) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: respuesta
-                };
-                res.status(201).json(response);
+                });
             } else {
-                let response = {
+                res.status(400).json({
                     message: 'Error',
-                    content: 'Error al crear categoria con restaurante'
-                };
-                res.status(400).json(response);
+                    content: 'Error al crear busqueda'
+                });
             }
         }).catch((error: any) => {
             console.log("Error => " + error);
@@ -37,10 +35,12 @@ export var busqueda_control = {
                     content: respuesta
                 })
             } else {
-                res.status(400).json({
-                    message: 'Not found'
+                res.status(204).json({
+                    message: 'No se encontro'
                 })
             }
-        })
+        }).catch((error: any) => {
+            console.log("Error => " + error);
+        });
     }
 }

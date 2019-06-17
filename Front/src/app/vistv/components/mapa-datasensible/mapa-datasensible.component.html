@@ -16,9 +16,9 @@
           </mat-form-field>
       
           <mat-form-field>
-            <input matInput type="number" placeholder="Latitud"  value={{objMarcador.lat}} >
+            <input matInput type="number" placeholder="Latitud"  value={{latitud}} >
           </mat-form-field>
-          {{objMarcador.lat}}
+          {{lat}}
           <mat-form-field>
             <input matInput type="number" placeholder="Longitud"  >
           </mat-form-field>
@@ -50,9 +50,9 @@
               [longitude]="lng" 
               [zoom]="13" 
               (mapClick)="agregarMarcador($event)">
-          <agm-marker *ngFor="let marcador of objMarcador" 
-              [latitude]="marcador.lat" 
-              [longitude]="marcador.lng"
+          <agm-marker 
+              [latitude]="lat" 
+              [longitude]="lng"
               [iconUrl]="icon"
 
               >

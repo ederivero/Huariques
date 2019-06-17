@@ -6,18 +6,16 @@ exports.solicitud_control = {
     create: (req, res) => {
         sequelize_1.Solicitud.create(req.body).then((respuesta) => {
             if (respuesta) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: respuesta
-                };
-                res.status(201).json(response);
+                });
             }
             else {
-                let response = {
+                res.status(400).json({
                     message: 'Error',
                     content: 'Error al crear la solicitud'
-                };
-                res.status(400).json(response);
+                });
             }
         }).catch((error) => {
             console.log("Error => " + error);
@@ -27,18 +25,16 @@ exports.solicitud_control = {
         let { sol_id } = req.params;
         sequelize_1.Solicitud.destroy({ where: { sol_id } }).then((respuesta) => {
             if (respuesta) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: respuesta
-                };
-                res.status(201).json(response);
+                });
             }
             else {
-                let response = {
+                res.status(400).json({
                     message: 'Error',
-                    content: 'Error al eliminar'
-                };
-                res.status(400).json(response);
+                    content: 'Error al eliminar la solicitud'
+                });
             }
         }).catch((error) => {
             console.log("Error => " + error);

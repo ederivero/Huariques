@@ -27,7 +27,6 @@ export const Categoria:any = categoria_model(sequelize,Sequelize);
 export const Producto:any = producto_model(sequelize,Sequelize);
 export const Oferta:any = oferta_model(sequelize,Sequelize);
 export const Solicitud:any= solicitud_model(sequelize,Sequelize);
-
 Usuario.hasMany(Restaurante,{foreignKey:'usu_id'});
 Usuario.hasMany(Busquedas,{foreignKey:'usu_id'});
 Usuario.hasMany(RegCliente,{foreignKey:'usu_id'});

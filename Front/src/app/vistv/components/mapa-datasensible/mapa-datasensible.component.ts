@@ -5,9 +5,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 // import {DatsenComponent} from '../datsen/datsen.component';
 
-
-// console.log(ctrl.value)
-
 @Component({
   selector: 'app-mapa-datasensible',
   templateUrl: './mapa-datasensible.component.html',
@@ -25,7 +22,7 @@ export class MapaDatasensibleComponent implements OnInit {
 
   // @ViewChild("") dataSen:DatsenComponent
 
-  // title: string = 'My first AGM project';
+  title: string = 'My first AGM project';
   lat: number = -16.4142104;
   lng: number = -71.5398665;
 
@@ -53,11 +50,9 @@ export class MapaDatasensibleComponent implements OnInit {
   agregarMarcador(evento){
     let objMarcador = new Marcador(evento.coords.lat,evento.coords.lng);    
     localStorage.setItem("marcadores",JSON.stringify(objMarcador));
-
-
     
-    this.latitud= this.objMarcador.lat;
-    this.longitud= this.objMarcador.lng;
+    this.latitud= +this.objMarcador.lat;
+    this.longitud= +this.objMarcador.lng;
     
   }
 

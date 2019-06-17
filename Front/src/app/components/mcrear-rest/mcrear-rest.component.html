@@ -13,22 +13,22 @@
                 <form action=""  [formGroup]="crearRestautante" (ngSubmit)="onSubmit()">
                     <mat-form-field appearance="outline">
                         <mat-label>Nombre del Restaurant</mat-label>
-                        <input id="rest_nom" matInput placeholder="Nombre del Restaurant" >
+                        <input [formControl]="rest_nom" id="rest_nom" matInput placeholder="Nombre del Restaurant" >
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
                         <mat-label> Direccion</mat-label>
-                        <input type="text" id="rest_fono" matInput placeholder="Telefono del Restaurant">
+                        <input [formControl]="rest_dir" type="text" id="rest_dir" matInput placeholder="Telefono del Restaurant">
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
                         <mat-label>Referencia de Dirección</mat-label>
-                        <input id="rest_ref" matInput placeholder="Referencia de dirección">
+                        <input [formControl]="rest_ref" id="rest_ref" matInput placeholder="Referencia de dirección">
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" id="textDesc">
                         <mat-label>Información del Negocio</mat-label>
-                        <textarea id="rest_info" rows="5" matInput placeholder="Información del negocio"></textarea>
+                        <textarea [formControl]="rest_info" id="rest_info" rows="5" matInput placeholder="Información del negocio"></textarea>
                     </mat-form-field>
 
                     <h5>Horario de Atención</h5>
@@ -37,20 +37,20 @@
                         <div class="col-md-6">
                             <mat-form-field appearance="outline" class="hora">
                                 <mat-label>Hora de Apertura</mat-label>
-                                <input type="time" name="h_abierto" matInput>
+                                <input [formControl]="h_abierto" type="time" name="h_abierto" matInput>
                             </mat-form-field>
                         </div>
 
                         <div class="col-md-6">
                             <mat-form-field appearance="outline" class="hora m-1">
                                 <mat-label>Hora de Salida</mat-label>
-                                <input type="time" name="h_cerrado" matInput>
+                                <input [formControl]="h_cerrado" type="time" name="h_cerrado" matInput>
                             </mat-form-field>
                         </div>
 
 
                         <!-- HORARIOS DE ATENCION -->
-                        <section class="example-section" id="checkDia">
+                        <section class="example-section" [formControl]="checkDia" id="checkDia">
                             <mat-checkbox class="example-margin m-1" [(ngModel)]="checked">Lun</mat-checkbox>
                             <mat-checkbox class="example-margin m-1" [(ngModel)]="checked">Mar</mat-checkbox>
                             <mat-checkbox class="example-margin m-1" [(ngModel)]="checked">Mier</mat-checkbox>
@@ -70,17 +70,17 @@
                     <hr>
                     <mat-form-field appearance="outline">
                         <mat-label>Latitud</mat-label>
-                        <input matInput type="number" placeholder="Latitud">
+                        <input [formControl]="latitud" matInput type="number" placeholder="Latitud">
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
                         <mat-label>Longitud</mat-label>
-                        <input matInput type="number" placeholder="Longitud">
+                        <input [formControl]="latitud" matInput type="number" placeholder="Longitud">
                     </mat-form-field>
 
                     <!-- MAPA -->
 
-                    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="13">
+                    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="13" (mapClick)="agregarMarcadorCre($event)">
                         <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
                     </agm-map>
 

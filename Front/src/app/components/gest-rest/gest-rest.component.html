@@ -29,16 +29,16 @@
     </div>
 
 
-    <div class="col-md-12 m-3">
+    <div class="col-md-12 m-3" *ngIf="load">
       <mat-card class="example-card mb-5">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>Nombre del Restaurant</mat-card-title>
+          <mat-card-title>{{rest_rSocialM}}</mat-card-title>
         </mat-card-header>
-        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <img mat-card-image [src]="imagen" alt="Photo of a Shiba Inu">
         <mat-card-content class="text-justify">
           <p>
-              Nos dedicamos a la venta de tacos ridiendo un homenaje a la comida mexicana con una pizca de sabor peruano
+            {{rest_direccionM}}
           </p>
         </mat-card-content>
         <mat-card-actions class="text-center">

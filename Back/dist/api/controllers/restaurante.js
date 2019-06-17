@@ -6,6 +6,7 @@ const Sequelize = require('sequelize');
 var path_module = require('path');
 var fs = require('fs');
 const Op = Sequelize.Op;
+const SubirArchivoFirebase_1 = require("../utils/SubirArchivoFirebase");
 exports.restaurante_control = {
     findByLike: (req, res) => {
         let { palabra } = req.params;
@@ -17,81 +18,70 @@ exports.restaurante_control = {
             }
         }).then((respuesta) => {
             if (respuesta) {
-                res.status(200).json({
+                res.status(201).json({
                     message: 'Ok',
                     content: respuesta
                 });
             }
             else {
                 res.status(400).json({
-                    message: 'Not found'
+                    message: 'Error',
+                    content: 'Error al encontrar restaurante'
                 });
             }
         });
     },
     getAll: (req, res) => {
-        sequelize_1.Restaurante.findAll().then((restaurante) => {
+        sequelize_1.Restaurante.findAll({
+            include: [{
+                    model: sequelize_1.Producto
+                }]
+        }).then((restaurante) => {
             if (restaurante) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: restaurante
-                };
-                res.status(200).json(response);
+                });
             }
             else {
-                let response = {
+                res.status(400).json({
                     message: 'Error',
                     content: 'Error al traer restaurantes'
-                };
-                res.status(201).json(response);
+                });
             }
         }).catch((error) => {
             console.log("Error => " + error);
         });
     },
     create: (req, res) => {
-        if (req.files) {
-            let ruta = req.files.rest_img.path;
-            // LOCALMENTE SE USA '\\'
-            // let nombreYExtension = ruta.split('\\')[1];
-            //PARA HEROKU SE USA '/'
-            let nombreYExtension = ruta.split('/')[1];
-            let { rest_rSocial, rest_direccion, rest_telefono, rest_lat, rest_lng, rest_info, rest_refUbicacion, rest_dAtencion, rest_hApertura, rest_hCierre, rest_avisos, rest_estado, rest_verificacion, usu_id } = req.body;
-            sequelize_1.Restaurante.create({
-                rest_rSocial,
-                rest_direccion,
-                rest_telefono,
-                rest_lat,
-                rest_lng,
-                rest_info,
-                rest_img: nombreYExtension,
-                rest_refUbicacion,
-                rest_dAtencion,
-                rest_hApertura,
-                rest_hCierre,
-                rest_avisos,
-                rest_estado,
-                rest_verificacion,
-                usu_id
-            }).then((restaurante) => {
-                if (restaurante) {
-                    let response = {
-                        message: 'Ok',
-                        content: restaurante
-                    };
-                    res.status(201).json(response);
-                }
-                else {
-                    let response = {
-                        message: 'Error',
-                        content: 'Error al crear restaurante'
-                    };
-                    res.status(400).json(response);
-                }
-            }).catch((error) => {
-                res.send(error);
-                console.log("Error => " + error);
+        let imagen = req.file;
+        if (imagen) {
+            SubirArchivoFirebase_1.subirArchivo(imagen, 'restaurantes').then((link) => {
+                let { rest_rSocial, rest_direccion, rest_telefono, rest_lat, rest_lng, rest_info, rest_refUbicacion, rest_dAtencion, rest_hApertura, rest_hCierre, rest_avisos, rest_estado, rest_verificacion, usu_id } = req.body;
+                let parametros = {
+                    rest_rSocial, rest_direccion, rest_telefono, rest_lat, rest_lng, rest_info, rest_refUbicacion, rest_dAtencion, rest_hApertura, rest_hCierre, rest_avisos, rest_estado, rest_verificacion, usu_id, rest_img: link[0],
+                };
+                sequelize_1.Restaurante.create(parametros).then((restaurante) => {
+                    if (parametros) {
+                        res.status(201).json({
+                            message: 'Ok',
+                            content: restaurante
+                        });
+                    }
+                    else {
+                        res.status(400).json({
+                            message: 'Error',
+                            content: 'Error al crear restaurante'
+                        });
+                    }
+                }).catch((error) => {
+                    res.send(error);
+                    console.log("Error => " + error);
+                });
             });
+        }
+        else {
+            res.status(400).json({ error: 'No hay archivos' });
         }
     },
     deleteById: (req, res) => {
@@ -104,54 +94,124 @@ exports.restaurante_control = {
             }
         }).then((restaurante) => {
             if (restaurante) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: restaurante
-                };
-                res.status(200).json(response);
+                });
             }
             else {
-                let response = {
-                    message: 'Error al eliminar restaurante',
-                    content: restaurante
-                };
-                res.status(201).json(response);
+                res.status(400).json({
+                    message: 'Error',
+                    content: 'Error al eliminar restaurante'
+                });
             }
         }).catch((error) => {
             console.log("Error => " + error);
         });
     },
     upDateById: (req, res) => {
-        let { rest_id } = req.params;
-        sequelize_1.Restaurante.update(req.body, {
-            where: { rest_id }
+        let imagen = req.file;
+        if (imagen) {
+            SubirArchivoFirebase_1.subirArchivo(imagen, 'restaurantes').then((link) => {
+                let { rest_rSocial, rest_direccion, rest_telefono, rest_lat, rest_lng, rest_info, rest_refUbicacion, rest_dAtencion, rest_hApertura, rest_hCierre, rest_avisos, rest_estado, rest_verificacion, usu_id } = req.body;
+                let parametros = {
+                    rest_rSocial, rest_direccion, rest_telefono, rest_lat, rest_lng, rest_info, rest_refUbicacion, rest_dAtencion, rest_hApertura, rest_hCierre, rest_avisos, rest_estado, rest_verificacion, usu_id, rest_img: link[0],
+                };
+                let { rest_id } = req.params;
+                sequelize_1.Restaurante.update(parametros, {
+                    where: { rest_id }
+                }).then((restaurante) => {
+                    if (restaurante) {
+                        res.status(201).json({
+                            message: 'Ok',
+                            content: restaurante
+                        });
+                    }
+                    else {
+                        res.status(400).json({
+                            message: 'Error',
+                            content: 'Error al actualizar restaurante'
+                        });
+                    }
+                }).catch((error) => {
+                    console.log("Error => " + error);
+                });
+            });
+        }
+        else {
+            let { rest_id } = req.params;
+            sequelize_1.Restaurante.update(req.body, {
+                where: { rest_id }
+            }).then((restaurante) => {
+                if (restaurante) {
+                    res.status(201).json({
+                        message: 'Ok',
+                        content: restaurante
+                    });
+                }
+                else {
+                    res.status(400).json({
+                        message: 'Error',
+                        content: 'Error al actualizar restaurante'
+                    });
+                }
+            }).catch((error) => {
+                console.log("Error => " + error);
+            });
+        }
+    },
+    getByUsuId: (req, res) => {
+        let { usu_id } = req.params;
+        sequelize_1.Restaurante.findAll({
+            where: { usu_id }
         }).then((restaurante) => {
             if (restaurante) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: restaurante
-                };
-                res.status(200).json(response);
+                });
             }
             else {
-                let response = {
-                    message: 'Error al actualizar restaurante',
-                    content: restaurante
-                };
-                res.status(201).json(response);
+                res.status(400).json({
+                    message: 'Error',
+                    content: 'Error al traer restaurante'
+                });
             }
         }).catch((error) => {
             console.log("Error => " + error);
         });
     },
     getImagenByName: (req, res) => {
-        let ruta = `images/${req.params.name}`;
-        let rutaDefault = `images/default.png`;
-        if (fs.existsSync(ruta)) {
-            return res.sendFile(path_module.resolve(ruta));
-        }
-        else {
-            return res.sendFile(path_module.resolve(rutaDefault));
-        }
+        res.send('Este paquete ha sido deprecado, evite su uso');
+        // let ruta = `images/${req.params.name}`;
+        // let rutaDefault = `images/default.png`;
+        // if (fs.existsSync(ruta)) {
+        //     return res.sendFile(path_module.resolve(ruta));
+        // } else {
+        //     return res.sendFile(path_module.resolve(rutaDefault));
+        // }
+    },
+    getById: (req, res) => {
+        let { id } = req.params;
+        sequelize_1.Restaurante.findAll({
+            where: {
+                rest_id: id
+            }
+        }).then((restaurante) => {
+            if (restaurante) {
+                res.status(201).json({
+                    message: 'Ok',
+                    content: restaurante
+                });
+            }
+            else {
+                res.status(400).json({
+                    message: 'Error',
+                    content: 'Error al traer restaurante'
+                });
+            }
+        }).catch((error) => {
+            console.log("Error => " + error);
+        });
     }
 };

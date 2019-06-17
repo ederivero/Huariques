@@ -9,7 +9,7 @@ const routes: Routes = [
     component: InicioComponent
   },
   {
-    path:'gest',
+    path:'gest/:id',
     component: GestRestComponent
 
   },

@@ -6,6 +6,25 @@ const Sequelize = require('sequelize');
 
 const Op = Sequelize.Op;
 export var categoria_control = {
+    findById:(req:Request,res:Response)=>{
+        let { id } = req.params;
+        Categoria.findAll({
+            where: {
+                cat_id: id
+            }
+        }).then((respuesta: any) => {
+            if (respuesta) {
+                res.status(200).json({
+                    message: 'Ok',
+                    content: respuesta
+                })
+            } else {
+                res.status(204).json({
+                    message: 'No se encontro'
+                })
+            }
+        })
+    },
     findByLike: (req: Request, res: Response) => {
         let { palabra } = req.params;
         Categoria.findAll({
@@ -21,8 +40,8 @@ export var categoria_control = {
                     content: respuesta
                 })
             } else {
-                res.status(400).json({
-                    message: 'Not found'
+                res.status(204).json({
+                    message: 'No se encontro'
                 })
             }
         })
@@ -30,17 +49,15 @@ export var categoria_control = {
     getAll: (req: Request, res: Response) => {
         Categoria.findAll().then((categoria: any) => {
             if (categoria) {
-                let response = {
+                res.status(200).json({
                     message: 'Ok',
                     content: categoria
-                };
-                res.status(200).json(response);
+                });
             } else {
-                let response = {
+                res.status(204).json({
                     message: 'Error',
                     content: 'Error al traer categorias'
-                };
-                res.status(201).json(response);
+                });
             }
         }).catch((error: any) => {
             console.log("Error => " + error);
@@ -49,17 +66,15 @@ export var categoria_control = {
     create: (req: Request, res: Response) => {
         Categoria.create(req.body).then((categoria: any) => {
             if (categoria) {
-                let response = {
+                res.status(201).json({
                     message: 'Ok',
                     content: categoria
-                };
-                res.status(201).json(response);
+                });
             } else {
-                let response = {
+                res.status(400).json({
                     message: 'Error',
                     content: 'Error al crear categoria'
-                };
-                res.status(400).json(response);
+                });
             }
         }).catch((error: any) => {
             console.log("Error => " + error);
