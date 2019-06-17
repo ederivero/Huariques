@@ -17,6 +17,7 @@ import { RestDetailsComponent } from './components/rest-details/rest-details.com
 import { CalificanosComponent } from './components/calificanos/calificanos.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
