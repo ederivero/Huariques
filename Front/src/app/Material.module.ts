@@ -7,11 +7,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
-
-
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatRadioModule } from '@angular/material/radio';
 @NgModule({
   declarations: [],
-  imports: [MatButtonModule, MatCheckboxModule, MatCardModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatIconModule, MatDividerModule, MatListModule],
-  exports: [MatButtonModule, MatCheckboxModule, MatCardModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatIconModule, MatDividerModule, MatListModule]
+  imports: [MatButtonModule, MatCheckboxModule, MatCardModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatIconModule, MatDividerModule, MatListModule, MatStepperModule, MatRadioModule],
+  exports: [MatButtonModule, MatCheckboxModule, MatCardModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatIconModule, MatDividerModule, MatListModule, MatStepperModule, MatRadioModule]
 })
 export class MaterialModule { }

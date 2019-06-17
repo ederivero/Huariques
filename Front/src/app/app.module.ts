@@ -10,16 +10,20 @@ import { PromocionesComponent } from './components/promociones/promociones.compo
 
 import { AgmCoreModule } from '@agm/core';
 import { LoginComponent } from './components/login/login.component';
+import { RegistroComponent } from './components/registro/registro.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     InicioComponent,
     PromocionesComponent,
-    LoginComponent
+    LoginComponent,
+    RegistroComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule, ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
@@ -27,7 +31,7 @@ import { LoginComponent } from './components/login/login.component';
       apiKey: 'AIzaSyBcjhtE0FIFEO92Z_7xKQWODx3I_QXq33E'
     })
   ],
-  entryComponents:[
+  entryComponents: [
     LoginComponent
   ],
   providers: [],
