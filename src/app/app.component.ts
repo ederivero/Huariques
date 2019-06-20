@@ -12,31 +12,35 @@ import { AuthServiceLocal } from './services/auth.service';
 export class AppComponent implements OnInit {
 
 
-  logged;
-  nombre;
+  user = false;
+  p;
+  constructor(
+    private dialog: MatDialog,
+    private _sAuth: AuthServiceLocal
+  ) {
+    if (localStorage.getItem('token')) {
+      this.user = null;
+      this._sAuth.getUserLogged(this._sAuth.getUserDetails().usu_id).subscribe((res: any) => {
+        this.user = res.content;
+        this.p = res.content[0];
+      })
 
-  constructor(public dialog: MatDialog,
-              private _sAuth: AuthServiceLocal) {
-    if(localStorage.getItem('token')){
-      this.logged=true;
-      let usu= this._sAuth.user;
-      console.log(usu);
-      
+    } else {
+      this._sAuth.userLogged().subscribe((resp: any) => {
+        this.user = null;
+        this._sAuth.getUserLogged(resp).subscribe((res: any) => {
+          this.user = res.content;
+          this.p = res.content[0];
+        })
+      })
     }
-    this._sAuth.getLogged().subscribe((resp:boolean)=>{
-      this.logged=resp;      
-    })
+
   }
   ngOnInit() {
-    if(this.logged){
-      let user = this._sAuth.getUserDetails();
-      this.nombre = user.usu_nom;
-      console.log(this.nombre);
-      
-    }
-          
   }
-  logOut(){
+
+  logOut() {
+    this.user = false;
     this._sAuth.cerrarSesion();
   }
 

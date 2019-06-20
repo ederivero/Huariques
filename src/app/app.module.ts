@@ -20,6 +20,8 @@ import { TablemapComponent } from './components/tablemap/tablemap.component';
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
 
+import { ReactiveFormsModule} from '@angular/forms';
+
 
 let configLogin = new AuthServiceConfig([
   {
@@ -55,7 +57,8 @@ export function provideConfig() {
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBcjhtE0FIFEO92Z_7xKQWODx3I_QXq33E'
     }),
-    SocialLoginModule
+    SocialLoginModule,
+    ReactiveFormsModule
   ],
   entryComponents:[
     LoginComponent

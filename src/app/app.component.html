@@ -24,13 +24,13 @@
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="text" placeholder="Search">
       <button class="btn btn-secondary my-2 my-sm-0" type="button">Search</button>
+    
 
-
-      <button *ngIf="!logged" class="btn btn-secondary my-2 my-sm-0 ml-3" type="button" (click)="openDialog()">Iniciar
+      <button *ngIf="user==false" class="btn btn-secondary my-2 my-sm-0 ml-3" type="button" (click)="openDialog()">Iniciar
         Sesion</button>
-
-      <button mat-menu-item *ngIf="logged" [matMenuTriggerFor]="menu">
-        <span>{{nombre}}</span>
+      <div *ngIf="user==null"></div>
+      <button class="btn_user ml-1 mr-3" mat-button *ngIf="user" [matMenuTriggerFor]="menu">
+        <img src={{p.usu_img}} class="rounded-circle float-left usu_img" alt="">
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
@@ -47,8 +47,8 @@
           <span>Log Out</span>
         </button>
       </mat-menu>
-
     </form>
+    
   </div>
 </nav>
 
