@@ -2,8 +2,11 @@
   <div>
     <img class="logo" src="../../../assets/images/logoSinFondo.png" style="height: 55%;" alt="">
   </div>
-  <div class="search" [ngClass]="status ? 'active' : 'inactive'">
-    <input id="search" type="text" placeholder="Que quieres tragar hoy...">
-    <div class="icon" (click)="abrirBusqueda()"></div>
-  </div>
+  <form (submit)="Buscar($event)">
+    <div class="search" [ngClass]="status ? 'active' : 'inactive'">
+      <input id="search" (keyup)="onKey($event)" type="text" placeholder="Que quieres tragar hoy...">
+      <!-- <div class="icon" (click)="abrirBusqueda()"></div> -->
+      <div class="icon2" (click)="Buscar($event)"></div>
+    </div>
+  </form>
 </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import * as $ from 'jquery';
+import { BusquedaService } from 'src/app/services/busqueda.service';
 
 
 @Component({
@@ -9,32 +10,54 @@ import * as $ from 'jquery';
 })
 
 export class InicioComponent implements OnInit {
-  
-  
-  inicio=true
+
+
+  inicio = true
   @Output() variableInicioEnvio = new EventEmitter<boolean>();
 
-  enviarMensaje(){
-    this.variableInicioEnvio.emit(this.inicio);
-  }
-  
   title: string = 'Descubre nuevos lugares para comer!';
   lat: number = -16.4310132;
   lng: number = -71.5189799;
   num = 0;
-  
-  constructor() {
+  busqueda: string
+  onKey(event) {
+    this.busqueda = event.target.value;
+  }
+
+  constructor(private _BusquedaService:BusquedaService) {
     this.contador()
-    this.enviarMensaje()
   }
 
   status: boolean = true;
   abrirBusqueda() {
     this.status = !this.status;
   }
+  Buscar($event) {
+    $event.preventDefault()
+    if (this.busqueda === ""||this.busqueda === undefined) {
+      fetch(`https://huariquesback.herokuapp.com/api/restaurante/traertodos`)
+        .then(response => {
+          return response.json()
+        }).then(data => {
+          // console.log(data)
+          this.buscar(data);
+        })
+    } else {
+      fetch(`https://huariquesback.herokuapp.com/api/restaurante/encontrar/${this.busqueda}`)
+      .then(response => {
+        return response.json()
+      }).then(data => {
+        // console.log(data)
+        this.buscar(data);
+      })
+    }
+  }
+  buscar(datos) {
+    this._BusquedaService.setArray(datos);
+  }
   contador() {
     for (let i = 0; i < 100; i++) {
-      setTimeout(()=>{this.num++},1000)
+      setTimeout(() => { this.num++ }, 1000)
     }
   }
   ngOnInit() {

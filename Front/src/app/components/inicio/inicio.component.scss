@@ -58,6 +58,7 @@ agm-map {
 .search.active .icon {
   background:#c42800;
 }
+
 .icon {
   position:absolute;
   top:10px;
@@ -112,6 +113,44 @@ agm-map {
   transition:.5%;
 }
 .icon:after {
+  content:'';
+  position:absolute;
+  top:25px;
+  left:35px;
+  width:18px;
+  height:18px;
+  background:transparent;
+  border-left:2px solid #5e1300;
+  border-radius:0;
+  transform:rotate(-45deg);
+  transition:.5%;
+}
+.search.active .icon2 {
+  background:#c42800;
+}
+.search.active .icon2 {
+  position:absolute;
+  top:10px;
+  right:10px;
+  width:60px;
+  height:60px;
+  cursor:pointer;
+  transition:.5s;
+  border-radius:4px;
+}
+.search.active .icon2:before {
+  content:'';
+  position:absolute;
+  top:12px;
+  left:12px;
+  width:24px;
+  height:24px;
+  background:transparent;
+  border:2px solid #5e1300;
+  border-radius:50%;
+  transition:.5%;
+}
+.search.active .icon2:after {
   content:'';
   position:absolute;
   top:25px;
