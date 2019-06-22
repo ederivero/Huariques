@@ -27,6 +27,9 @@ export class InicioComponent implements OnInit {
   constructor(private _BusquedaService:BusquedaService) {
     this.contador()
   }
+  contadorfinalizado(){
+    console.log("se paro el contador")
+  }
 
   status: boolean = true;
   abrirBusqueda() {

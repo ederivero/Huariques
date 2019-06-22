@@ -4,9 +4,14 @@
   </div>
   <form (submit)="Buscar($event)">
     <div class="search" [ngClass]="status ? 'active' : 'inactive'">
-      <input id="search" (keyup)="onKey($event)" type="text" placeholder="Que quieres tragar hoy...">
+      <input id="search" (keyup)="onKey($event)" type="text" placeholder="Que quieres comer hoy...">
       <!-- <div class="icon" (click)="abrirBusqueda()"></div> -->
       <div class="icon2" (click)="Buscar($event)"></div>
     </div>
   </form>
+  <div id="huariqueros">
+  <p>
+    Ya somos <span [countUp]="55321" (complete)="contadorfinalizado()">0</span> Huariqueros
+  </p>
+  </div>
 </div>

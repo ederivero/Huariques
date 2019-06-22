@@ -4,6 +4,13 @@ agm-map {
 #mapa{
   height: 350px;
 }
+#huariqueros{
+  position:absolute;
+  top:95%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-size: 200%
+}
 .logo{
   position:absolute;
   top:45%;

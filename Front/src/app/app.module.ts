@@ -16,6 +16,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RestDetailsComponent } from './components/rest-details/rest-details.component';
 import { CalificanosComponent } from './components/calificanos/calificanos.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { CountUpModule } from 'countup.js-angular2';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     BrowserAnimationsModule,
     MaterialModule,
     NgbModule,
+    CountUpModule,
     StarRatingModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBcjhtE0FIFEO92Z_7xKQWODx3I_QXq33E'
