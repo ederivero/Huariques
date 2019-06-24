@@ -37,7 +37,11 @@
   </mat-card-content>
   <mat-card-actions>
     <div class="container-fluid">
+<<<<<<< Updated upstream
       <div class="row"><button mat-raised-button class="btn btn-block btn-success" (click)="login()">Enviar Comentario</button></div>
+=======
+      <div class="row"><button mat-raised-button [disabled]="!enviando" class="btn btn-block btn-success" (click)="Puntuacion()">Enviar Comentario</button></div>
+>>>>>>> Stashed changes
       <div class="row">
       <button mat-raised-button class="btn btn-block btn-primary" (click)="onNoClick()">Cancelar</button></div>
     </div>

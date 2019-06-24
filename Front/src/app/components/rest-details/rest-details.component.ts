@@ -47,7 +47,16 @@ export class RestDetailsComponent implements OnInit {
   }]
 
   constructor(public dialog: MatDialog, private ruta: ActivatedRoute) {
-    
+
+    var diaAct = new Date();
+    // console.log(diaAct.getFullYear());
+    // console.log(diaAct.getMonth()+1);
+    // console.log(diaAct.getDate());
+    // console.log(diaAct.getHours());
+    // console.log(diaAct.getMinutes());
+    // console.log(diaAct.getSeconds());
+    // console.log(`${diaAct.getFullYear()}/${diaAct.getMonth()+1}/${diaAct.getDate()} ${diaAct.getHours()}:${diaAct.getMinutes()}:${diaAct.getSeconds()}`)
+    // console.log(diaAct.getTime())
     // console.log(this.categorias)
     // console.log(this.categoriasruta)
     // console.log(ruta.snapshot.params.id)
@@ -69,26 +78,28 @@ export class RestDetailsComponent implements OnInit {
     })
     this.obtenerDiaActual()
     this.comentarios = []
-    fetch(`https://huariquesback.herokuapp.com/api/regcli/encontrarporrest/${rutaActual}`).then(response => {
+    fetch(`https://huariquesback.herokuapp.com/api/regcli/encontrarporrest/${rutaActual+1}`).then(response => {
       return response.json();
     }).then(datareg => {
-      // console.log(datareg.content)
+      console.log(datareg.content)
       datareg.content.forEach(registro => {
         fetch(`https://huariquesback.herokuapp.com/api/puntuacion/mostrar/${registro.regCliente_id}`).then(response => {
           return response.json()
         }).then(data1 => {
-          // console.log(data1.content[0].punt_coment)
-          fetch(`https://huariquesback.herokuapp.com/api/usuario/traerporid/${registro.usu_id}`).then(response => {
-            return response.json();
-          }).then(data => {
-            // console.log(data.content[0].usu_nom)
-            this.comentarios.push({
-              id: registro.usu_id,
-              nombre: data.content[0].usu_nom,
-              comentario: data1.content[0].punt_coment,
-              rating: data1.content[0].punt_total
+          // console.log(data1.content)
+          if (data1.content!=""){
+            fetch(`https://huariquesback.herokuapp.com/api/usuario/traerporid/${registro.usu_id}`).then(response => {
+              return response.json();
+            }).then(data => {
+              // console.log(data.content[0])
+              this.comentarios.push({
+                id: registro.usu_id,
+                nombre: data.content[0].usu_nom,
+                comentario: data1.content[0].punt_coment,
+                rating: data1.content[0].punt_total
+              })
             })
-          })
+          }
         })
       });
       // console.log(this.comentarios)
@@ -96,7 +107,7 @@ export class RestDetailsComponent implements OnInit {
     fetch('https://huariquesback.herokuapp.com/api/restaurante/traertodos').then((response) => {
       return response.json()
     }).then((data) => {
-      console.log(data.content[rutaActual])
+      // console.log(data.content[rutaActual])
       this.imagen = data.content[rutaActual].rest_img;
       if (!this.imagen) {
         this.imagen = "https://firebasestorage.googleapis.com/v0/b/api-project-161182547768.appspot.com/o/restaurantes%2Ffotito.png?alt=media&token=9b1da490-016c-4c08-b7f2-69e07f8137e9"
@@ -123,9 +134,9 @@ export class RestDetailsComponent implements OnInit {
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(CalificanosComponent, {
-      width: '30%',
+      width: '40%',
     });
-
+    dialogRef.componentInstance.rutaActual=this.ruta.snapshot.params.id
     dialogRef.afterClosed().subscribe(() => {
       console.log('The dialog was closed');
     });
