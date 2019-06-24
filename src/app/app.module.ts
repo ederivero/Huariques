@@ -21,6 +21,7 @@ import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
 
 import { ReactiveFormsModule} from '@angular/forms';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 
 let configLogin = new AuthServiceConfig([
@@ -45,7 +46,8 @@ export function provideConfig() {
     InicioComponent,
     PromocionesComponent,
     LoginComponent,
-    TablemapComponent
+    TablemapComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,
