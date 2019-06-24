@@ -1,10 +1,6 @@
-<<<<<<< Updated upstream
-import { Component, OnInit } from '@angular/core';
-=======
 
 import { ClickEvent } from 'angular-star-rating';
 import { Component, OnInit, Input } from '@angular/core';
->>>>>>> Stashed changes
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -13,10 +9,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./calificanos.component.scss']
 })
 export class CalificanosComponent implements OnInit {
-<<<<<<< Updated upstream
-
-  constructor(public dialogRef: MatDialogRef<CalificanosComponent>) { }
-=======
 
   rutaActual;
   enviando: boolean = true;
@@ -151,7 +143,6 @@ export class CalificanosComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<CalificanosComponent>) {
 
   }
->>>>>>> Stashed changes
   onNoClick(): void {
     this.dialogRef.close();
   }
