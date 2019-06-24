@@ -6,24 +6,28 @@
         Actualiza tus datos sensibles
         <br>
         <br>
-        <form action="" class="p-3">
+        <form action="" class="p-3" (ngSubmit)="onSubmit()">
           <mat-form-field>
-            <input matInput   placeholder="Dirección" value="Urb. Monterrey 102">
+            <input matInput placeholder="Dirección" value="Urb. Monterrey 102">
           </mat-form-field>
-      
+
           <mat-form-field>
             <input matInput type="number" placeholder="Teléfono" value="941271568">
           </mat-form-field>
-      
-          <mat-form-field>
-            <input matInput type="number" placeholder="Latitud"  value={{latitud}} >
+
+          <mat-form-field >
+            <mat-label>Latitud</mat-label>
+            <input name="n_rLng"  readonly matInput value="{{markers[0].latitude}}"
+              placeholder="Latitud">
           </mat-form-field>
-          {{lat}}
-          <mat-form-field>
-            <input matInput type="number" placeholder="Longitud"  >
+
+          <mat-form-field >
+            <mat-label>Longitud</mat-label>
+            <input name="n_rLat" readonly matInput value="{{markers[0].longitude}}" placeholder="Longitud"
+              >
           </mat-form-field>
-      
-      
+
+
           <br>
           <small style="color:green">*Sus nuevos datos serán verificados y luego actualizados</small>
           <br>
@@ -41,23 +45,15 @@
 
     <div class="col-md-8 p-1">
       <div>
-        Puntuaciones
         <br>
         <!-- <app-anillo-chart></app-anillo-chart> -->
         <!-- <app-mapa-datasensible></app-mapa-datasensible> -->
-        <agm-map 
-              [latitude]="lat" 
-              [longitude]="lng" 
-              [zoom]="13" 
-              (mapClick)="agregarMarcador($event)">
-          <agm-marker 
-              [latitude]="lat" 
-              [longitude]="lng"
-              [iconUrl]="icon"
 
-              >
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="13" (mapClick)="posicionMarcador($event)">
+          <agm-marker *ngFor="let marker of markers" [latitude]="marker.latitude" [longitude]="marker.longitude">
           </agm-marker>
         </agm-map>
+
       </div>
     </div>
   </div>

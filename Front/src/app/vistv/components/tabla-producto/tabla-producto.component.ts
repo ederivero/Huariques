@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { ActivatedRoute } from '@angular/router';
 
 
 export interface UserData {
@@ -37,12 +38,16 @@ export class TablaProductoComponent implements OnInit {
 
   
 
-  constructor() {
+  constructor(ruta: ActivatedRoute) {
 
+    var usuId = ruta.snapshot.params.usuId
+    var restId = ruta.snapshot.params.restId
     const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(users);
+
+    
    }
 
   ngOnInit() {

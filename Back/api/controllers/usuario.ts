@@ -29,7 +29,7 @@ export var usuario_control = {
                         message: 'error',
                         content: 'Usuario o password incorrecto'
                     };
-                    res.status(400).json(response);
+                    res.status(200).json(response);
                 }
             } else {
                 // si es null
@@ -37,7 +37,7 @@ export var usuario_control = {
                     message: 'error',
                     content: 'Usuario o password incorrecto'
                 };
-                res.status(500).json(response);
+                res.status(200).json(response);
             }
         })
     },
@@ -49,7 +49,7 @@ export var usuario_control = {
                     content: usuario
                 });
             } else {
-                res.status(400).json({
+                res.status(200).json({
                     message: 'Error',
                     content: 'Error al traer usuarios'
                 });
@@ -67,7 +67,7 @@ export var usuario_control = {
                     content: usuario
                 });
             } else {
-                res.status(400).json({
+                res.status(200).json({
                     message: 'Error',
                     content: 'Usuario no encontrado'
                 });
@@ -85,7 +85,7 @@ export var usuario_control = {
                     content: usuario
                 });
             } else {
-                res.status(400).json({
+                res.status(200).json({
                     message: 'Error',
                     content: 'Usuario no encontrado'
                 });
@@ -132,7 +132,7 @@ export var usuario_control = {
                                     message: 'error',
                                     content: 'Erro al crear el usuario y/o token',
                                 };
-                                res.status(500).json(response);
+                                res.status(200).json(response);
                             }
                         });
                         // </aqui>
@@ -141,12 +141,48 @@ export var usuario_control = {
                             message: 'error',
                             content: `El usuario con email ${req.body.usu_email} ya existe`,
                         };
-                        res.status(500).json(response);
+                        res.status(200).json(response);
                     }
                 })
             })
         } else {
-            res.status(400).json({ error: 'No hay archivos' })
+            let { usu_email } = req.body;
+            Usuario.findAll({
+                where: {
+                    usu_email
+                }
+            }).then((usuarios: any) => {
+                if (usuarios.length === 0) {
+                    // -- AQUI -- //
+                    // Instanciando un objeto del modelo Usuario
+                    let objUsuario = Usuario.build(req.body);
+                    objUsuario.setSaltAndHash(req.body.usu_pass);
+                    objUsuario.save().then((usuarioCreado: any) => {
+                        let token = usuarioCreado.generateJWT();
+                        if (usuarioCreado && token) {
+                            let response = {
+                                message: 'created',
+                                content: usuarioCreado,
+                                token: token,
+                            };
+                            res.status(201).json(response);
+                        } else {
+                            let response = {
+                                message: 'error',
+                                content: 'Erro al crear el usuario y/o token',
+                            };
+                            res.status(200).json(response);
+                        }
+                    });
+                    // </aqui>
+                } else {
+                    let response = {
+                        message: 'error',
+                        content: `El usuario con email ${req.body.usu_email} ya existe`,
+                    };
+                    res.status(200).json(response);
+                }
+            })
         }
     },
     upDateById: (req: any, res: Response) => {
@@ -174,7 +210,7 @@ export var usuario_control = {
                             content: usuario
                         });
                     } else {
-                        res.status(400).json({
+                        res.status(200).json({
                             message: 'Error',
                             content: 'Error al actualizar usuario'
                         });
@@ -196,7 +232,7 @@ export var usuario_control = {
                         content: usuario
                     });
                 } else {
-                    res.status(400).json({
+                    res.status(200).json({
                         message: 'Error',
                         content: 'Error al actualizar usuario'
                     });

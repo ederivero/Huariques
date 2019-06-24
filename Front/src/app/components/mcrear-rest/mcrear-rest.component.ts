@@ -11,15 +11,49 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class McrearRestComponent implements OnInit {
 
-  objMarcador:Marcador;
+  objMarcador = []
 
   lat: number = -16.4142104;
   lng: number = -71.5398665;
   srcResult: any;
 
-   
+  markers = [
+      { 
+        latitude: 52.228973, 
+        longitude: 20.728218 
+      }
+  ];
+  latR: number;
+  lngR: number;
+  nMarkers=[];
+  rMarkers= [];
+  cadauno = [];
+  // nMark=[{
+  //   latitude: '',
+  //   longitude: ''
+  // }]
+  nMark:string;
   
   // checked = true;
+n_rSocial = 'yu';
+
+  objNRest = {
+    n_rSocial:'',
+    n_rDir:'',
+    n_rRefDir:'',
+    n_rTel:0,
+    n_rLat: 0,
+    n_rLng: 0,
+    n_rInfo:'',
+    n_rImg:'',
+    n_rRefUbic:'',
+    n_rDAt:'',
+    n_rHAp:'',
+    n_rHCer:''
+  }
+  inputValue: any;
+
+
 
   constructor() { }
 
@@ -34,23 +68,35 @@ export class McrearRestComponent implements OnInit {
   
       reader.onload = (e: any) => {
         this.srcResult = e.target.result;
+        console.log(this.srcResult);
+        
       };
   
       reader.readAsArrayBuffer(inputNode.files[0]);
     }
   }
 
-  agregarMarcadorCre(evento){
-    let objMarcador = new Marcador(evento.coords.lat,evento.coords.lng);    
-    // localStorage.setItem("marcadores",JSON.stringify(objMarcador));
+
+  posicionMarcador(posicion: any) {
+    const lat = posicion.coords.lat;
+    const lng = posicion.coords.lng;
     
-    // this.lat= +this.objMarcador.lat;
-    // this.lng= +this.objMarcador.lng;
+
+    this.markers.push({ latitude: lat, longitude: lng });
+    this.markers.splice(0, 1); 
     
-    // console.log(this.lat);
-    // console.log(this.lng);
-    console.log(objMarcador);
     
+  }; 
+
+  onKey(event) {
+    this.inputValue = event.target.value;
+    this.objNRest.n_rLat = this.inputValue;
+    console.log(this.objNRest.n_rLat);
+    
+  }
+
+  crearRest(){
+    console.log(this.objNRest);
     
   }
 

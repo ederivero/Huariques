@@ -5,8 +5,8 @@
 
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-3 m-0 p-0">
-        <img src="http://placehold.it/310x250" alt="">
+      <div class="col-md-3 m-0 p-1">
+        <img id="muestra" src="http://placehold.it/310x250" alt="">
       </div>
 
       <div class="col-md-3  m-0 p-0">
@@ -66,6 +66,7 @@
                 </div>
             </div>
             <div>
+              
 
 
 
@@ -100,7 +101,7 @@
     <div class="col-md-4 p-1">
       <!-- <app-lista-usuarios></app-lista-usuarios> -->
       <div class="example-button-row">
-        <button class="btn-block p-1" mat-raised-button color="primary" [routerLink]="[ '/vistv/prin']"><strong> <a
+        <button class="btn-block p-1" mat-raised-button color="primary" [routerLink]="[ '/vistv/prin/:usuId']"><strong> <a
               matLine>Dashboard</a></strong></button>
       </div>
     </div>

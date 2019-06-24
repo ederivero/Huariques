@@ -51,13 +51,13 @@ export class BlankComponent implements OnInit {
   
 
   constructor(public dialog: MatDialog) { 
-    if(localStorage.getItem('horarios')){
-      this.listHorarios = JSON.parse(localStorage.getItem('horarios'));
+    // if(localStorage.getItem('horarios')){
+    //   this.listHorarios = JSON.parse(localStorage.getItem('horarios'));
     
-      console.log(this.listHorarios.map((cont)=>{
-        return (cont.h_abierto );
-      }));
-    }
+    //   console.log(this.listHorarios.map((cont)=>{
+    //     return (cont.h_abierto );
+    //   }));
+    // }
   }
 
 
@@ -65,7 +65,7 @@ export class BlankComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log(this.listHorarios);
+    // console.log(this.listHorarios);
   }
 
   openDialog(): void {

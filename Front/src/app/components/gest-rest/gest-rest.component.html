@@ -1,50 +1,69 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-8" id="divImg">
-      <img src="./../../../assets/yy.png" alt="Smiley face" height="590" width="110%">
-    </div>
-    <div class="col-md-4 text-center" id="divBtn">
-      <div class="example-button-row">
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <button class="m-10" class="btn btn-block" (click)="openDialog()" mat-raised-button color="primary">
-           <strong> Añade un restaurante </strong>
-        </button>
+<div id="all1">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8" id="divImg">
+        <img src="./../../../assets/yy.png" alt="Smiley face" height="590" width="110%">
+      </div>
+      <div class="col-md-4 text-center" id="divBtn">
+        <div class="example-button-row">
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <button class="m-10" class="btn btn-block" (click)="openDialog()" mat-raised-button color="primary">
+            <strong> Añade un restaurante </strong>
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<hr>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12 text-center bg-default">
-      <h2> Tus Restaurantes</h2>
-    </div>
+  <div class="container-fluid" id="contCard">
+    <div class="row">
+      <div class="col-md-12 text-center " id="contSub">
+        <hr>
+        <h2> Tus Restaurantes</h2>
+        <hr>
+      </div>
+
+      <div class="text-center col-md-12" id="nRest" *ngIf="noHayRest">
+        <h1> Cargando Restaurantes </h1>
+      </div>
+
+      <div class="text-center col-md-12" id="nRest" *ngIf="aunNRest">
+        <h1> Usted aún no tiene Restaurantes </h1>
+      </div>
+
+      <div class="row ">
+        <div class=" spinner-border text-light center-block " role="status" *ngIf="noHayRest" id="spin">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
 
 
-    <div class="col-md-12 m-3" *ngIf="load">
-      <mat-card class="example-card mb-5">
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>{{rest_rSocialM}}</mat-card-title>
-        </mat-card-header>
-        <img mat-card-image [src]="imagen" alt="Photo of a Shiba Inu">
-        <mat-card-content class="text-justify">
-          <p>
-            {{rest_direccionM}}
-          </p>
-        </mat-card-content>
-        <mat-card-actions class="text-center">
-          <button color="primary" mat-raised-button> <a matLine [routerLink]="[ '/vistv']">Administrar</a></button>
-        </mat-card-actions>
-      </mat-card>
+      <div class="col-md-3 pt-4" id="abs-center" *ngFor="let card of cadauno">
+        <mat-card class="example-card mb-5" id="cardRest">
+          <mat-card-header id="cardHeader">
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>{{card.rSocial}}</mat-card-title>
+          </mat-card-header>
+          <img id="cardImg" mat-card-image [src]=card.img alt="Foto of {{card.rSocial}}">
+          <mat-card-content class="text-justify">
+            <p>
+              {{card.rDir}}
+            </p>
+          </mat-card-content>
+          <mat-card-actions class="text-center">
+            <button color="primary" mat-raised-button> <a matLine [routerLink]="[ '/vistv']">Administrar</a></button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+
+
     </div>
   </div>
 </div>

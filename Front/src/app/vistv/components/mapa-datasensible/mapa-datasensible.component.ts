@@ -12,7 +12,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class MapaDatasensibleComponent implements OnInit {
 
-  objMarcador:Marcador;
+  objMarcador: Marcador;
 
   latitud;
   longitud;
@@ -28,14 +28,22 @@ export class MapaDatasensibleComponent implements OnInit {
 
   espacio = 10;
 
-  icon = { 
-          url: '../../../img/tacaspastor.jpg', 
-          scaledSize: {height: 40, width: 40}}
+  icon = {
+    url: '../../../img/tacaspastor.jpg',
+    scaledSize: { height: 40, width: 40 }
+  }
 
-  constructor() { 
+  markers = [
+    {
+      latitude: 52.228973,
+      longitude: 20.728218
+    }
+  ];
+
+  constructor() {
     // this.objMarcador = data.marcador;
-    if(localStorage.getItem('horarios')){
-      this.objMarcador = JSON.parse(localStorage.getItem('horarios'));    
+    if (localStorage.getItem('horarios')) {
+      this.objMarcador = JSON.parse(localStorage.getItem('horarios'));
     }
 
 
@@ -44,16 +52,27 @@ export class MapaDatasensibleComponent implements OnInit {
 
   ngOnInit() {
     // console.log(this.objMarcador);
-    
+
   }
 
-  agregarMarcador(evento){
-    let objMarcador = new Marcador(evento.coords.lat,evento.coords.lng);    
-    localStorage.setItem("marcadores",JSON.stringify(objMarcador));
-    
-    this.latitud= +this.objMarcador.lat;
-    this.longitud= +this.objMarcador.lng;
-    
+  posicionMarcador(posicion: any) {
+    const lat = posicion.coords.lat;
+    const lng = posicion.coords.lng;
+
+
+    this.markers.push({ latitude: lat, longitude: lng });
+    this.markers.splice(0, 1);
+
+
+  };
+
+  agregarMarcador(evento) {
+    let objMarcador = new Marcador(evento.coords.lat, evento.coords.lng);
+    localStorage.setItem("marcadores", JSON.stringify(objMarcador));
+
+    this.latitud = +this.objMarcador.lat;
+    this.longitud = +this.objMarcador.lng;
+
   }
 
 }

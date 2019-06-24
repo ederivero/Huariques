@@ -13,11 +13,11 @@ const routes: Routes = [
     component: BlankComponent,
     children:[
       {
-        path:'prin',
+        path:'prin/:usuId',
         component: DashboardComponent
       },
       {
-        path:'edmen',
+        path:'edmen/:usuId/:restId',
         component: MenuComponent
       },
       {

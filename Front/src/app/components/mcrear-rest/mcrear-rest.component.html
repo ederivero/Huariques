@@ -10,25 +10,30 @@
                     <br>
                     <h5>Información del Negocio</h5>
                     <hr>
-                <form action=""  [formGroup]="crearRestautante" (ngSubmit)="onSubmit()">
+                <form action="" (ngSubmit)="onSubmit()">
                     <mat-form-field appearance="outline">
                         <mat-label>Nombre del Restaurant</mat-label>
-                        <input [formControl]="rest_nom" id="rest_nom" matInput placeholder="Nombre del Restaurant" >
+                        <input name="n_rSocial" #r_rSocial matInput placeholder="Nombre del Restaurant"  [(ngModel)]="objNRest.n_rSocial" >
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label> Telefono</mat-label>
+                        <input [(ngModel)]="objNRest.n_rTel" type="number" name="n_rTel" #n_rTel id="n_rTel" matInput placeholder="Telefono del Restaurant">
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
                         <mat-label> Direccion</mat-label>
-                        <input [formControl]="rest_dir" type="text" id="rest_dir" matInput placeholder="Telefono del Restaurant">
+                        <input [(ngModel)]="objNRest.n_rDir" name="n_rDir" #n_rDir type="text" id="n_rDir" matInput placeholder="Telefono del Restaurant">
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
                         <mat-label>Referencia de Dirección</mat-label>
-                        <input [formControl]="rest_ref" id="rest_ref" matInput placeholder="Referencia de dirección">
+                        <input [(ngModel)]="objNRest.n_rRefDir"  #n_rRefDir name="n_rRefDir" id="n_rRefDir" matInput placeholder="Referencia de dirección">
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" id="textDesc">
                         <mat-label>Información del Negocio</mat-label>
-                        <textarea [formControl]="rest_info" id="rest_info" rows="5" matInput placeholder="Información del negocio"></textarea>
+                        <textarea [(ngModel)]="objNRest.n_rInfo" #n_rInfo name="n_rInfo" id="n_rInfo" rows="5" matInput placeholder="Información del negocio"></textarea>
                     </mat-form-field>
 
                     <h5>Horario de Atención</h5>
@@ -70,19 +75,22 @@
                     <hr>
                     <mat-form-field appearance="outline">
                         <mat-label>Latitud</mat-label>
-                        <input [formControl]="latitud" matInput type="number" placeholder="Latitud">
+                        <input name="n_rLng" (keyup)="onKey($event)"  readonly matInput  value="{{markers[0].latitude}}"  placeholder="Latitud">
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
                         <mat-label>Longitud</mat-label>
-                        <input [formControl]="latitud" matInput type="number" placeholder="Longitud">
+                        <input name="n_rLat" readonly matInput  value="{{markers[0].longitude}}" placeholder="Longitud"  [(ngModel)]="objNRest.n_rLat">
                     </mat-form-field>
+                    <p>{{inputValue}}</p>
 
                     <!-- MAPA -->
 
-                    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="13" (mapClick)="agregarMarcadorCre($event)">
-                        <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="13" (mapClick)="posicionMarcador($event)">
+                        <agm-marker *ngFor="let marker of markers" [latitude]="marker.latitude" [longitude]="marker.longitude"></agm-marker>
                     </agm-map>
+
+                    
 
 
                     <br>
