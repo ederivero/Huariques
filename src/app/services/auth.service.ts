@@ -34,7 +34,6 @@ export class AuthServiceLocal {
       if (userDetails.exp > ahora) {
         return this.logged = true;
       }
-      localStorage.removeItem('token');
       return this.logged = false;
     }
     return this.logged = false;

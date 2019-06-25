@@ -32,27 +32,43 @@ export class TablemapComponent implements OnInit {
   paginator;
   sort;
   suscriptor: Subscription;
-  @ViewChild(MatPaginator,{static:false}) set matSort(content: MatPaginator) {
+  mark: Node;
+  openedWindow : number = 0;
+
+  @ViewChild(MatPaginator, { static: false }) set matSort(content: MatPaginator) {
     this.paginator = content;
-    if (this.paginator){
-       this.rests.paginator = this.paginator;
+    if (this.paginator) {
+      this.rests.paginator = this.paginator;
     }
   }
-  @ViewChild(MatSort,{static:false}) set content(content: MatSort) {
+  @ViewChild(MatSort, { static: false }) set content(content: MatSort) {
     this.sort = content;
-    if (this.sort){
-       this.rests.sort = this.sort;
+    if (this.sort) {
+      this.rests.sort = this.sort;
     }
   }
   constructor(private _sRest: RestService,
-              private _el: ElementRef) { }
+    private _el: ElementRef) { }
 
   displayedColumns: string[] = ['rest_rSocial', 'rest_info'];
-
 
   ngOnInit() {
     this.suscriptor = this._sRest.getRest().subscribe((resp: any) => {
       this.markers = resp.content;
+      this.markers.forEach((element: any) => {
+        let cont = 0;
+        let promedio = 0;
+        element.t_productos.forEach((product: any) => {
+          promedio = +product.prod_precio + promedio;
+          cont++;
+        })
+        let proProd = promedio / cont;
+        if (proProd > 0) {
+          element.precioProm = proProd;
+        } else {
+          element.precioProm = 0;
+        }
+      });
       this.restList = resp.content;
       this.rests = new MatTableDataSource(this.restList);
     })
@@ -68,5 +84,28 @@ export class TablemapComponent implements OnInit {
   ngOnDestroy(): void {
     this.suscriptor.unsubscribe();
   }
+  selectMarker(event) {
+    console.log(event);
+    
+    this.lat= +event.latitude+0.002;
+    this.lng= +event.longitude;
+  }
+  verMarker(restId){
+    let l = this.markers.find(rest=>rest.rest_id==restId);
+    this.lat=+l.rest_lat+0.002;
+    this.lng=+l.rest_lng;
+    console.log(l);                
+  }
+
+  openWindow(id) {
+    let l = this.markers.find(rest=>rest.rest_id==id);
+    this.lat=+l.rest_lat+0.002;
+    this.lng=+l.rest_lng;
+    this.openedWindow = id; // alternative: push to array of numbers
+}
+
+isInfoWindowOpen(id) {
+    return this.openedWindow == id; // alternative: check if id is in array
+}
 
 }
