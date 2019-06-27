@@ -5,6 +5,7 @@ import { PromocionesComponent } from './components/promociones/promociones.compo
 import { RestDetailsComponent } from './components/rest-details/rest-details.component';
 import { TablemapComponent } from './components/tablemap/tablemap.component';
 import { GestRestComponent } from './components/gest-rest/gest-rest.component';
+import { RegistroComponent } from './components/registro/registro.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,10 @@ const routes: Routes = [
   {
     path: 'vistv/:usuId/:restId',
     loadChildren: './vistv/vistv.module#VistvModule'
+  },
+  {  
+    path: 'agregar',
+    component: RegistroComponent
   }
 ];
 

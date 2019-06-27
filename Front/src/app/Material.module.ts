@@ -20,11 +20,16 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { ChartsModule } from 'ng2-charts';
 import { MatSelectModule } from '@angular/material/select';
 
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatRadioModule } from '@angular/material/radio';
+
 
 
 @NgModule({
   declarations: [],
   imports: [
+    MatStepperModule,
+    MatRadioModule,
     ChartsModule,
     MatSelectModule,
     MatExpansionModule,
@@ -47,6 +52,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatAutocompleteModule
   ],
   exports: [
+    MatStepperModule,
+    MatRadioModule,
     ChartsModule,
     MatSelectModule,
     MatExpansionModule,

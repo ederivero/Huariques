@@ -8,17 +8,8 @@
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" [routerLink]="['/']" routerLinkActive="router-link-active">Inicio <span
+        <a class="nav-link" [routerLink]="['agregar']" routerLinkActive="router-link-active">Agregar un Huarique<span
             class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/promo']" routerLinkActive="router-link-active">Otros</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
       </li>
     </ul>
 
@@ -82,20 +73,11 @@
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" [routerLink]="['/']" routerLinkActive="router-link-active">Inicio <span
+        <a class="nav-link" [routerLink]="['agregar']" routerLinkActive="router-link-active">Agregar un Huarique<span
             class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/promo']" routerLinkActive="router-link-active">Otros</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
-      </li>
     </ul>
-    <button *ngIf="user==false" class="btn btn-secondary my-2 my-sm-0 ml-3" type="button" (click)="openDialog()">Iniciar
+    <button *ngIf="user==false" class="btn btn-secondary my-2 my-sm-0 ml-3" type="button" style="background-color: #ffE61D;color: #5E1300 " (click)="openDialog()">Iniciar
       Sesión
     </button>
 

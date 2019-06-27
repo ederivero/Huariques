@@ -18,6 +18,7 @@ import { CalificanosComponent } from './components/calificanos/calificanos.compo
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { CountUpModule } from 'countup.js-angular2';
 import { TablemapComponent } from './components/tablemap/tablemap.component';
+import { RegistroComponent } from './components/registro/registro.component';
 
 
 
@@ -54,6 +55,7 @@ export function provideConfig() {
     InicioComponent,
     PromocionesComponent,
     LoginComponent,
+    RegistroComponent,
     RestDetailsComponent,
     CalificanosComponent,
     TablemapComponent,
