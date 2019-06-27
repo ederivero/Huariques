@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { PromocionesComponent } from './components/promociones/promociones.component';
 import { RestDetailsComponent } from './components/rest-details/rest-details.component';
+import { TablemapComponent } from './components/tablemap/tablemap.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,14 @@ const routes: Routes = [
   {
     path: 'rest-details/:id',
     component: RestDetailsComponent
+  },
+  {
+    path: 'busqueda/:nombre',
+    component: TablemapComponent
+  },
+  {
+    path:'*',
+    component:PromocionesComponent
   }
 ];
 

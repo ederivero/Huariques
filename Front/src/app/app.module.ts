@@ -17,7 +17,30 @@ import { RestDetailsComponent } from './components/rest-details/rest-details.com
 import { CalificanosComponent } from './components/calificanos/calificanos.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { CountUpModule } from 'countup.js-angular2';
+import { TablemapComponent } from './components/tablemap/tablemap.component';
 
+
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
+import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
+import { ReactiveFormsModule } from '@angular/forms';
+
+let configLogin = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider("21794192303-roga71pcfodl3mi84truru81vgkubpp4.apps.googleusercontent.com")
+
+  },
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider("2755826184445833")
+  }
+]);
+
+export function provideConfig() {
+  return configLogin;
+}
 
 @NgModule({
   declarations: [
@@ -27,6 +50,7 @@ import { CountUpModule } from 'countup.js-angular2';
     LoginComponent,
     RestDetailsComponent,
     CalificanosComponent,
+    TablemapComponent,
     NavbarComponent
   ],
   imports: [
@@ -39,13 +63,20 @@ import { CountUpModule } from 'countup.js-angular2';
     StarRatingModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBcjhtE0FIFEO92Z_7xKQWODx3I_QXq33E'
-    })
+    }),
+    SocialLoginModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    FormsModule,
   ],
   entryComponents:[
     LoginComponent,
     CalificanosComponent
   ],
-  providers: [],
+  providers: [{
+    provide: AuthServiceConfig,
+    useFactory: provideConfig
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

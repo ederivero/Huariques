@@ -6,22 +6,43 @@
       preferencias</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <div class="example-container">
-      <mat-form-field>
-        <input matInput type="email" placeholder="Correo">
-      </mat-form-field>
+    <div class="example-container" ng-submit="login()">
+        <mat-form-field>
+          <input matInput [formControl]="emailFormControl" type="email" placeholder="Correo"
+            [(ngModel)]="objUsuario.usu_email" name="usu_email">
+          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
 
-      <mat-form-field>
-        <input matInput type="password" placeholder="Contraseña">
-      </mat-form-field>
+        <mat-form-field>
+          <input matInput [formControl]="passwordFormControl" type="password" placeholder="Contraseña"
+            [(ngModel)]="objUsuario.usu_pass" name="usu_pass">
+          <mat-error *ngIf="passwordFormControl.hasError('required')">
+            Password is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="container mt-3">
+
+      <div class="row">
+        <div class="col-6">
+          <button #myButton class="ml-3" mat-stroked-button (click)="login()">Ingresar</button>
+        </div>
+        <div class="col-6">
+          <button mat-stroked-button (click)="onNoClick()">Cancelar</button>
+        </div>
+      </div>
     </div>
 
   </mat-card-content>
   <mat-card-actions>
-      <button mat-button (click)="onNoClick()">Cancelar</button>
-      <button mat-button (click)="login()">Ingresar</button>
-      <button class=" btn btn-block fa fa-facebook">Inicia sesión con Facebook</button>
-      <button class=" btn btn-block fa fa-google">Inicia sesión con Google</button>
-   
+
+    <button class=" btn btn-block fa fa-facebook" (click)="signInWithFB()">Iniciar sesión con Facebook</button>
+    <button class=" btn btn-block fa fa-google" (click)="signInWithGoogle()">Iniciar sesión con Google</button>
+
   </mat-card-actions>
 </mat-card>

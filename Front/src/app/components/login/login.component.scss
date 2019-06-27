@@ -1,11 +1,8 @@
 .example-card {
     max-width: 100%;
+    margin: 0;
   }
   
-  .example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-    background-size: cover;
-  }
   .fa {
     font-size: 15px;
     text-align: center;
@@ -27,3 +24,4 @@
     background: #dd4b39;
     color: white;
   }
+  

@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import * as $ from 'jquery';
 import { BusquedaService } from 'src/app/services/busqueda.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class InicioComponent implements OnInit {
     this.busqueda = event.target.value;
   }
 
-  constructor(private _BusquedaService:BusquedaService) {
+  constructor(private _BusquedaService:BusquedaService,
+    private _Router:Router) {
     this.contador()
   }
   contadorfinalizado(){
@@ -38,21 +40,25 @@ export class InicioComponent implements OnInit {
   Buscar($event) {
     $event.preventDefault()
     if (this.busqueda === ""||this.busqueda === undefined) {
-      fetch(`https://huariquesback.herokuapp.com/api/restaurante/traertodos`)
-        .then(response => {
-          return response.json()
-        }).then(data => {
-          // console.log(data)
-          this.buscar(data);
-        })
+      //this._BusquedaService.buscartodos()
+      this._Router.navigateByUrl(`busqueda/todos`);
+      // fetch(`https://huariquesback.herokuapp.com/api/restaurante/traertodos`)
+      //   .then(response => {
+      //     return response.json()
+      //   }).then(data => {
+      //     console.log(data.content)
+      //     this.buscar(data.content);
+      //   })
     } else {
-      fetch(`https://huariquesback.herokuapp.com/api/restaurante/encontrar/${this.busqueda}`)
-      .then(response => {
-        return response.json()
-      }).then(data => {
-        // console.log(data)
-        this.buscar(data);
-      })
+      //this._BusquedaService.buscarpopalabra(this.busqueda)
+      this._Router.navigateByUrl(`busqueda/${this.busqueda}`);
+      // fetch(`https://huariquesback.herokuapp.com/api/restaurante/encontrar/${this.busqueda}`)
+      // .then(response => {
+      //   return response.json()
+      // }).then(data => {
+      //   console.log(data.content)
+      //   this.buscar(data.content);
+      // })
     }
   }
   buscar(datos) {

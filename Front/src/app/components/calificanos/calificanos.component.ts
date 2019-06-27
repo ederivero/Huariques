@@ -50,10 +50,12 @@ export class CalificanosComponent implements OnInit {
     }
   }*/
   Puntuacion() {
+    if(this.Comentario === undefined){
+      this.Comentario=""
+    }
     if (this.onClickResult === undefined || this.onClickResult2 === undefined || this.onClickResult3 === undefined) {
       alert("faltan campos")
-    } else if(this.Comentario === undefined||this.Comentario === ""){
-      this.Comentario=""
+    } else {
       this.enviando = false;
       this.TOTAL = (this.onClickResult.rating + this.onClickResult2.rating + this.onClickResult3.rating) / 3;
       var date;

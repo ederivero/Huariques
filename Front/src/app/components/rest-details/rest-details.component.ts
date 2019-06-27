@@ -60,7 +60,7 @@ export class RestDetailsComponent implements OnInit {
     // console.log(this.categorias)
     // console.log(this.categoriasruta)
     // console.log(ruta.snapshot.params.id)
-    var rutaActual = ruta.snapshot.params.id - 1
+    var rutaActual = ruta.snapshot.params.id - 1;
     fetch(`https://huariquesback.herokuapp.com/api/restcategoria/rest/${rutaActual+1}`).then(response => {
       return response.json()
     }).then(datacat => {

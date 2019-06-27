@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -6,6 +7,11 @@ import { Injectable } from '@angular/core';
 export class BusquedaService {
 
   public arrayDelService: Array<any>;
+
+  buscartodos(){
+    return this._http.get('https://huariquesback.herokuapp.com/api/restaurante/traertodos');
+  }
+  
 
   setArray(array: any) {
     this.arrayDelService = array;
@@ -15,5 +21,5 @@ export class BusquedaService {
     return this.arrayDelService;
   }
   
-  constructor() { }
+  constructor(private _http: HttpClient) { }
 }
