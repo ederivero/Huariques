@@ -36,6 +36,7 @@ export class TablemapComponent implements OnInit {
   suscriptor: Subscription;
   mark: Node;
   openedWindow: number = 0;
+  currentRate = 3;
 
   @ViewChild(MatPaginator, { static: false }) set matSort(content: MatPaginator) {
     this.paginator = content;

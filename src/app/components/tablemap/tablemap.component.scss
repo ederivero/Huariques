@@ -93,4 +93,23 @@ tr.example-detail-row {
   margin: 0px;
   padding: 0px;
   margin-bottom: -10px;
+}.star {
+  position: relative;
+  display: inline-block;
+  font-size: 3rem;
+  color: #d3d3d3;
+  outline: none;
+}
+.full {
+  color: red;
+  outline: none;
+
+}
+.half {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  color: red;
+  outline: none;
+
 }

@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestService {
 
+  busquedaRest = new Subject<string>();
   constructor(private _http: HttpClient) { }
   
   getRest(){

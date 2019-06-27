@@ -22,13 +22,12 @@
       </li>
     </ul>
 
-    <form  [formGroup]="stateForm" > 
-
+    <form  [formGroup]="stateForm" ng-submit="buscar()"> 
+  <div class="buscador">
       <mat-form-field appearance="outline" class="mr-3">
-
-        <mat-label>Seleccione Categoria</mat-label>
-        <input class="search" type="text" matInput formControlName="stateGroup" [matAutocomplete]="autoGroup">
-        <button matSuffix mat-icon-button aria-label="Example icon-button with a heart icon">
+        <mat-label>Categorias</mat-label>
+        <input [(ngModel)]="categoria" name="categoria" class="search" type="text" matInput formControlName="stateGroup" [matAutocomplete]="autoGroup" >
+        <button matSuffix mat-icon-button aria-label="Example icon-button with a heart icon" (click)="buscar()">
             <mat-icon matSuffix>search</mat-icon>
           </button>
         <mat-autocomplete #autoGroup="matAutocomplete">
@@ -39,6 +38,7 @@
           </mat-optgroup>
         </mat-autocomplete>
       </mat-form-field>
+    </div>
     </form>
 
 
@@ -51,7 +51,7 @@
       
       <div *ngIf="user==null"></div>
 
-      <button *ngIf="user" class="btn_user ml-1 mr-3" mat-button  [matMenuTriggerFor]="menu">
+      <button *ngIf="user" class="btn_user ml-1 mr-5 mt-2" mat-button  [matMenuTriggerFor]="menu">
         <img src={{p.usu_img}} class="rounded-circle usu_img" alt="">
         <mat-icon matSuffix>more_vert</mat-icon>
       </button>

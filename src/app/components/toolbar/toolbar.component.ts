@@ -52,6 +52,7 @@ export class ToolbarComponent implements OnInit {
 
   user = false;
   p;
+  categoria;
   constructor(
     private dialog: MatDialog,
     private _sAuth: AuthServiceLocal,
@@ -104,6 +105,10 @@ export class ToolbarComponent implements OnInit {
     this.dialog.open(LoginComponent, {
       width: '30%',
     });
+  }
+  buscar(){
+    console.log(this.categoria);
+    
   }
 
 }

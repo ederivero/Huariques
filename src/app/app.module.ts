@@ -24,6 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 import { RatingModule } from 'ng-starrating';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 let configLogin = new AuthServiceConfig([
@@ -63,7 +64,8 @@ export function provideConfig() {
     }),
     SocialLoginModule,
     ReactiveFormsModule,
-    RatingModule
+    RatingModule,
+    NgbModule
   ],
   entryComponents: [
     LoginComponent
