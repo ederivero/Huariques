@@ -289,7 +289,7 @@ export class BlankComponent implements OnInit {
     console.log(this.myJsonString);
 
 
-    fetch(`https://huariquesback.herokuapp.com/api/restaurante/actualizar/${restId}`)
+    fetch(`https://huariquesback.herokuapp.com/api/restaurante/actualizar/${this.restId}`)
     .then(response => {
       return response.json()
     }).then(datarest => {

@@ -115,6 +115,7 @@ export class McrearRestComponent implements OnInit {
 
     // <input type="checkbox" name="checkbox" [(ngModel)]="isChecked">
     let objNRest ={
+      
 
     }
 
@@ -128,7 +129,7 @@ export class McrearRestComponent implements OnInit {
       body: JSON.stringify(objNRest)
     };
 
-    fetch(`https://huariquesback.herokuapp.com/api//restaurante/crear`,headersRest)
+    fetch(`https://huariquesback.herokuapp.com/api//restaurante/crear`,headersRest  )
     .then(response => {
       return response.json()
     }).then(datarest => {
