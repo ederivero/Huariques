@@ -13,7 +13,7 @@ const routes: Routes = [
     path: 'promo',
     component: PromocionesComponent
   },
-  {
+  {  
     path: 'contactanos',
     component: RegistroComponent
   }
