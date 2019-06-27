@@ -11,14 +11,14 @@
 
 
   <div class="container-fluid">
-    <div class="row">
+    
       <form action="" (ngSubmit)="guardarInfo()">
         <div class="form-row">
-          <div class="form-group col-md-3 m-0 p-1 text-center">
+          <div class="form-group col-md-3 m-0 p-0 text-center">
             <img id="muestra" [src]=result.rest_img alt="Foto of {{result.rest_rSocial}}">
             <!-- <br> -->
             <br>
-            <button type="button" mat-raised-button color="basic" (click)="fileInput.click()"> Sube una Foto para tu
+            <button *ngIf="estadoBtnGuard" type="button" class="btn btn-block" mat-raised-button color="basic" (click)="fileInput.click()"> Sube una Foto para tu
               restaurant </button>
             <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
 
@@ -113,7 +113,7 @@
           </div>
         </div>
       </form>
-    </div>
+    
   </div>
 
   <hr>
@@ -125,21 +125,21 @@
     <div class="col-md-4 p-1">
       <!-- <app-lista-usuarios></app-lista-usuarios> -->
       <div class="example-button-row">
-        <button class="btn-block p-1" mat-raised-button color="primary" [routerLink]="[ '/prin']"><strong> <a
+        <button class="btn-block p-1" mat-raised-button color="primary" [routerLink]="[ '/vistv/1/2/prin/1/2']"><strong> <a
               matLine>Dashboard</a></strong></button>
       </div>
     </div>
     <div class="col-md-4 p-1">
       <!-- <app-chat></app-chat> -->
       <div class="example-button-row">
-        <button class="btn-block p-1" mat-raised-button color="primary" [routerLink]="[ '/vistv/edmen']"> <strong> <a
+        <button class="btn-block p-1" mat-raised-button color="primary" [routerLink]="[ '/vistv/1/2/edmen/1/1']"> <strong> <a
               matLine> Productos</a> </strong></button>
       </div>
     </div>
     <div class="col-md-4 p-1">
       <!-- <app-chat></app-chat> -->
       <div class="example-button-row">
-        <button class="btn-block p-1" mat-raised-button color="primary" [routerLink]="[ '/vistv/datsen']"> <strong> <a
+        <button class="btn-block p-1" mat-raised-button color="primary" [routerLink]="[ '/vistv/1/2/datsen/1/2']"> <strong> <a
               matLine>Datos Sensibles</a> </strong></button>
       </div>
     </div>

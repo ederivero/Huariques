@@ -6,7 +6,7 @@ import { BlankComponent } from './components/blank/blank.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MenuComponent } from './components/menu/menu.component';
 // import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MAT_CHECKBOX_CLICK_ACTION} from '@angular/material';
 import { BarChartComponent } from './components/bar-chart/bar-chart.component';
 import { MaterialModule } from '../material.module';
 import { ModalProductoComponent } from './components/modal-producto/modal-producto.component';
@@ -34,6 +34,10 @@ import { SnackbarProductComponent } from './components/snackbar-product/snackbar
   entryComponents:[
     ModalProductoComponent,
     SnackbarProductComponent 
-  ]
+  ],
+    providers: [
+    {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'check'}
+
+],
 })
 export class VistvModule { }

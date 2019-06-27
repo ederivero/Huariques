@@ -141,6 +141,8 @@ export class BlankComponent implements OnInit {
         console.log(this.r_soc);
 
       })
+    
+    
 
 
     fetch(`https://huariquesback.herokuapp.com/api/producto/porIdRest/${this.restId}`)
@@ -287,7 +289,16 @@ export class BlankComponent implements OnInit {
     console.log(this.myJsonString);
 
 
+    fetch(`https://huariquesback.herokuapp.com/api/restaurante/actualizar/${restId}`)
+    .then(response => {
+      return response.json()
+    }).then(datarest => {
 
+      console.log(datarest.content)
+
+
+
+    })
 
 
   };

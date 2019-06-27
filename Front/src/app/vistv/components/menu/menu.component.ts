@@ -182,7 +182,7 @@ export class MenuComponent implements OnInit {
 
 
 
-  crearProducto(e) {
+  crearProducto(e, prod_nombre) {
     console.log(e);
 
     let objProducto = this.producto;
@@ -193,9 +193,9 @@ export class MenuComponent implements OnInit {
 
 
 
-    // this._snackBar.open(prod_nombre, "Ha sido Agregado", {
-    //   duration: 2000,
-    // });
+    this._snackBar.open(prod_nombre, "Ha sido Agregado", {
+      duration: 2000,
+    });
 
   };
 

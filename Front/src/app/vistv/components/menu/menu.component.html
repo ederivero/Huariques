@@ -5,7 +5,12 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-3">
-        <img id="muestra" src="http://placehold.it/310x217" alt="">
+        <!-- <img id="muestra" src="http://placehold.it/310x217" alt=""> -->
+        <button type="button" class="btn btn-block" mat-raised-button color="basic" (click)="fileInput.click()">
+           Elige una Foto para tu Producto 
+          </button>
+        <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
+
       </div>
 
       <div class="col-md-3">

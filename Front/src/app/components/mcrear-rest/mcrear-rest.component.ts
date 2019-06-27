@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Marcador } from './../../vistv/models/Marcador';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -18,67 +19,73 @@ export class McrearRestComponent implements OnInit {
   srcResult: any;
 
   markers = [
-      { 
-        latitude: 52.228973, 
-        longitude: 20.728218 
-      }
+    {
+      latitude: 52.228973,
+      longitude: 20.728218
+    }
   ];
   latR: number;
   lngR: number;
-  nMarkers=[];
-  rMarkers= [];
+  nMarkers = [];
+  rMarkers = [];
   cadauno = [];
   // nMark=[{
   //   latitude: '',
   //   longitude: ''
   // }]
-  nMark:string;
-  
+  nMark: string;
+
   // checked = true;
-n_rSocial = 'yu';
+  n_rSocial = 'yu';
 
   objNRest = {
-    n_rSocial:'',
-    n_rDir:'',
-    n_rRefDir:'',
-    n_rTel:0,
+    n_rSocial: '',
+    n_rDir: '',
+    n_rRefDir: '',
+    n_rTel: 0,
     n_rLat: 0,
     n_rLng: 0,
-    n_rInfo:'',
-    n_rImg:'',
-    n_rRefUbic:'',
-    n_rDAt:'',
-    n_rHAp:'',
-    n_rHCer:''
+    n_rInfo: '',
+    n_rImg: '',
+    n_rRefUbic: '',
+    n_rDAt: '',
+    n_rHAp: '',
+    n_rHCer: ''
   }
   inputValue: any;
 
- chL= false;
- chM=true;
+  @Input() usuId: number;
+  restId: number;
 
- opcion1
- opcion2
+  chL = false;
+  chM = true;
 
- isChecked : boolean;
- checked=true;
+  opcion1
+  opcion2
 
-  constructor() { }
+  isChecked: boolean;
+  checked = true;
+
+  constructor(ruta: ActivatedRoute) {
+    this.usuId = +ruta.snapshot.params.usuId
+    this.restId = +ruta.snapshot.params.restId
+  }
 
   ngOnInit() {
   }
 
   onFileSelected() {
     const inputNode: any = document.querySelector('#file');
-  
+
     if (typeof (FileReader) !== 'undefined') {
       const reader = new FileReader();
-  
+
       reader.onload = (e: any) => {
         this.srcResult = e.target.result;
         console.log(this.srcResult);
-        
+
       };
-  
+
       reader.readAsArrayBuffer(inputNode.files[0]);
     }
   }
@@ -87,32 +94,52 @@ n_rSocial = 'yu';
   posicionMarcador(posicion: any) {
     const lat = posicion.coords.lat;
     const lng = posicion.coords.lng;
-    
+
 
     this.markers.push({ latitude: lat, longitude: lng });
-    this.markers.splice(0, 1); 
-    
-    
-  }; 
+    this.markers.splice(0, 1);
+
+
+  };
 
   onKey(event) {
     this.inputValue = event.target.value;
     this.objNRest.n_rLat = this.inputValue;
     console.log(this.objNRest.n_rLat);
-    
+
   }
 
-  crearRest(){
+  crearRest() {
     console.log(this.objNRest);
-
-    // console.log(this.chM);
     console.log(this.checked);
-    
 
-    
     // <input type="checkbox" name="checkbox" [(ngModel)]="isChecked">
+    let objNRest ={
 
-    
+    }
+
+
+    let headersRest = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(objNRest)
+    };
+
+    fetch(`https://huariquesback.herokuapp.com/api//restaurante/crear`,headersRest)
+    .then(response => {
+      return response.json()
+    }).then(datarest => {
+
+      console.log(datarest.content)
+
+
+
+    })
+
+
   }
 
 }

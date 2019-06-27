@@ -10,6 +10,7 @@ import { McrearRestComponent } from './components/mcrear-rest/mcrear-rest.compon
 import { AgmCoreModule } from '@agm/core';
 import { InicioComponent } from './components/inicio/inicio.component';
 import {MatInputModule} from '@angular/material/input';
+import { MAT_CHECKBOX_CLICK_ACTION } from '@angular/material';
 
 
 
@@ -38,7 +39,10 @@ import {MatInputModule} from '@angular/material/input';
   entryComponents:[
     McrearRestComponent
   ],
-  providers: [],
+  providers: [
+      {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'check'}
+
+  ],
   bootstrap: [AppComponent],
   
 })
