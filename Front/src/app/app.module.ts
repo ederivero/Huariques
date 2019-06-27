@@ -20,6 +20,10 @@ import { CountUpModule } from 'countup.js-angular2';
 import { TablemapComponent } from './components/tablemap/tablemap.component';
 
 
+
+import { GestRestComponent } from './components/gest-rest/gest-rest.component';
+import { McrearRestComponent } from './components/mcrear-rest/mcrear-rest.component';
+
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
@@ -45,6 +49,8 @@ export function provideConfig() {
 @NgModule({
   declarations: [
     AppComponent,
+    GestRestComponent,
+    McrearRestComponent,
     InicioComponent,
     PromocionesComponent,
     LoginComponent,
@@ -70,6 +76,8 @@ export function provideConfig() {
     FormsModule,
   ],
   entryComponents:[
+    
+    McrearRestComponent,
     LoginComponent,
     CalificanosComponent
   ],

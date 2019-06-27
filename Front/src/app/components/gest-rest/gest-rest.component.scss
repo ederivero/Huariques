@@ -1,0 +1,78 @@
+
+.example-card {
+    max-width: 300px;
+  }
+  
+  .example-header-image {
+    background-image: url('http://www.centro.edu.uy/wp-content/uploads/2019/04/gastr.png');
+    background-size: cover;
+  }
+
+  #divImg{
+  margin: 0;
+  padding: 0;
+}
+
+#abs-center {
+  display: flex;
+  // align-items: center;
+  justify-content: center;
+ 
+
+}
+
+
+#all1 {
+  background-image: url("./../../../assets/bgPattern.png");
+  background-size: 300px 300px;
+  min-height: 100vh;
+  height: auto;
+  min-width: 100vh;
+  width: auto;
+
+}
+
+
+#spin{
+  width: 200px;
+  height: 200px;
+}
+
+#contSub{
+  background-color: white;
+}
+
+#divBtn{
+  background-color: #EEC31C;
+  // background-image: url('./../../../assets/bgPattern.png');
+  // height: 100px; /* You must set a specified height */
+  // background-position: center; /* Center the image */
+  // background-repeat:repeat; /* Do not repeat the image */
+  // background-size: cover; /* Resize the background image to cover the entire container */
+
+
+}
+
+
+
+#cardRest{
+  min-height: 490px;
+}
+
+#cardHeader{
+  max-height: 100px;   
+}
+
+#cardImg{
+  min-height: 300px;
+  max-height: 300px;
+}
+
+
+
+
+a{
+  text-decoration: none;
+  color: white;
+}
+

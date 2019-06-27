@@ -17,16 +17,22 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatExpansionModule } from '@angular/material/expansion';
 
+import { ChartsModule } from 'ng2-charts';
+import { MatSelectModule } from '@angular/material/select';
+
 
 
 @NgModule({
   declarations: [],
   imports: [
+    ChartsModule,
+    MatSelectModule,
     MatExpansionModule,
     MatButtonModule,
     MatCheckboxModule,
     MatCardModule,
     MatDialogModule,
+    MatSnackBarModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
@@ -41,10 +47,13 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatAutocompleteModule
   ],
   exports: [
+    ChartsModule,
+    MatSelectModule,
     MatExpansionModule,
     MatButtonModule,
     MatCheckboxModule,
     MatCardModule,
+    MatSnackBarModule,
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,

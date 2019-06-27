@@ -1,0 +1,59 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4 p-1">
+      <!-- <app-datsen   ></app-datsen> -->
+      <div>
+        <br>
+        <br>
+        <form action="" class="p-3" (ngSubmit)="modDataSen()" >
+          <mat-form-field>
+            <input name="dir" [(ngModel)]="resultDat.rest_direccion" matInput placeholder="Dirección" value="Urb. Monterrey 102">
+          </mat-form-field>
+          <!-- {{resultDat.rest_direccion}} -->
+          <mat-form-field>
+            <input name="tel" [(ngModel)]="resultDat.rest_telefono" matInput type="number" placeholder="Teléfono" value="941271568">
+          </mat-form-field>
+
+          <mat-form-field >
+            <mat-label>Latitud</mat-label>
+            <input name="lat" [(ngModel)]="resultDat.rest_lat" name="n_rLng"  readonly matInput value="{{markers[0].latitude}}"
+              placeholder="Latitud">
+          </mat-form-field>
+
+          <mat-form-field >
+            <mat-label>Longitud</mat-label>
+            <input name="lng" [(ngModel)]="resultDat.rest_lng" name="n_rLat" readonly matInput value="{{markers[0].longitude}}" placeholder="Longitud"
+              >
+          </mat-form-field>
+
+
+          <br>
+          <small style="color:green">*Sus nuevos datos serán verificados y luego actualizados</small>
+          <br>
+          <br>
+          <div class="example-button-row">
+              <input type="submit" class="btn btn-block btn-danger"  value="Enviar Actualización de datos">
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="col-md-8 p-1">
+      <div>
+        <br>
+        <!-- <app-anillo-chart></app-anillo-chart> -->
+        <!-- <app-mapa-datasensible></app-mapa-datasensible> -->
+
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="13" (mapClick)="posicionMarcador($event)">
+          <agm-marker *ngFor="let marker of markers" [latitude]="marker.latitude" [longitude]="marker.longitude">
+          </agm-marker>
+        </agm-map>
+
+      </div>
+    </div>
+  </div>
+</div>

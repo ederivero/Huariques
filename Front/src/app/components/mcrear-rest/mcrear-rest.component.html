@@ -1,0 +1,136 @@
+<div class="text-center p-1">
+    <h3> <strong> Ingresa los datos </strong></h3>
+</div>
+<hr>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <mat-dialog-content>
+                <br>
+                <h5>Información del Negocio</h5>
+                <hr>
+                <form action="" (ngSubmit)="crearRest()">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nombre del Restaurant</mat-label>
+                        <input name="n_rSocial" #r_rSocial matInput placeholder="Nombre del Restaurant"
+                            [(ngModel)]="objNRest.n_rSocial">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label> Telefono</mat-label>
+                        <input [(ngModel)]="objNRest.n_rTel" type="number" name="n_rTel" #n_rTel id="n_rTel" matInput
+                            placeholder="Telefono del Restaurant">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label> Direccion</mat-label>
+                        <input [(ngModel)]="objNRest.n_rDir" name="n_rDir" #n_rDir type="text" id="n_rDir" matInput
+                            placeholder="Telefono del Restaurant">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Referencia de Dirección</mat-label>
+                        <input [(ngModel)]="objNRest.n_rRefDir" #n_rRefDir name="n_rRefDir" id="n_rRefDir" matInput
+                            placeholder="Referencia de dirección">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" id="textDesc">
+                        <mat-label>Información del Negocio</mat-label>
+                        <textarea [(ngModel)]="objNRest.n_rInfo" #n_rInfo name="n_rInfo" id="n_rInfo" rows="5" matInput
+                            placeholder="Información del negocio"></textarea>
+                    </mat-form-field>
+
+                    <h5>Horario de Atención</h5>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Hora de Apertura</mat-label>
+                                <input [(ngModel)]="h_abierto" type="time" name="h_abierto" matInput>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6">
+                            <mat-form-field appearance="outline" class="hora m-1">
+                                <mat-label>Hora de Salida</mat-label>
+                                <input [(ngModel)]="h_cerrado" type="time" name="h_cerrado" matInput>
+                            </mat-form-field>
+                        </div>
+
+
+                        <!-- HORARIOS DE ATENCION -->
+                        <section class="example-section" id="checkDia">
+                            <mat-checkbox class="example-margin m-1" name="lun" [(ngModel)]="checked">Lun</mat-checkbox>
+                            <!-- <mat-checkbox class="example-margin m-1" [(ngModel)]="chM">Mar</mat-checkbox>
+                            <mat-checkbox class="example-margin m-1" [(ngModel)]="chMi">Mier</mat-checkbox>
+                            <mat-checkbox class="example-margin m-1" [(ngModel)]="chJ">Jue</mat-checkbox>
+                            <mat-checkbox class="example-margin m-1" [(ngModel)]="chV">Vie</mat-checkbox>
+                            <mat-checkbox class="example-margin m-1" [(ngModel)]="chS">Sab</mat-checkbox>
+                            <mat-checkbox class="example-margin m-1" [(ngModel)]="chD">Dom</mat-checkbox> -->
+                            
+                        </section>
+
+
+                        <section class="example-section">
+                            <mat-checkbox class="example-margin" [(ngModel)]="checked">Checked</mat-checkbox>
+                            <mat-checkbox class="example-margin" [(ngModel)]="indeterminate">Indeterminate
+                            </mat-checkbox>
+                        </section>
+                    </div>
+
+
+                    <br>
+                    <h5>Ubicación</h5>
+
+                    <hr>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Latitud</mat-label>
+                        <input name="n_rLng" (keyup)="onKey($event)" readonly matInput value="{{markers[0].latitude}}"
+                            placeholder="Latitud">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Longitud</mat-label>
+                        <input name="n_rLat" readonly matInput value="{{markers[0].longitude}}" placeholder="Longitud"
+                            [(ngModel)]="objNRest.n_rLat">
+                    </mat-form-field>
+                    <p>{{inputValue}}</p>
+
+                    <!-- MAPA -->
+
+                    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="13" (mapClick)="posicionMarcador($event)">
+                        <agm-marker *ngFor="let marker of markers" [latitude]="marker.latitude"
+                            [longitude]="marker.longitude"></agm-marker>
+                    </agm-map>
+
+
+
+
+                    <br>
+                    <!-- <input type="file" matInput> -->
+                    <button type="button" mat-raised-button color="basic" (click)="fileInput.click()"> Sube una Foto
+                        para tu restaurant </button>
+                    <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
+
+
+                    <hr>
+                    <div class="text-center">
+                        <mat-dialog-actions>
+                            <button color="warn" mat-raised-button mat-dialog-close>Cancelar</button>
+                            <!-- <button color="primary" mat-raised-button [mat-dialog-close]="true" cdkFocusInitial
+                                (click)="crearRest()">
+                                Crear Restaurant
+                            </button> -->
+                            <input type="submit" class="btn btn-info m-2" value="Crear Restaurant">
+
+                        </mat-dialog-actions>
+                    </div>
+
+
+
+                </form>
+            </mat-dialog-content>
+        </div>
+    </div>
+</div>

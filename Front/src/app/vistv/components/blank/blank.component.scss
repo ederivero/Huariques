@@ -1,0 +1,77 @@
+#btnDia{
+  margin: 1px;
+  width: 1%;
+  padding: 0px;
+}
+
+#muestra{
+  max-width: 94%;
+  min-width: 94%;
+  min-height: 295px;
+  // border: 1px solid black;
+}
+
+#contBtnDia{
+  width: 100%;
+}
+
+
+.example-button-row button,
+.example-button-row a {
+  margin-right: 8px;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+#spin{
+  width: 200px;
+  height: 200px;
+}
+
+mat-form-field {
+  // display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+
+#cont{
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  // background-image: url("./../../../../assets/bgPattern.png");
+  // background-size: 300px 300px;
+  // min-height: 100vh;
+  // height: auto;
+  // min-width: 100vh;
+  // width: auto;
+}
+
+.hora{
+  font-size: 12px;
+  width: 38%;
+  height: 25%;
+
+}
+
+
+
+
+
+.example-h2 {
+  margin: 5px;
+}
+
+.example-section {
+  // display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.example-margin {
+  margin: 0 10px;
+}
