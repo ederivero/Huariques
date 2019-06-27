@@ -7,6 +7,8 @@ import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Subscription } from 'rxjs';
 
+import { StarRatingComponent } from 'ng-starrating';
+
 @Component({
   selector: 'app-tablemap',
   templateUrl: './tablemap.component.html',
@@ -33,7 +35,7 @@ export class TablemapComponent implements OnInit {
   sort;
   suscriptor: Subscription;
   mark: Node;
-  openedWindow : number = 0;
+  openedWindow: number = 0;
 
   @ViewChild(MatPaginator, { static: false }) set matSort(content: MatPaginator) {
     this.paginator = content;
@@ -47,15 +49,16 @@ export class TablemapComponent implements OnInit {
       this.rests.sort = this.sort;
     }
   }
-  constructor(private _sRest: RestService,
-    private _el: ElementRef) { }
+  constructor(private _sRest: RestService) { }
 
-  displayedColumns: string[] = ['rest_rSocial', 'rest_info'];
+  displayedColumns: string[] = ['rest_rSocial', 'rating'];
 
   ngOnInit() {
     this.suscriptor = this._sRest.getRest().subscribe((resp: any) => {
       this.markers = resp.content;
       this.markers.forEach((element: any) => {
+        let dias = element.rest_dAtencion.split(',');
+        element.dias = dias;
         let cont = 0;
         let promedio = 0;
         element.t_productos.forEach((product: any) => {
@@ -63,15 +66,34 @@ export class TablemapComponent implements OnInit {
           cont++;
         })
         let proProd = promedio / cont;
-        if (proProd > 0) {
-          element.precioProm = proProd;
-        } else {
-          element.precioProm = 0;
-        }
+        element.rating = this.rating(proProd).toString();
       });
       this.restList = resp.content;
       this.rests = new MatTableDataSource(this.restList);
     })
+  }
+  rating(p) {
+    if (0 < p && p <= 5) {
+      return 1;
+    } else if (6 < p && p <= 10) {
+      return 2;
+    } else if (11 < p && p <= 15) {
+      return 3;
+    } else if (16 < p && p <= 20) {
+      return 3;
+    } else if (21 < p && p <= 25) {
+      return 4;
+    } else if (26 < p) {
+      return 5;
+    } else {
+      return 0;
+    }
+  }
+  
+  onRate($event: { oldValue: number, newValue: number, starRating: StarRatingComponent }) {
+    this.applyFilter($event.newValue.toString())
+    console.log($event.newValue.toString());
+    
   }
   applyFilter(filterValue: string) {
     this.rests.filter = filterValue.trim().toLowerCase();
@@ -85,27 +107,18 @@ export class TablemapComponent implements OnInit {
     this.suscriptor.unsubscribe();
   }
   selectMarker(event) {
-    console.log(event);
-    
-    this.lat= +event.latitude+0.002;
-    this.lng= +event.longitude;
+    this.lat = +event.latitude + 0.002;
+    this.lng = +event.longitude;
   }
-  verMarker(restId){
-    let l = this.markers.find(rest=>rest.rest_id==restId);
-    this.lat=+l.rest_lat+0.002;
-    this.lng=+l.rest_lng;
-    console.log(l);                
-  }
-
   openWindow(id) {
-    let l = this.markers.find(rest=>rest.rest_id==id);
-    this.lat=+l.rest_lat+0.002;
-    this.lng=+l.rest_lng;
-    this.openedWindow = id; // alternative: push to array of numbers
-}
+    let l = this.markers.find(rest => rest.rest_id == id);
+    this.lat = +l.rest_lat + 0.002;
+    this.lng = +l.rest_lng;
+    this.openedWindow = id;
+  }
 
-isInfoWindowOpen(id) {
-    return this.openedWindow == id; // alternative: check if id is in array
-}
+  isInfoWindowOpen(id) {
+    return this.openedWindow == id; 
+  }
 
 }

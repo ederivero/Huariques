@@ -24,7 +24,7 @@ export class AuthServiceLocal {
   userLogged(): Observable<string> {
     return this.user.asObservable();
   }
-  updateUserLogged(userLogged: string) {
+  updateUserLogged(userLogged:string) {
     this.user.next(userLogged);
   }
   isLogged() {
@@ -33,10 +33,15 @@ export class AuthServiceLocal {
       let ahora = Date.now() / 1000;
       if (userDetails.exp > ahora) {
         return this.logged = true;
+      }else{
+        this.cerrarSesion();
+        return this.logged = false;
       }
+    }else{
+      this.cerrarSesion();
+
       return this.logged = false;
     }
-    return this.logged = false;
   }
   getToken() {
     if (!this.token) {
@@ -67,13 +72,10 @@ export class AuthServiceLocal {
   }
   logout() {
     this.token = null;
+    this.updateUserLogged("false");
     localStorage.removeItem("token");
     this._router.navigateByUrl('');
-
   }
-  // getRest(){
-  //   return this._http.get('https://huariquesback.herokuapp.com/api/restaurante/traertodos');
-  // }
   cerrarSesion() {
     this._sAuthService.signOut().then(() => {
       this.logout();

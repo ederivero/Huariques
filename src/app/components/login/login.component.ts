@@ -18,7 +18,7 @@ import { Subscription } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
 
-  @ViewChild("myButton", { static: false }) myButton: ElementRef;
+  click:boolean =false;
 
   objUsuario = {
     usu_email: '',
@@ -167,11 +167,12 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    if (this.objUsuario.usu_email != '' && this.objUsuario.usu_pass != '') {
+    if ((this.objUsuario.usu_email != '' && this.objUsuario.usu_pass != '') && this.click==false ) {
+      this.click=true;
       this.localLogin = this._sAuth.login(this.objUsuario).subscribe((respuesta) => {
         if (respuesta.message == "ok" && respuesta.token) {
-          this._sAuth.saveToken(respuesta.token);
           this._sAuth.updateUserLogged(this.objUsuario.usu_email)
+          this._sAuth.saveToken(respuesta.token);
           this.dialogRef.close();
           let user = this._sAuth.getUserDetails();
           this.snackBar.open(`Bienvenido ${user.usu_nom}`, "OK", {
@@ -181,8 +182,7 @@ export class LoginComponent implements OnInit {
 
           this._router.navigateByUrl("/table");
         } else if (respuesta.message == "error") {
-          console.log(respuesta);
-
+          this.click=false;
           this.objUsuario.usu_pass = '';
           this.snackBar.open(`Usuario o contraseña incorrecta`, "OK", {
             duration: 5000,

@@ -6,7 +6,7 @@
       preferencias</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <div class="example-container">
+    <div class="example-container" ng-submit="login()">
         <mat-form-field>
           <input matInput [formControl]="emailFormControl" type="email" placeholder="Correo"
             [(ngModel)]="objUsuario.usu_email" name="usu_email">

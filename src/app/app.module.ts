@@ -12,7 +12,7 @@ import { AgmCoreModule } from '@agm/core';
 import { LoginComponent } from './components/login/login.component';
 
 
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { TablemapComponent } from './components/tablemap/tablemap.component';
 
@@ -20,15 +20,17 @@ import { TablemapComponent } from './components/tablemap/tablemap.component';
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
 
-import { ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+
+import { RatingModule } from 'ng-starrating';
 
 
 let configLogin = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
     provider: new GoogleLoginProvider("21794192303-roga71pcfodl3mi84truru81vgkubpp4.apps.googleusercontent.com")
-                                        
+
   },
   {
     id: FacebookLoginProvider.PROVIDER_ID,
@@ -60,9 +62,10 @@ export function provideConfig() {
       apiKey: 'AIzaSyBcjhtE0FIFEO92Z_7xKQWODx3I_QXq33E'
     }),
     SocialLoginModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RatingModule
   ],
-  entryComponents:[
+  entryComponents: [
     LoginComponent
   ],
   providers: [{
