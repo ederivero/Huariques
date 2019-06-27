@@ -62,6 +62,9 @@ export class GestRestComponent implements OnInit {
             this.aunNRest = true;
           }
         })
+
+        console.log(this.cadauno);
+        
       })
   }
 

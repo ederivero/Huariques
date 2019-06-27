@@ -45,6 +45,9 @@ exports.regcliente_control = {
     findByRestauranteAndUsuario: (req, res) => {
         let { id_usu, id_rest } = req.params;
         sequelize_1.RegCliente.findAll({
+            include: [
+                model
+            ],
             where: { usu_id: id_usu, rest_id: id_rest }
         }).then((respuesta) => {
             if (respuesta) {

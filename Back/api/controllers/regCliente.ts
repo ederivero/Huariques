@@ -45,6 +45,9 @@ export var regcliente_control = {
     findByRestauranteAndUsuario: (req: Request, res: Response) => {
         let { id_usu, id_rest } = req.params;
         RegCliente.findAll({
+            include:[
+                model: 
+            ]
             where: { usu_id: id_usu, rest_id: id_rest }
         }).then((respuesta: any) => {
             if (respuesta) {

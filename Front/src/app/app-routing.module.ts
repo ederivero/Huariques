@@ -14,7 +14,7 @@ const routes: Routes = [
 
   },
   {
-    path: 'vistv',
+    path: 'vistv/:usuId/:restId',
     loadChildren: './vistv/vistv.module#VistvModule'
   }
 ];

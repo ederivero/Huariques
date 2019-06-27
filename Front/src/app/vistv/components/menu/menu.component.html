@@ -62,7 +62,7 @@
 
 <!-- <app-tabla-producto></app-tabla-producto> -->
 
-<mat-form-field class="m-3">
+<mat-form-field class="m-3" *ngIf="load">
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
 </mat-form-field>
 

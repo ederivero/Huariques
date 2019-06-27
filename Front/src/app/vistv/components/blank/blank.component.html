@@ -1,94 +1,110 @@
-<div class="container-fluid" id="cont">
+<div>
+  <div class=" spinner-border text-info center-block " role="status" *ngIf="noHayRest" id="spin">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+<div class="container-fluid" id="cont" *ngIf="cargado">
   <br>
   <h4 class="">Información Actual de su Restaurant</h4>
   <br>
 
+
+
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-3 m-0 p-1">
-        <img id="muestra" src="http://placehold.it/310x250" alt="">
-      </div>
+      <form action="" (ngSubmit)="guardarInfo()">
+        <div class="col-md-3 m-0 p-1">
+          <img id="muestra" [src]=result.rest_img alt="Foto of {{result.rest_rSocial}}">
+        </div>
 
-      <div class="col-md-3  m-0 p-0">
-        <mat-form-field appearance="outline">
-          <mat-label>Nombre del Restaurant</mat-label>
-          <input id="rest_nom" matInput placeholder="Nombre del Restaurant" value="Tacos Mexi" readonly>
-        </mat-form-field>
+        <div class="col-md-3  m-0 p-0">
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre del Restaurant</mat-label>
+            <input [(ngModel)]="result.rest_rSocial" id="rest_nom" matInput placeholder="Nombre del Restaurant"
+              readonly>
+          </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Referencia de Dirección</mat-label>
-          <input id="rest_ref" matInput placeholder="Referencia de dirección" value="Frente al Mall Aventura Porongoche" readonly>
-        </mat-form-field>
-        <br>
-        <mat-form-field appearance="outline" id="textDesc">
-          <mat-label>Información del Negocio</mat-label>
-          <textarea id="rest_info" rows="5" matInput readonly placeholder="Información del negocio"
-            value="Nos dedicamos a la venta de tacos ridiendo un homenaje a la comida mexicana con una pizca de sabor peruano"></textarea>
-        </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Referencia de Dirección</mat-label>
+            <input [(ngModel)]="result.rest_refUbicacion" id="rest_ref" matInput placeholder="Referencia de dirección"
+              readonly>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="outline" id="textDesc">
+            <mat-label>Información del Negocio</mat-label>
+            <textarea [(ngModel)]="result.rest_info" id="rest_info" rows="5" matInput readonly
+              placeholder="Información del negocio"></textarea>
+          </mat-form-field>
 
 
-      </div>
+        </div>
 
-      <div class="col-md-4  m-0 pl-3 pr-0">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-3 text-right">
-               <h6 hidden="hidden" id="selectHor">Seleccione su Horario (AM / PM)</h6>
-               <br>
-               <h6 hidden="hidden" id="selectDia">Seleccione el o los días para ese horario</h6>
-            </div>
-            <div class="col-md-9 m-0 text-center">
-                <mat-form-field id="h_abierto"  hidden="hidden" appearance="outline" class="hora">
-                  <input  type="time" [(ngModel)]="horario.h_abierto" name="h_abierto" matInput readonly> 
-                </mat-form-field>       
+        <div class="col-md-4  m-0 pl-3 pr-0">
+          <div class="container">
+            <div class="row">
+              <div *ngIf="leer">
+                <h5>Dias de Atención</h5>
+                <p>{{result.rest_dAtencion}}</p>
+                <hr>
+                <h5>Hora de Apertura</h5>
+                <p>{{result.rest_hApertura}}</p>
+                <br>
+                <h5>Hora de Cierre</h5>
+                <p>{{result.rest_hCierre}}</p>
+              </div>
+
+              <div class="col-md-3 text-right">
+                <h6 hidden="hidden" id="selectHor">Seleccione su Horario (AM / PM)</h6>
+                <br>
+                <h6 hidden="hidden" id="selectDia">Seleccione el o los días para ese horario</h6>
+              </div>
+              <div class="col-md-9 m-0 text-center">
+                <mat-form-field id="h_abierto" hidden="hidden" appearance="outline" class="hora">
+                  <input type="time" [(ngModel)]="horario.h_abierto" name="h_abierto" matInput readonly>
+                </mat-form-field>
                 <!-- <div id="a" hidden="hidden">  a </div> -->
-                <mat-form-field id="h_cerrado" hidden="hidden"  appearance="outline" class="hora m-1">
-                  <input  type="time" [(ngModel)]="horario.h_cerrado" name="h_cerrado" matInput readonly>
+                <mat-form-field id="h_cerrado" hidden="hidden" appearance="outline" class="hora m-1">
+                  <input type="time" [(ngModel)]="horario.h_cerrado" name="h_cerrado" matInput readonly>
                 </mat-form-field>
                 <br>
                 <br>
                 <section class="example-section" id="checkDia" hidden="hidden">
-                  <mat-checkbox class="example-margin" [(ngModel)]="checked">Lun</mat-checkbox>
-                  <mat-checkbox class="example-margin" [(ngModel)]="checked">Mar</mat-checkbox>
-                  <mat-checkbox class="example-margin" [(ngModel)]="checked">Mier</mat-checkbox>
-                  <mat-checkbox class="example-margin" [(ngModel)]="checked">Jue</mat-checkbox>
-                  <mat-checkbox class="example-margin" [(ngModel)]="checked">Vie</mat-checkbox>
-                  <mat-checkbox class="example-margin" [(ngModel)]="checked">Sab</mat-checkbox>
-                  <mat-checkbox class="example-margin" [(ngModel)]="checked">Dom</mat-checkbox>
+                  <mat-checkbox class="example-margin" [(ngModel)]="checkedL">Lun</mat-checkbox>
+                  <mat-checkbox class="example-margin" [(ngModel)]="checkedM">Mar</mat-checkbox>
+                  <mat-checkbox class="example-margin" [(ngModel)]="checkedMi">Mier</mat-checkbox>
+                  <mat-checkbox class="example-margin" [(ngModel)]="checkedJ">Jue</mat-checkbox>
+                  <mat-checkbox class="example-margin" [(ngModel)]="checkedV">Vie</mat-checkbox>
+                  <mat-checkbox class="example-margin" [(ngModel)]="checkedS">Sab</mat-checkbox>
+                  <mat-checkbox class="example-margin" [(ngModel)]="checkedD">Dom</mat-checkbox>
                 </section>
 
                 <br>
-
-                <div class="example-button-row" id="divBtnEdit" hidden="hidden">
-                  <button class="btn-block" mat-stroked-button color="primary" (click)="crearHorario()"> 
-                    <strong> Agregar Horario </strong>
-                  </button>
-                </div>
-            </div>
-            <div>
-              
+              </div>
+              <div>
 
 
 
 
+
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="col-md-2  m-0 p-0">
-        <br>
-        <br>
-        <br>
-        <div *ngIf="estadoBtnEdit" class="example-button-row" id="btnEditInfo">
-          <button class="btn-block" mat-raised-button color="primary" (click)="habilitarEdicion()">Editar
-            Información</button>
+        <div class="col-md-2  m-0 p-0">
+          <br>
+          <br>
+          <br>
+          <div *ngIf="estadoBtnEdit" class="example-button-row" id="btnEditInfo">
+            <button class="btn-block" mat-raised-button color="primary" (click)="habilitarEdicion()">Editar
+              Información</button>
+          </div>
+          <div *ngIf="estadoBtnGuard" class="example-button-row" id="btnGuarInfo">
+            <button class="btn-block" mat-raised-button color="warn" (click)="guardarInfo()">Guardar
+              Información</button>
+          </div>
         </div>
-        <div *ngIf="estadoBtnGuard" class="example-button-row" id="btnGuarInfo" >
-          <button class="btn-block" mat-raised-button color="warn" (click)="guardarInfo()">Guardar
-            Información</button>
-        </div>
-      </div>
+      </form>
     </div>
   </div>
 
@@ -101,7 +117,7 @@
     <div class="col-md-4 p-1">
       <!-- <app-lista-usuarios></app-lista-usuarios> -->
       <div class="example-button-row">
-        <button class="btn-block p-1" mat-raised-button color="primary" [routerLink]="[ '/vistv/prin/:usuId']"><strong> <a
+        <button class="btn-block p-1" mat-raised-button color="primary" [routerLink]="[ '/prin']"><strong> <a
               matLine>Dashboard</a></strong></button>
       </div>
     </div>

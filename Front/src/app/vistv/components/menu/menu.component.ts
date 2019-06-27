@@ -67,6 +67,8 @@ export class MenuComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
+  restInfo = [];
+
 
   constructor(public dialog: MatDialog, private _snackBar: MatSnackBar, ruta: ActivatedRoute) {
 
@@ -74,35 +76,56 @@ export class MenuComponent implements OnInit {
     //   this.listProductos = JSON.parse(localStorage.getItem('productos'));
     //   console.log(this.listProductos)
     // }
-    var usuId = ruta.snapshot.params.usuId
-    var restId = ruta.snapshot.params.restId
+    var usuId = +ruta.snapshot.params.usuId
+    var restId = +ruta.snapshot.params.restId
 
-    fetch(`https://huariquesback.herokuapp.com/api/restaurante/getByUsuId/${usuId}`)
-      .then(response => {
-        console.log("SFsfsgsgs");
-        return response.json()
-      }).then(datarest => {
+    // fetch(`https://huariquesback.herokuapp.com/api/restaurante/getByUsuId/${usuId}`)
+    //   .then(response => {
+    //     // console.log("SFsfsgsgs");
+    //     return response.json()
+    //   }).then(datarest => {
+    //     console.log(datarest.content);
 
-        console.log(datarest.content);
-      })
+    //     // console.log(usuId);
+    //     console.log(restId);
+        
+
+    //     datarest.content.forEach(idRest => {
+    //       if (idRest === restId) {           
+
+    //         this.restInfo.push({
+    //           rId: idRest.rest_id,
+    //           rSocial: idRest.rest_rSocial,
+    //           rDir: idRest.rest_direccion,
+    //           img:idRest.rest_img
+  
+    //         })
+    //         console.log(this.restInfo);            
+    //       }else{
+    //         console.log("N E L S O N");
+            
+    //       }
+    //     });
+
+    //   })
 
     fetch(`https://huariquesback.herokuapp.com/api/producto/porIdRest/${restId}`)
       .then(response => {
         console.log("productos");
         return response.json()
-      }).then(datarest => {
+      }).then(dataprod => {
 
-        console.log(datarest.content);
+        console.log(dataprod.content);
 
-        datarest.content.forEach(idForRest => {
+        dataprod.content.forEach(idForProd => {
           // console.log(idForRest);
 
-          console.log(this.id_prod = idForRest.prod_id);
-          this.p_desc = idForRest.prod_desc;
-          this.p_disp = idForRest.prod_disp;
-          this.p_nomb = idForRest.prod_nom;
-          this.p_prec = idForRest.prod_precio;
-          this.p_imagen = idForRest.prod_img;
+          console.log(this.id_prod = idForProd.prod_id);
+          this.p_desc = idForProd.prod_desc;
+          this.p_disp = idForProd.prod_disp;
+          this.p_nomb = idForProd.prod_nom;
+          this.p_prec = idForProd.prod_precio;
+          this.p_imagen = idForProd.prod_img;
 
           if (!this.p_imagen) {
             this.p_imagen = "https://firebasestorage.googleapis.com/v0/b/api-project-161182547768.appspot.com/o/restaurantes%2Ffotito.png?alt=media&token=9b1da490-016c-4c08-b7f2-69e07f8137e9"
@@ -111,12 +134,12 @@ export class MenuComponent implements OnInit {
           this.load = true;
 
           this.p_cadauno.push({
-            pId: idForRest.prod_id,
-            pDesc: idForRest.prod_desc,
-            pDisp: idForRest.prod_disp,
-            pNom: idForRest.prod_nom,
-            pPre: idForRest.prod_precio,
-            img: idForRest.prod_img
+            pId: idForProd.prod_id,
+            pDesc: idForProd.prod_desc,
+            pDisp: idForProd.prod_disp,
+            pNom: idForProd.prod_nom,
+            pPre: idForProd.prod_precio,
+            img: idForProd.prod_img
 
           })
 

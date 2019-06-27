@@ -53,7 +53,11 @@ n_rSocial = 'yu';
   }
   inputValue: any;
 
+ chL= false;
+ chM=true;
 
+ opcion1
+ opcion2
 
   constructor() { }
 
@@ -97,6 +101,13 @@ n_rSocial = 'yu';
 
   crearRest(){
     console.log(this.objNRest);
+
+    // console.log(this.chM);
+    console.log(this.opcion1);
+    console.log(this.opcion2);
+
+    
+    
     
   }
 

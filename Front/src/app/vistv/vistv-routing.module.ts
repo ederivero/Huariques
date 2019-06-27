@@ -4,16 +4,16 @@ import { BlankComponent } from './components/blank/blank.component';
 import { componentFactoryName } from '@angular/compiler';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MenuComponent } from './components/menu/menu.component';
-import { DatsenComponent } from './components/datsen/datsen.component';
 import { MapaDatasensibleComponent } from './components/mapa-datasensible/mapa-datasensible.component';
 
 const routes: Routes = [
   {
     path:'',
     component: BlankComponent,
+    // component: DashboardComponent,
     children:[
       {
-        path:'prin/:usuId',
+        path:'prin/:usuId/:restId',
         component: DashboardComponent
       },
       {
@@ -21,7 +21,7 @@ const routes: Routes = [
         component: MenuComponent
       },
       {
-        path:'datsen',
+        path:'datsen/:usuId/:restId',
         component: MapaDatasensibleComponent
       }
     ]
