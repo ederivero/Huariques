@@ -59,6 +59,9 @@ n_rSocial = 'yu';
  opcion1
  opcion2
 
+ isChecked : boolean;
+ checked=true;
+
   constructor() { }
 
   ngOnInit() {
@@ -103,11 +106,12 @@ n_rSocial = 'yu';
     console.log(this.objNRest);
 
     // console.log(this.chM);
-    console.log(this.opcion1);
-    console.log(this.opcion2);
+    console.log(this.checked);
+    
 
     
-    
+    // <input type="checkbox" name="checkbox" [(ngModel)]="isChecked">
+
     
   }
 

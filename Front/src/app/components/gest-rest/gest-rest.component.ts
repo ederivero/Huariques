@@ -30,10 +30,11 @@ export class GestRestComponent implements OnInit {
       .then(response => {
         return response.json()
       }).then(datarest => {
-
+          
+        
         console.log(datarest.content)
 
-
+        this.showMessageSuccess();
 
         datarest.content.forEach(idForRest => {
           // console.log(idForRest);
@@ -66,9 +67,22 @@ export class GestRestComponent implements OnInit {
         console.log(this.cadauno);
         
       })
+    
   }
 
   ngOnInit() {
+
+  }
+
+  showMessageSuccess(){
+
+    this.aunNRest = false;
+
+    setTimeout(function(){
+      this.noHayRest= false;
+      this.aunNRest = true;
+
+    },1500);
 
   }
 
