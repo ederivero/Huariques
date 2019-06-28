@@ -26,7 +26,7 @@ export const _filter = (opt: string[], value: string): string[] => {
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  inicio:boolean=false;
+  inicio: boolean = false;
   animal: string;
   name: string;
   stateForm: FormGroup = this._formBuilder.group({
@@ -61,13 +61,13 @@ export class NavbarComponent implements OnInit {
   constructor(public dialog: MatDialog,
     private _sAuth: AuthServiceLocal,
     private _formBuilder: FormBuilder,
-    private _Router:Router) {
+    private _Router: Router) {
     // console.log(window.location.href);
     // console.log(window.location.href.split('/')[3])
-    if(window.location.href.split('/')[3]===""){
-      this.inicio=true
-    }else{
-      this.inicio=false
+    if (window.location.href.split('/')[3] === "" || window.location.href.split('/')[3] === "#") {
+      this.inicio = true
+    } else {
+      this.inicio = false
     }
     if (localStorage.getItem('token')) {
       this.user = null;
@@ -75,11 +75,10 @@ export class NavbarComponent implements OnInit {
         this.user = res.content;
         this.p = res.content[0];
         console.log(this.user[0].usu_id)
-        if(this.user[0].usu_tipo==="0"){
+        if (this.user[0].usu_tipo === "0") {
           this._Router.navigateByUrl(`gest/${this.user[0].usu_id}`)
         }
       })
-
     } else {
       this._sAuth.userLogged().subscribe((resp: any) => {
         this.user = null;
@@ -93,12 +92,12 @@ export class NavbarComponent implements OnInit {
         }
       })
     }
-    
+
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(LoginComponent, {
       width: '30%',
-      data: {name: this.name, animal: this.animal}
+      data: { name: this.name, animal: this.animal }
     });
 
     dialogRef.afterClosed().subscribe(result => {

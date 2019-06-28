@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { CalificanosComponent } from '../calificanos/calificanos.component';
 import { MatDialog } from '@angular/material/dialog';
-import { asapScheduler } from 'rxjs';
 import { ActivatedRoute } from "@angular/router";
+import { LoginComponent } from '../login/login.component';
 
 
 @Component({
@@ -12,15 +12,15 @@ import { ActivatedRoute } from "@angular/router";
 
 })
 export class RestDetailsComponent implements OnInit {
-
+  public innerWidth: any;
   imagen = "https://firebasestorage.googleapis.com/v0/b/api-project-161182547768.appspot.com/o/restaurantes%2Ffotito.png?alt=media&token=9b1da490-016c-4c08-b7f2-69e07f8137e9";
   horarioaperturaActual = "12:00"
   horariofinActual = "12:00";
   feriadors: Boolean = true;
   estado: Boolean = false;
   title: string = 'Anticucheria la ultima cena';
-  direccion:string=''
-  telefono:string=''
+  direccion: string = ''
+  telefono: string = ''
   lat: number = -16.4310132;
   lng: number = -71.5189799;
   categoriasruta = []
@@ -61,7 +61,7 @@ export class RestDetailsComponent implements OnInit {
     // console.log(this.categoriasruta)
     // console.log(ruta.snapshot.params.id)
     var rutaActual = ruta.snapshot.params.id - 1;
-    fetch(`https://huariquesback.herokuapp.com/api/restcategoria/rest/${rutaActual+1}`).then(response => {
+    fetch(`https://huariquesback.herokuapp.com/api/restcategoria/rest/${rutaActual + 1}`).then(response => {
       return response.json()
     }).then(datacat => {
       // console.log(datacat.content)
@@ -73,12 +73,12 @@ export class RestDetailsComponent implements OnInit {
         //   this.categoriasruta.push({ruta:`./assets/images/${data.content[0].cat_nom}.png`})
         // })
         // console.log(idcat.cat_id)
-        this.categoriasruta.push({ruta:"./assets/images/"+idcat.cat_id+".png"})
+        this.categoriasruta.push({ ruta: "./assets/images/" + idcat.cat_id + ".png" })
       })
     })
     this.obtenerDiaActual()
     this.comentarios = []
-    fetch(`https://huariquesback.herokuapp.com/api/regcli/encontrarporrest/${rutaActual+1}`).then(response => {
+    fetch(`https://huariquesback.herokuapp.com/api/regcli/encontrarporrest/${rutaActual + 1}`).then(response => {
       return response.json();
     }).then(datareg => {
       console.log(datareg.content)
@@ -87,7 +87,7 @@ export class RestDetailsComponent implements OnInit {
           return response.json()
         }).then(data1 => {
           // console.log(data1.content)
-          if (data1.content!=""){
+          if (data1.content != "") {
             fetch(`https://huariquesback.herokuapp.com/api/usuario/traerporid/${registro.usu_id}`).then(response => {
               return response.json();
             }).then(data => {
@@ -112,8 +112,8 @@ export class RestDetailsComponent implements OnInit {
       if (!this.imagen) {
         this.imagen = "https://firebasestorage.googleapis.com/v0/b/api-project-161182547768.appspot.com/o/restaurantes%2Ffotito.png?alt=media&token=9b1da490-016c-4c08-b7f2-69e07f8137e9"
       }
-      this.telefono=data.content[rutaActual].rest_telefono;
-      this.direccion=data.content[rutaActual].rest_direccion;
+      this.telefono = data.content[rutaActual].rest_telefono;
+      this.direccion = data.content[rutaActual].rest_direccion;
       this.title = data.content[rutaActual].rest_rSocial;
       this.lat = +data.content[rutaActual].rest_lat;
       this.lng = +data.content[rutaActual].rest_lng;
@@ -128,18 +128,53 @@ export class RestDetailsComponent implements OnInit {
       this.obtenerDiaActual();
     });
   }
-
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.innerWidth = window.innerWidth;
+    console.log(this.innerWidth)
+  }
   ngOnInit() {
-
+    this.innerWidth = window.innerWidth
   }
   openDialog(): void {
-    const dialogRef = this.dialog.open(CalificanosComponent, {
-      width: '40%',
-    });
-    dialogRef.componentInstance.rutaActual=this.ruta.snapshot.params.id
-    dialogRef.afterClosed().subscribe(() => {
-      console.log('The dialog was closed');
-    });
+    if (localStorage.getItem('token')) {
+      if (this.innerWidth <= 900) {
+        const dialogRef = this.dialog.open(CalificanosComponent, {
+          width: '60%',
+        });
+        dialogRef.componentInstance.rutaActual = this.ruta.snapshot.params.id
+        dialogRef.afterClosed().subscribe(() => {
+          console.log('The dialog was closed');
+        });
+      } else {
+        const dialogRef = this.dialog.open(CalificanosComponent, {
+          width: '40%',
+        });
+        dialogRef.componentInstance.rutaActual = this.ruta.snapshot.params.id
+        dialogRef.afterClosed().subscribe(() => {
+          console.log('The dialog was closed');
+        });
+      }
+
+    } else {
+      if (this.innerWidth <= 1000) {
+        const dialogRef = this.dialog.open(LoginComponent, {
+          width: '50%'
+        });
+        dialogRef.afterClosed().subscribe(() => {
+          console.log('The dialog was closed');
+        });
+      } else {
+        const dialogRef = this.dialog.open(LoginComponent, {
+          width: '30%'
+        });
+        dialogRef.afterClosed().subscribe(() => {
+          console.log('The dialog was closed');
+        });
+      }
+
+    }
+
   }
   obtenerDiaActual() {
     var diaActualN = new Date();
