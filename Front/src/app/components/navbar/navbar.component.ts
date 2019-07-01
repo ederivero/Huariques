@@ -54,7 +54,7 @@ export class NavbarComponent implements OnInit {
   }];
 
   stateGroupOptions: Observable<StateGroup[]>;
-
+  userRest=false;
   user = false;
   p;
 
@@ -76,7 +76,8 @@ export class NavbarComponent implements OnInit {
         this.p = res.content[0];
         console.log(this.user[0].usu_id)
         if (this.user[0].usu_tipo === "0") {
-          this._Router.navigateByUrl(`gest/${this.user[0].usu_id}`)
+          // this._Router.navigateByUrl(`gest/${this.user[0].usu_id}`)
+          this.userRest=true
         }
       })
     } else {
@@ -102,7 +103,29 @@ export class NavbarComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.animal = result;
+      if (localStorage.getItem('token')) {
+        this.user = null;
+        this._sAuth.getUserLogged(this._sAuth.getUserDetails().usu_id).subscribe((res: any) => {
+          this.user = res.content;
+          this.p = res.content[0];
+          console.log(this.user[0].usu_id)
+          if (this.user[0].usu_tipo === "0") {
+            this._Router.navigateByUrl(`gest/${this.user[0].usu_id}`)
+          }
+        })
+      }else {
+        this._sAuth.userLogged().subscribe((resp: any) => {
+          this.user = null;
+          if (resp == "false") {
+            this.user = false;
+          } else {
+            this._sAuth.getUserLogged(resp).subscribe((res: any) => {
+              this.user = res.content;
+              this.p = res.content[0];
+            })
+          }
+        })
+      }
     });
   }
   ngOnInit() {
@@ -121,9 +144,12 @@ export class NavbarComponent implements OnInit {
 
     return this.stateGroups;
   }
-
+  gestRest(){
+    this._Router.navigateByUrl(`gest/${this.user[0].usu_id}`)
+  }
   logOut() {
     this._sAuth.cerrarSesion();
+    this._Router.navigateByUrl(``)
   }
 
 }

@@ -9,7 +9,8 @@ agm-map {
   top:95%;
   left:50%;
   transform:translate(-50%,-50%);
-  font-size: 200%
+  font-size: 200%;
+  text-align: center;
 }
 .logo{
   position:absolute;
@@ -169,4 +170,9 @@ agm-map {
   border-radius:0;
   transform:rotate(-45deg);
   transition:.5%;
+}
+@media (max-width: 931px){
+  #huariqueros{
+    top:98%;
+  }
 }

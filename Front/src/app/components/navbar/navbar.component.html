@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#c42800" *ngIf="!inicio">
+<nav id="navbar" class="navbar navbar-expand-lg navbar-dark" style="background-color:#c42800" *ngIf="!inicio">
   <a class="navbar-brand" [routerLink]="['']">Agachaditos</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
     aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,16 +13,16 @@
       </li>
     </ul>
 
-    <form [formGroup]="stateForm">
+    <form id="nose"[formGroup]="stateForm">
 
       <mat-form-field appearance="outline" class="mr-3">
 
-        <mat-label>Seleccione Categoria</mat-label>
+        <mat-label  >Seleccione Categoria</mat-label>
         <input class="search" type="text" matInput formControlName="stateGroup" [matAutocomplete]="autoGroup">
         <button matSuffix mat-icon-button aria-label="Example icon-button with a heart icon">
           <mat-icon matSuffix>search</mat-icon>
         </button>
-        <mat-autocomplete #autoGroup="matAutocomplete">
+        <mat-autocomplete  #autoGroup="matAutocomplete">
           <mat-optgroup *ngFor="let group of stateGroupOptions | async" [label]="group.letter">
             <mat-option *ngFor="let name of group.names" [value]="name">
               {{name}}
@@ -40,22 +40,18 @@
 
     <div *ngIf="user==null"></div>
 
-    <button *ngIf="user" class="btn_user ml-1 mr-3" mat-button [matMenuTriggerFor]="menu">
-      <img src={{p.usu_img}} class="rounded-circle usu_img" alt="">
+    <button  *ngIf="user" class="btn_user ml-1 mr-3" mat-button [matMenuTriggerFor]="menu">
+      <img src={{p.usu_img}} id="imgUsu" class="rounded-circle usu_img" alt="">
       <mat-icon matSuffix>more_vert</mat-icon>
     </button>
 
     <mat-menu #menu="matMenu">
-      <button mat-menu-item>
-        <mat-icon>dialpad</mat-icon>
-        <span>Redial</span>
-      </button>
-      <button mat-menu-item disabled>
-        <mat-icon>voicemail</mat-icon>
-        <span>Check voice mail</span>
+      <button mat-menu-item *ngIf="userRest" (click)="gestRest()">
+        <mat-icon>table-chart</mat-icon>
+        <span>Restaurantes</span>
       </button>
       <button mat-menu-item (click)="logOut()">
-        <mat-icon>notifications_off</mat-icon>
+        <mat-icon>exit_to_app</mat-icon>
         <span>Log Out</span>
       </button>
     </mat-menu>
@@ -63,7 +59,7 @@
 
   </div>
 </nav>
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#c42800" *ngIf="inicio">
+<nav id="navbar" class="navbar navbar-expand-lg navbar-dark" style="background-color:#c42800" *ngIf="inicio">
   <a class="navbar-brand" href="#">Agachaditos</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
     aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -83,22 +79,18 @@
 
     <div *ngIf="user==null"></div>
 
-    <button *ngIf="user" class="btn_user ml-1 mr-3" mat-button [matMenuTriggerFor]="menu">
-      <img src={{p.usu_img}} class="rounded-circle usu_img" alt="">
+    <button   *ngIf="user" class="btn_user ml-1 mr-3" mat-button [matMenuTriggerFor]="menu">
+      <img src={{p.usu_img}} id="imgUsu" class="rounded-circle usu_img" alt="">
       <mat-icon matSuffix>more_vert</mat-icon>
     </button>
 
     <mat-menu #menu="matMenu">
-      <button mat-menu-item>
-        <mat-icon>dialpad</mat-icon>
-        <span>Redial</span>
-      </button>
-      <button mat-menu-item disabled>
-        <mat-icon>voicemail</mat-icon>
-        <span>Check voice mail</span>
+      <button mat-menu-item *ngIf="userRest">
+        <mat-icon>table-chart</mat-icon>
+        <span>Restaurantes</span>
       </button>
       <button mat-menu-item (click)="logOut()">
-        <mat-icon>notifications_off</mat-icon>
+        <mat-icon>exit_to_app</mat-icon>
         <span>Log Out</span>
       </button>
     </mat-menu>
