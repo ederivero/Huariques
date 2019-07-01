@@ -5,7 +5,7 @@ import { AuthServiceLocal } from './../../services/auth.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 export interface DialogData {
   animal: string;
   name: string;
@@ -57,11 +57,12 @@ export class NavbarComponent implements OnInit {
   userRest=false;
   user = false;
   p;
+  busqueda: string;
 
   constructor(public dialog: MatDialog,
     private _sAuth: AuthServiceLocal,
     private _formBuilder: FormBuilder,
-    private _Router: Router) {
+    private _Router: Router,private ruta:ActivatedRoute) {
     // console.log(window.location.href);
     // console.log(window.location.href.split('/')[3])
     if (window.location.href.split('/')[3] === "" || window.location.href.split('/')[3] === "#") {
@@ -74,7 +75,7 @@ export class NavbarComponent implements OnInit {
       this._sAuth.getUserLogged(this._sAuth.getUserDetails().usu_id).subscribe((res: any) => {
         this.user = res.content;
         this.p = res.content[0];
-        console.log(this.user[0].usu_id)
+        console.log(this.user[0])
         if (this.user[0].usu_tipo === "0") {
           // this._Router.navigateByUrl(`gest/${this.user[0].usu_id}`)
           this.userRest=true
@@ -129,6 +130,14 @@ export class NavbarComponent implements OnInit {
     });
   }
   ngOnInit() {
+    this.ruta.params.subscribe((params)=>{
+      console.log(params)
+      if (window.location.href.split('/')[3] === "" || window.location.href.split('/')[3] === "#") {
+        this.inicio = true
+      } else {
+        this.inicio = false
+      }
+    })
     this.stateGroupOptions = this.stateForm.get('stateGroup')!.valueChanges
       .pipe(
         startWith(''),
@@ -144,8 +153,23 @@ export class NavbarComponent implements OnInit {
 
     return this.stateGroups;
   }
+  resetInicio(){
+    // this.inicio=true
+  }
   gestRest(){
     this._Router.navigateByUrl(`gest/${this.user[0].usu_id}`)
+    // this.inicio=false
+  }
+  onKey(event) {
+    this.busqueda = event.target.value;
+  }
+  Buscar($event) {
+    $event.preventDefault()
+    if (this.busqueda === ""||this.busqueda === undefined) {
+      this._Router.navigate([`busqueda/todos`]);
+    } else {
+      this._Router.navigate([`busqueda/${this.busqueda}`]);
+    }
   }
   logOut() {
     this._sAuth.cerrarSesion();

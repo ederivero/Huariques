@@ -6,7 +6,7 @@ import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -50,9 +50,10 @@ export class TablemapComponent implements OnInit {
       this.rests.sort = this.sort;
     }
   }
-  constructor(private _sRest: RestService, private ruta: ActivatedRoute) {
+  constructor(private _sRest: RestService, private ruta: ActivatedRoute, private _Router: Router) {
     var rutaActual = this.ruta.snapshot.params.nombre;
-    if (rutaActual === "todos" || rutaActual==='') {
+
+    if (rutaActual === "todos" || rutaActual === '') {
       this.suscriptor = this._sRest.getRest().subscribe((resp: any) => {
         this.markers = resp.content;
         this.markers.forEach((element: any) => {
@@ -73,11 +74,9 @@ export class TablemapComponent implements OnInit {
     } else {
       this.suscriptor = this._sRest.buscarpopalabra(rutaActual).subscribe((resp: any) => {
         console.log(resp.content);
-
         this.markers = resp.content;
         this.markers.forEach((element: any) => {
           console.log(element);
-
           let dias = element.rest_dAtencion.split(',');
           element.dias = dias;
           let cont = 0;
@@ -95,7 +94,7 @@ export class TablemapComponent implements OnInit {
         });
         this.restList = resp.content;
         console.log(this.restList[0]);
-        
+
         this.rests = new MatTableDataSource(this.restList);
       })
     }
@@ -107,7 +106,54 @@ export class TablemapComponent implements OnInit {
 
 
   ngOnInit() {
+    this.ruta.params.subscribe(params => {
+      var rutaActual = this.ruta.snapshot.params.nombre;
+      if (rutaActual === "todos" || rutaActual === '') {
+        this.suscriptor = this._sRest.getRest().subscribe((resp: any) => {
+          this.markers = resp.content;
+          this.markers.forEach((element: any) => {
+            let dias = element.rest_dAtencion.split(',');
+            element.dias = dias;
+            let cont = 0;
+            let promedio = 0;
+            element.t_productos.forEach((product: any) => {
+              promedio = +product.prod_precio + promedio;
+              cont++;
+            })
+            let proProd = promedio / cont;
+            element.rating = this.rating(proProd).toString();
+          });
+          this.restList = resp.content;
+          this.rests = new MatTableDataSource(this.restList);
+        })
+      } else {
+        this.suscriptor = this._sRest.buscarpopalabra(rutaActual).subscribe((resp: any) => {
+          console.log(resp.content);
+          this.markers = resp.content;
+          this.markers.forEach((element: any) => {
+            console.log(element);
+            let dias = element.rest_dAtencion.split(',');
+            element.dias = dias;
+            let cont = 0;
+            let promedio = 0;
+            element.t_productos.forEach((product: any) => {
+              promedio = +product.prod_precio + promedio;
+              cont++;
+            })
+            let proProd
+            if (cont != 0) { proProd = promedio / cont; }
+            else {
+              proProd = 0;
+            }
+            element.rating = this.rating(proProd).toString();
+          });
+          this.restList = resp.content;
+          console.log(this.restList[0]);
 
+          this.rests = new MatTableDataSource(this.restList);
+        })
+      }
+    })
   }
   rating(p) {
     if (0 < p && p <= 5) {
@@ -149,7 +195,9 @@ export class TablemapComponent implements OnInit {
     this.lng = +l.rest_lng;
     this.openedWindow = id;
   }
-
+  verAgachadito() {
+    this._Router.navigateByUrl(`rest-details/${this.openedWindow}`)
+  }
   isInfoWindowOpen(id) {
     return this.openedWindow == id;
   }

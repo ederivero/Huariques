@@ -2,6 +2,7 @@
 import { ClickEvent } from 'angular-star-rating';
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AuthServiceLocal } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-calificanos',
@@ -30,6 +31,9 @@ export class CalificanosComponent implements OnInit {
     this.onClickResult3 = $limpieza;
     // console.log('onClick $limpieza: ', $limpieza.rating);
   };
+  user: any;
+  p: any;
+  userId: any;
   onKey(event) {
     this.Comentario = event.target.value;
   }
@@ -50,8 +54,9 @@ export class CalificanosComponent implements OnInit {
     }
   }*/
   Puntuacion() {
-    if(this.Comentario === undefined){
-      this.Comentario=""
+    
+    if (this.Comentario === undefined) {
+      this.Comentario = ""
     }
     if (this.onClickResult === undefined || this.onClickResult2 === undefined || this.onClickResult3 === undefined) {
       alert("faltan campos")
@@ -69,7 +74,7 @@ export class CalificanosComponent implements OnInit {
       console.log(date);
       let objreg = {
         regCliente_fecha: date,
-        usu_id: 1,
+        usu_id: this.userId,
         rest_id: +this.rutaActual
       }
       console.log(objreg)
@@ -142,7 +147,28 @@ export class CalificanosComponent implements OnInit {
       })
     console.log(obj);*/
   }
-  constructor(public dialogRef: MatDialogRef<CalificanosComponent>) {
+  constructor(public dialogRef: MatDialogRef<CalificanosComponent>, private _sAuth:AuthServiceLocal) {
+    if (localStorage.getItem('token')) {
+      this.user = null;
+      this._sAuth.getUserLogged(this._sAuth.getUserDetails().usu_id).subscribe((res: any) => {
+        this.user = res.content;
+        this.p = res.content[0];
+        console.log(this.user[0].usu_id)
+        this.userId=this.user[0].usu_id
+      })
+    } else {
+      this._sAuth.userLogged().subscribe((resp: any) => {
+        this.user = null;
+        if (resp == "false") {
+          this.user = false;
+        } else {
+          this._sAuth.getUserLogged(resp).subscribe((res: any) => {
+            this.user = res.content;
+            this.p = res.content[0];
+          })
+        }
+      })
+    }
 
   }
   onNoClick(): void {

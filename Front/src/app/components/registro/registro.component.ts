@@ -17,14 +17,15 @@ export class RegistroComponent implements OnInit {
     sol_lng: 0.0,
     sol_email: '',
     sol_tipo: 0,
-    sol_info: '', // extras
+    sol_info: '',
     sol_telefono: '',
     sol_dAtencion: '',
     sol_hApertura: '',
     sol_hCierre: '',
-    sol_refUbicacion:''
+    sol_refUbicacion: ''
   };
   secondFormGroup: FormGroup;
+  enviando: boolean;
   constructor(private _formBuilder: FormBuilder) {
     this.ubicacion();
   }
@@ -66,7 +67,11 @@ export class RegistroComponent implements OnInit {
     this.imagen = event.target.files;
     console.log(this.imagen);
   }
+  enviar1(){
+    console.log(this.objRestaurante)
+  }
   enviar() {
+    this.enviando=false;
     var formData = new FormData();
     console.log(this.imagen);
     this.objRestaurante.sol_dAtencion = '';
@@ -99,18 +104,17 @@ export class RegistroComponent implements OnInit {
     formData.append('imagen',
       this.imagen[0],
       this.imagen[0].name);
-    formData.append('rest_rSocial', this.objRestaurante.sol_rSocial)
-    formData.append('rest_direccion', this.objRestaurante.sol_direccion)
-    formData.append('rest_telefono', this.objRestaurante.sol_telefono)
-    formData.append('rest_lat', this.objRestaurante.sol_lat.toString())
-    formData.append('rest_lng', this.objRestaurante.sol_lng.toString())
-    formData.append('rest_info', this.objRestaurante.sol_info)
-    formData.append('rest_refUbicacion', this.objRestaurante.sol_refUbicacion)
-    formData.append('rest_dAtencion', this.objRestaurante.sol_dAtencion)
-    formData.append('rest_hApertura', this.objRestaurante.sol_hApertura)
-    formData.append('rest_hCierre', this.objRestaurante.sol_hCierre)
-    formData.append('sol_tipo',this.objRestaurante.sol_tipo.toString())
-    formData.append('rest_avisos', 'prueba')
+    formData.append('sol_rSocial', this.objRestaurante.sol_rSocial)
+    formData.append('sol_direccion', this.objRestaurante.sol_direccion)
+    formData.append('sol_telefono', this.objRestaurante.sol_telefono)
+    formData.append('sol_lat', this.objRestaurante.sol_lat.toString())
+    formData.append('sol_lng', this.objRestaurante.sol_lng.toString())
+    formData.append('sol_info', this.objRestaurante.sol_info)
+    formData.append('sol_refUbicacion', this.objRestaurante.sol_refUbicacion)
+    formData.append('sol_dAtencion', this.objRestaurante.sol_dAtencion)
+    formData.append('sol_hApertura', this.objRestaurante.sol_hApertura)
+    formData.append('sol_hCierre', this.objRestaurante.sol_hCierre)
+    formData.append('sol_tipo', this.objRestaurante.sol_tipo.toString())
     let headersRest = {
       method: 'POST',
       body: formData
@@ -121,6 +125,7 @@ export class RegistroComponent implements OnInit {
         return response.json();
       }).then(data => {
         console.log(data);
+        this.enviando=true
         alert("restaurante subido exitosamente")
       })
   }

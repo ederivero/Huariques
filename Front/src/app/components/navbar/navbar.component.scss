@@ -1,9 +1,13 @@
-#navbar{
-    max-height: 8vh;
-}
-#imgUsu{
-    max-height: 7vh;
-}
+
 #nose{
     height: 3px;
 };
+
+#imgUsu{
+    height: 6vh;
+}
+@media (min-width: 992px){
+    #navbar{
+        height: 7vh;
+    }
+}

@@ -1,5 +1,5 @@
-<nav id="navbar" class="navbar navbar-expand-lg navbar-dark" style="background-color:#c42800" *ngIf="!inicio">
-  <a class="navbar-brand" [routerLink]="['']">Agachaditos</a>
+<nav id="navbar" class="navbar navbar-expand-lg navbar-dark" style="background-color:#c42800">
+  <a class="navbar-brand" (click)="resetInicio()" [routerLink]="['']">Agachaditos</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
     aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -12,12 +12,15 @@
             class="sr-only">(current)</span></a>
       </li>
     </ul>
-
-    <form id="nose"[formGroup]="stateForm">
-
+    <form (submit)="Buscar($event)" *ngIf="!inicio">
+      <mat-form-field>
+        <input placeholder="Buscar" matInput (keyup)="onKey($event)"  type="text">
+      </mat-form-field>
+      <button class="btn btn-secondary my-2 my-sm-0 ml-3" type="button" style="background-color: #ffE61D;color: #5E1300 " (click)="Buscar($event)">Buscar</button>
+    </form>
+    <!-- <form id="nose"[formGroup]="stateForm"  *ngIf="!inicio">
       <mat-form-field appearance="outline" class="mr-3">
-
-        <mat-label  >Seleccione Categoria</mat-label>
+        <mat-label>Seleccione Categoria</mat-label>
         <input class="search" type="text" matInput formControlName="stateGroup" [matAutocomplete]="autoGroup">
         <button matSuffix mat-icon-button aria-label="Example icon-button with a heart icon">
           <mat-icon matSuffix>search</mat-icon>
@@ -30,16 +33,11 @@
           </mat-optgroup>
         </mat-autocomplete>
       </mat-form-field>
-    </form>
-
-
-
-    <button *ngIf="user==false" class="btn btn-secondary my-2 my-sm-0 ml-3" type="button" (click)="openDialog()">Iniciar
+    </form> -->
+    <button *ngIf="user==false" class="btn btn-secondary my-2 my-sm-0 ml-3" type="button" style="background-color: #ffE61D;color: #5E1300 " (click)="openDialog()">Iniciar
       Sesión
     </button>
-
     <div *ngIf="user==null"></div>
-
     <button  *ngIf="user" class="btn_user ml-1 mr-3" mat-button [matMenuTriggerFor]="menu">
       <img src={{p.usu_img}} id="imgUsu" class="rounded-circle usu_img" alt="">
       <mat-icon matSuffix>more_vert</mat-icon>
@@ -59,7 +57,7 @@
 
   </div>
 </nav>
-<nav id="navbar" class="navbar navbar-expand-lg navbar-dark" style="background-color:#c42800" *ngIf="inicio">
+<!-- <nav id="navbar" class="navbar navbar-expand-lg navbar-dark" style="background-color:#c42800" *ngIf="inicio">
   <a class="navbar-brand" href="#">Agachaditos</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
     aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,16 +74,14 @@
     <button *ngIf="user==false" class="btn btn-secondary my-2 my-sm-0 ml-3" type="button" style="background-color: #ffE61D;color: #5E1300 " (click)="openDialog()">Iniciar
       Sesión
     </button>
-
     <div *ngIf="user==null"></div>
-
     <button   *ngIf="user" class="btn_user ml-1 mr-3" mat-button [matMenuTriggerFor]="menu">
       <img src={{p.usu_img}} id="imgUsu" class="rounded-circle usu_img" alt="">
       <mat-icon matSuffix>more_vert</mat-icon>
     </button>
 
     <mat-menu #menu="matMenu">
-      <button mat-menu-item *ngIf="userRest">
+      <button mat-menu-item *ngIf="userRest" (click)="gestRest()">
         <mat-icon>table-chart</mat-icon>
         <span>Restaurantes</span>
       </button>
@@ -97,7 +93,7 @@
 
 
   </div>
-</nav>
+</nav> -->
 
 <!-- <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#c42800" *ngIf="!inicio">
   <a class="navbar-brand" href="#">Agachaditos</a>
