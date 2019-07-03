@@ -25,10 +25,6 @@ const routes: Routes = [
     component: TablemapComponent
   },
   {
-    path:'*',
-    component:PromocionesComponent
-  },
-  {
     path:'gest/:id',
     component: GestRestComponent
   },
@@ -39,7 +35,11 @@ const routes: Routes = [
   {  
     path: 'agregar',
     component: RegistroComponent
-  }
+  },
+  {
+    path:'**',
+    component:PromocionesComponent
+  },
 ];
 
 @NgModule({

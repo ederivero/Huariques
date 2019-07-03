@@ -105,7 +105,7 @@
       <mat-icon>notes</mat-icon>
     </button>
   </div>
-  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="16">
+  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="13">
     <agm-marker *ngFor="let item of markers" class="item.rest_id" (markerClick)="openWindow(item.rest_id)"
       [animation]="'DROP'" [openInfoWindow]="true" [title]="item.rest_rSocial" [latitude]="item.rest_lat"
       [longitude]="item.rest_lng">
