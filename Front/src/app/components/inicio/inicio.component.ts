@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import * as $ from 'jquery';
 import { BusquedaService } from 'src/app/services/busqueda.service';
 import { Router } from '@angular/router';
+import { InicioService } from 'src/app/services/inicio.service';
 
 
 @Component({
@@ -26,7 +27,8 @@ export class InicioComponent implements OnInit {
   }
 
   constructor(private _BusquedaService:BusquedaService,
-    private _Router:Router) {
+    private _Router:Router,private _Sinicio:InicioService) {
+    this._Sinicio.setinicioVar(true)
     this.contador()
   }
   contadorfinalizado(){

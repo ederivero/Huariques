@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
+import { InicioService } from 'src/app/services/inicio.service';
 export interface DialogData {
   animal: string;
   name: string;
@@ -62,7 +63,7 @@ export class NavbarComponent implements OnInit {
   constructor(public dialog: MatDialog,
     private _sAuth: AuthServiceLocal,
     private _formBuilder: FormBuilder,
-    private _Router: Router,private ruta:ActivatedRoute) {
+    private _Router: Router,private ruta:ActivatedRoute,private _Sinicio:InicioService) {
     // console.log(window.location.href);
     // console.log(window.location.href.split('/')[3])
     if (window.location.href.split('/')[3] === "" || window.location.href.split('/')[3] === "#") {
@@ -131,6 +132,7 @@ export class NavbarComponent implements OnInit {
   }
   ngOnInit() {
     this.ruta.params.subscribe((params)=>{
+      this.inicio=this._Sinicio.getiniciovar()
       console.log(params)
       if (window.location.href.split('/')[3] === "" || window.location.href.split('/')[3] === "#") {
         this.inicio = true
