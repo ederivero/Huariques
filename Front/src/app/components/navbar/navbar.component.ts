@@ -132,7 +132,7 @@ export class NavbarComponent implements OnInit {
   }
   ngOnInit() {
     this.ruta.params.subscribe((params)=>{
-      this.inicio=this._Sinicio.getiniciovar()
+      this.inicio = this._Sinicio.getiniciovar()
       console.log(params)
       if (window.location.href.split('/')[3] === "" || window.location.href.split('/')[3] === "#") {
         this.inicio = true
@@ -175,7 +175,8 @@ export class NavbarComponent implements OnInit {
   }
   logOut() {
     this._sAuth.cerrarSesion();
-    this._Router.navigateByUrl(``)
+    this._Router.navigateByUrl(``);
+    this.user=false;
   }
 
 }
