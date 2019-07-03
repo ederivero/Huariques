@@ -8,6 +8,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
+import { AuthServiceLocal } from 'src/app/services/auth.service';
+import { RestService } from 'src/app/services/rest.service';
+import { Subscription } from 'rxjs';
 
 
 
@@ -62,96 +65,111 @@ export class MenuComponent implements OnInit {
 
   Tabla;
 
-  displayedColumns: string[] = ['Id','Nombre', 'Precio',  'Descripción', 'Imagen', 'Disponibilidad'];
-  
+  displayedColumns: string[] = ['Id', 'Nombre', 'Precio', 'Descripción', 'Imagen', 'Disponibilidad','Editar'];
+
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   restInfo = [];
+  user: any;
+  usuId: any;
+  suscriptor: Subscription;
+  prod: any;
+  restId: any;
+  srcResult: any;
+  nprod: void;
 
 
-  constructor(public dialog: MatDialog, private _snackBar: MatSnackBar, ruta: ActivatedRoute) {
+  constructor(public dialog: MatDialog,
+    private _snackBar: MatSnackBar,
+    private ruta: ActivatedRoute,
+    private _authServ: AuthServiceLocal,
+    private _sRest: RestService
+    ) {
 
-    // if(localStorage.getItem('productos')){
-    //   this.listProductos = JSON.parse(localStorage.getItem('productos'));
-    //   console.log(this.listProductos)
-    // }
-    var usuId = +ruta.snapshot.params.usuId
-    var restId = +ruta.snapshot.params.restId
+    if (localStorage.getItem('idR')) {
+      this.restId = JSON.parse(localStorage.getItem('idR'));
+      console.log(this.restId);
 
-    // fetch(`https://huariquesback.herokuapp.com/api/restaurante/getByUsuId/${usuId}`)
-    //   .then(response => {
-    //     // console.log("SFsfsgsgs");
-    //     return response.json()
-    //   }).then(datarest => {
-    //     console.log(datarest.content);
-
-    //     // console.log(usuId);
-    //     console.log(restId);
-        
-
-    //     datarest.content.forEach(idRest => {
-    //       if (idRest === restId) {           
-
-    //         this.restInfo.push({
-    //           rId: idRest.rest_id,
-    //           rSocial: idRest.rest_rSocial,
-    //           rDir: idRest.rest_direccion,
-    //           img:idRest.rest_img
-  
-    //         })
-    //         console.log(this.restInfo);            
-    //       }else{
-    //         console.log("N E L S O N");
-            
-    //       }
-    //     });
-
-    //   })
-
-    fetch(`https://huariquesback.herokuapp.com/api/producto/porIdRest/${restId}`)
-      .then(response => {
-        console.log("productos");
-        return response.json()
-      }).then(dataprod => {
-
+      this._sRest.getProductosByRestId(this.restId).subscribe((dataprod: any) => {
         console.log(dataprod.content);
 
         dataprod.content.forEach(idForProd => {
-          // console.log(idForRest);
-
-          console.log(this.id_prod = idForProd.prod_id);
-          this.p_desc = idForProd.prod_desc;
-          this.p_disp = idForProd.prod_disp;
-          this.p_nomb = idForProd.prod_nom;
-          this.p_prec = idForProd.prod_precio;
-          this.p_imagen = idForProd.prod_img;
-
-          if (!this.p_imagen) {
-            this.p_imagen = "https://firebasestorage.googleapis.com/v0/b/api-project-161182547768.appspot.com/o/restaurantes%2Ffotito.png?alt=media&token=9b1da490-016c-4c08-b7f2-69e07f8137e9"
-          }
 
           this.load = true;
 
           this.p_cadauno.push({
-            pId: idForProd.prod_id,
-            pDesc: idForProd.prod_desc,
-            pDisp: idForProd.prod_disp,
-            pNom: idForProd.prod_nom,
-            pPre: idForProd.prod_precio,
-            img: idForProd.prod_img
+            prod_id: idForProd.prod_id,
+            prod_desc: idForProd.prod_desc,
+            prod_disp: idForProd.prod_disp,
+            prod_nom: idForProd.prod_nom,
+            prod_precio: idForProd.prod_precio,
+            prod_img: idForProd.prod_img,
+            rest_id: idForProd.rest_id
+          })
+        });
+        console.log(this.p_cadauno);
+
+      })
+
+
+    } else {
+
+      this.restId = this._sRest.getIdRest();
+      console.log(this.restId);
+
+      this._authServ.getUserLogged(this._authServ.getUserDetails().usu_id).subscribe((res: any) => {
+        this.user = res.content;
+        console.log(this.user);
+        this.user.forEach((e) => {
+          this.usuId = e.usu_id
+        })
+        console.log(this.usuId);
+
+        this.suscriptor = this._sRest.getRestByUsuId(this.usuId).subscribe((datarest: any) => {
+          console.log(datarest.content);
+
+          this.restId = this._sRest.getIdRest();
+
+          console.log(this.restId);
+
+          this._sRest.getProductosByRestId(this.restId).subscribe((dataprod: any) => {
+            console.log(dataprod.content);
+
+            dataprod.content.forEach(idForProd => {
+
+              this.load = true;
+
+              this.p_cadauno.push({
+                prod_id: idForProd.prod_id,
+                prod_desc: idForProd.prod_desc,
+                prod_disp: idForProd.prod_disp,
+                prod_nom: idForProd.prod_nom,
+                prod_precio: idForProd.prod_precio,
+                prod_img: idForProd.prod_img,
+                rest_id: idForProd.rest_id
+
+              })
+            });
+            console.log(this.p_cadauno);
 
           })
 
         })
 
-        console.log(this.p_cadauno);
-        
-
 
       })
 
-      this.dataSource = new MatTableDataSource(this.p_cadauno);
+
+    }
+
+    //       if (!this.p_imagen) {
+    //         this.p_imagen = "https://firebasestorage.googleapis.com/v0/b/api-project-161182547768.appspot.com/o/restaurantes%2Ffotito.png?alt=media&token=9b1da490-016c-4c08-b7f2-69e07f8137e9"
+    //       }
+
+    //     
+
+    this.dataSource = new MatTableDataSource(this.p_cadauno);
 
   }
 
@@ -161,9 +179,6 @@ export class MenuComponent implements OnInit {
 
 
   ngOnInit() {
-    // para la tabla
-
-    // console.log(this.listProductos);
 
   }
 
@@ -180,7 +195,29 @@ export class MenuComponent implements OnInit {
     }
   }
 
+  onFileSelected() {
+    const inputNode: any = document.querySelector('#file');
 
+    if (typeof (FileReader) !== 'undefined') {
+      const reader = new FileReader();
+
+      reader.onload = (e: any) => {
+        this.srcResult = e.target.result;
+        console.log(this.srcResult);
+
+      };
+
+      reader.readAsArrayBuffer(inputNode.files[0]);
+    }
+  }
+
+  editProd(prod_id){
+    console.log(prod_id);
+    this.nprod = this._sRest.setIdProd(prod_id);
+    this.openDialog();
+    console.log(this.nprod);
+    return this.nprod
+  }
 
   crearProducto(e, prod_nombre) {
     console.log(e);
@@ -193,9 +230,16 @@ export class MenuComponent implements OnInit {
 
 
 
-    this._snackBar.open(prod_nombre, "Ha sido Agregado", {
-      duration: 2000,
-    });
+    if (prod_nombre == "") {
+      this._snackBar.open(prod_nombre, "Ha sido Agregado", {
+        duration: 2000,
+      });
+    } else {
+      this._snackBar.open("No hay producto", "", {
+        duration: 2000,
+      }); 
+    }
+
 
   };
 
@@ -207,7 +251,7 @@ export class MenuComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalProductoComponent, {
-      width: '300px',
+      width: '580px',
       // data: {name: this.name, animal: this.animal}
     });
 
@@ -216,6 +260,4 @@ export class MenuComponent implements OnInit {
       this.animal = result;
     });
   }
-
-
 }

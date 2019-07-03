@@ -16,6 +16,7 @@
 }
 
 
+
 .example-button-row button,
 .example-button-row a {
   margin-right: 8px;
@@ -24,6 +25,17 @@
 a{
     text-decoration: none;
     color: white;
+}
+
+#btnBlank{
+  background-color: #c42800;
+  color: white;
+}
+
+#btnBlankEdit{
+  background-color: rgb(240, 184, 2);
+  color: #5e1300;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
 }
 
 #spin{

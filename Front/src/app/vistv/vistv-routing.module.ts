@@ -13,15 +13,15 @@ const routes: Routes = [
     // component: DashboardComponent,
     children:[
       {
-        path:'prin/:usuId/:restId',
+        path:'prin',
         component: DashboardComponent
       },
       {
-        path:'edmen/:usuId/:restId',
+        path:'edmen',
         component: MenuComponent
       },
       {
-        path:'datsen/:usuId/:restId',
+        path:'datsen',
         component: MapaDatasensibleComponent
       }
     ]

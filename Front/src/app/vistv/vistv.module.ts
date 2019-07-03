@@ -15,6 +15,7 @@ import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import { MapaDatasensibleComponent } from './components/mapa-datasensible/mapa-datasensible.component';
 import { AgmCoreModule } from '@agm/core';
 import { SnackbarProductComponent } from './components/snackbar-product/snackbar-product.component';
+import { FormsModule }   from '@angular/forms';
 
 
 
@@ -23,6 +24,7 @@ import { SnackbarProductComponent } from './components/snackbar-product/snackbar
   imports: [
     CommonModule,
     VistvRoutingModule,
+    FormsModule,
     // BrowserAnimationsModule,
     MaterialModule,    
     AgmCoreModule.forRoot({

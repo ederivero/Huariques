@@ -5,20 +5,20 @@
 </div>
 <div class="container-fluid" id="cont" *ngIf="cargado">
   <br>
-  <h4 class="">Información Actual de su Restaurant</h4>
+  <h4  class="ml-3">Información Actual de su Restaurant</h4>
   <br>
 
 
 
-  <div class="container-fluid">
+  <div class="container-fluid" style="height: 375px">
     
       <form action="" (ngSubmit)="guardarInfo()">
         <div class="form-row">
           <div class="form-group col-md-3 m-0 p-0 text-center">
-            <img id="muestra" [src]=result.rest_img alt="Foto of {{result.rest_rSocial}}">
-            <!-- <br> -->
+            <img id="muestra" [src]=result[0].rest_img alt="Foto of {{result.rest_rSocial}}" class="pb-2">
+            
             <br>
-            <button *ngIf="estadoBtnGuard" type="button" class="btn btn-block" mat-raised-button color="basic" (click)="fileInput.click()"> Sube una Foto para tu
+            <button *ngIf="estadoBtnGuard" type="button" class="btn btn-block" style="background-color: rgb(255, 217, 0);color: #5E1300 " (click)="fileInput.click()"> Sube una Foto para tu
               restaurant </button>
             <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
 
@@ -27,19 +27,19 @@
           <div class="col-md-3 form-group  m-0 p-0">
             <mat-form-field appearance="outline">
               <mat-label>Nombre del Restaurant</mat-label>
-              <input name="social" [(ngModel)]="result.rest_rSocial" id="rest_nom" matInput
+              <input name="social" [(ngModel)]="result[0].rest_rSocial" id="rest_nom" matInput
                 placeholder="Nombre del Restaurant" readonly>
             </mat-form-field>
-
             <mat-form-field appearance="outline">
               <mat-label>Referencia de Dirección</mat-label>
-              <input name="refDir" [(ngModel)]="result.rest_refUbicacion" id="rest_ref" matInput
+              <input name="refDir" [(ngModel)]="result[0].rest_refUbicacion" id="rest_ref" matInput
                 placeholder="Referencia de dirección" readonly>
             </mat-form-field>
+            
             <br>
             <mat-form-field appearance="outline" id="textDesc">
               <mat-label>Información del Negocio</mat-label>
-              <textarea name="InfoNeg" [(ngModel)]="result.rest_info" id="rest_info" rows="5" matInput readonly
+              <textarea name="InfoNeg" [(ngModel)]="result[0].rest_info" id="rest_info" rows="5" matInput readonly
                 placeholder="Información del negocio"></textarea>
             </mat-form-field>
 
@@ -51,13 +51,13 @@
               <div class="row">
                 <div *ngIf="leer">
                   <h5>Dias de Atención</h5>
-                  <p>{{result.rest_dAtencion}}</p>
+                  <p>{{result[0].rest_dAtencion}}</p>
                   <hr>
                   <h5>Hora de Apertura</h5>
-                  <p>{{result.rest_hApertura}}</p>
+                  <p>{{result[0].rest_hApertura}}</p>
                   <br>
                   <h5>Hora de Cierre</h5>
-                  <p>{{result.rest_hCierre}}</p>
+                  <p>{{result[0].rest_hCierre}}</p>
                 </div>
 
                 <div class="col-md-3 text-right">
@@ -103,12 +103,14 @@
             <br>
             <br>
             <div *ngIf="estadoBtnEdit" class="example-button-row" id="btnEditInfo">
-              <button class="btn-block" mat-raised-button color="primary" (click)="habilitarEdicion()">Editar
-                Información</button>
+              <button class="btn btn-block   mr-3" mat-raised-button type="button" style="background-color: #ffE61D;color: #5E1300 "  (click)="habilitarEdicion()"> <strong> Editar
+                Información </strong></button>
+                <!-- <button class="btn btn-block btn-secondary  mr-3"  type="button" style="background-color: #ffE61D;color: #5E1300 " (click)="Buscar($event)">Buscar</button> -->
             </div>
             <div *ngIf="estadoBtnGuard" class="example-button-row" id="btnGuarInfo">
               <button class="btn-block" mat-raised-button color="warn" (click)="guardarInfo()">Guardar
-                Información</button>
+                Información
+              </button>
             </div>
           </div>
         </div>
@@ -125,21 +127,21 @@
     <div class="col-md-4 p-1">
       <!-- <app-lista-usuarios></app-lista-usuarios> -->
       <div class="example-button-row">
-        <button class="btn-block p-1" mat-raised-button color="primary" [routerLink]="[ '/vistv/1/2/prin/1/2']"><strong> <a
+        <button class="btn-block p-1" id="btnBlank"  mat-raised-button  [routerLink]="[ '/vistv/prin']"><strong> <a
               matLine>Dashboard</a></strong></button>
       </div>
     </div>
     <div class="col-md-4 p-1">
       <!-- <app-chat></app-chat> -->
       <div class="example-button-row">
-        <button class="btn-block p-1" mat-raised-button color="primary" [routerLink]="[ '/vistv/1/2/edmen/1/1']"> <strong> <a
+        <button class="btn-block p-1" id="btnBlank" mat-raised-button  [routerLink]="[ '/vistv/edmen']"> <strong> <a
               matLine> Productos</a> </strong></button>
       </div>
     </div>
     <div class="col-md-4 p-1">
       <!-- <app-chat></app-chat> -->
       <div class="example-button-row">
-        <button class="btn-block p-1" mat-raised-button color="primary" [routerLink]="[ '/vistv/1/2/datsen/1/2']"> <strong> <a
+        <button class="btn-block p-1" id="btnBlank" mat-raised-button [routerLink]="[ '/vistv/datsen']"> <strong> <a
               matLine>Datos Sensibles</a> </strong></button>
       </div>
     </div>

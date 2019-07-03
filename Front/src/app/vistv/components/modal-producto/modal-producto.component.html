@@ -1,8 +1,31 @@
 <!-- <h1 mat-dialog-title>Hi {{data.name}}</h1> -->
-<div mat-dialog-content>
-  <p>Producto agregado exitosamente</p>
+<div mat-dialog-content id="modalAct">
+  <form action="">
+    <button type="button" class="btn btn-block" mat-raised-button color="info" (click)="fileInput.click()">
+      Elige una Foto para tu Producto
+    </button>
+    <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
+    <br>
+    <br>
+    <mat-form-field>
+      <input [(ngModel)]="producto[0].prod_nom" #prod_nombre name="prod_nombre" matInput
+        placeholder="Nombre del Producto" value="Taco al Pastor">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input [(ngModel)]="producto[0].prod_precio" name="prod_precio" matInput type="number"
+        placeholder="Precio del producto" value="S/. 4.00">
+    </mat-form-field>
+    <br>
+    <mat-form-field  id="textDesc">
+      <textarea [(ngModel)]="producto[0].prod_desc" name="prod_desc" rows="3" matInput
+        placeholder="Descripción del producto"
+        value="Sus ingredientes principales son carne adobada, asada, servida en finas rebanadas sobre pequeñas tortillas de maíz, la carne puede ser una combinación de carne de cerdo y carne de ternera, aunque lo mas común es que sea solo carne de puerco."></textarea>
+    </mat-form-field>
+
+  </form>
 </div>
 <div mat-dialog-actions>
   <button mat-raised-button (click)="onNoClick()" color="warn">Cerrar</button>
-  <button mat-raised-button color="primary"  [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+  <button mat-raised-button (click)="actualizarProd()" color="primary">Actualizar</button>
 </div>

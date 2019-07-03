@@ -29,7 +29,7 @@ const routes: Routes = [
     component: GestRestComponent
   },
   {
-    path: 'vistv/:usuId/:restId',
+    path: 'vistv',
     loadChildren: './vistv/vistv.module#VistvModule'
   },
   {  

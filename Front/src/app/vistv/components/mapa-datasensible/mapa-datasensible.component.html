@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div class="row">
+  <div class="row" >
     <div class="col-md-4 p-1">
       <!-- <app-datsen   ></app-datsen> -->
       <div>
@@ -7,28 +7,31 @@
         <br>
         <form action="" class="p-3" (ngSubmit)="modDataSen()" >
           <mat-form-field>
-            <input name="dir" [(ngModel)]="resultDat.rest_direccion" matInput placeholder="Dirección" value="Urb. Monterrey 102">
+            <input name="dir" [(ngModel)]="resultDat[0].rest_direccion" matInput placeholder="Dirección" value="Urb. Monterrey 102">
           </mat-form-field>
           <!-- {{resultDat.rest_direccion}} -->
           <mat-form-field>
-            <input name="tel" [(ngModel)]="resultDat.rest_telefono" matInput type="number" placeholder="Teléfono" value="941271568">
+            <input name="tel" [(ngModel)]="resultDat[0].rest_telefono" matInput type="number" placeholder="Teléfono" value="941271568">
           </mat-form-field>
 
           <mat-form-field >
             <mat-label>Latitud</mat-label>
-            <input name="lat" [(ngModel)]="resultDat.rest_lat" name="n_rLng"  readonly matInput value="{{markers[0].latitude}}"
+            <input name="lat" [(ngModel)]="resultDat[0].rest_lat" name="n_rLng"  readonly matInput value="{{markers[0].latitude}}"
               placeholder="Latitud">
           </mat-form-field>
 
           <mat-form-field >
             <mat-label>Longitud</mat-label>
-            <input name="lng" [(ngModel)]="resultDat.rest_lng" name="n_rLat" readonly matInput value="{{markers[0].longitude}}" placeholder="Longitud"
+            <input name="lng" [(ngModel)]="resultDat[0].rest_lng" name="n_rLat" readonly matInput value="{{markers[0].longitude}}" placeholder="Longitud"
               >
           </mat-form-field>
 
 
           <br>
           <small style="color:green">*Sus nuevos datos serán verificados y luego actualizados</small>
+          <br>
+          <br>
+          <br>
           <br>
           <br>
           <div class="example-button-row">
@@ -39,9 +42,7 @@
     </div>
 
 
-
-
-
+<!-- MAPA -->
     <div class="col-md-8 p-1">
       <div>
         <br>

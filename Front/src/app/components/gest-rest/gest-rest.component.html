@@ -1,10 +1,15 @@
 <div id="all1">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-8" id="divImg">
-        <img src="./../../../assets/yy.png" alt="Smiley face" height="590" width="110%">
+      <div class="col-md-1" id="divImg" style="  background-color: #EEC31C; ">
       </div>
-      <div class="col-md-4 text-center" id="divBtn">
+      <div class="col-md-6" id="divImg">
+        <img src="./../../../assets/yy.png" alt="Smiley face" height="100%" width="100%">
+      </div>
+      <div class="col-md-1" id="divImg" style="  background-color: #EEC31C; ">
+      </div>
+
+      <div class="col-md-4 text-center" id="divBtn" style="  background-color: #EEC31C; ">
         <div class="example-button-row">
           <br>
           <br>
@@ -15,7 +20,7 @@
           <br>
           <br>
           <br>
-          <button class="m-10" class="btn btn-block" (click)="openDialog()" mat-raised-button color="primary">
+          <button class="m-10" class="btn btn-block" (click)="openDialog()" mat-raised-button id="btnBlankEdit">
             <strong> Añade un restaurante </strong>
           </button>
         </div>
@@ -58,7 +63,10 @@
             </p>
           </mat-card-content>
           <mat-card-actions class="text-center">
-            <button color="primary" mat-raised-button> <a matLine [routerLink]="[ '/vistv/1/2']">Administrar</a></button>
+            <button color="primary" mat-raised-button id="btnBlankEdit" (click)="adminRest(card.rId)">
+              <!-- <a matLine [routerLink]="[ '/vistv/1/2']">Administrar</a> -->
+              Administrar
+            </button>
           </mat-card-actions>
         </mat-card>
       </div>

@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
               duration: 5000,
               horizontalPosition: 'right'
             });
-            this._router.navigateByUrl("/table");
+            // this._router.navigateByUrl("/table");
           } else if (respuesta.message === 'error') {
             console.log("Usuario no resgistrado");
             let usu = {
@@ -89,7 +89,7 @@ export class LoginComponent implements OnInit {
                   duration: 5000,
                   horizontalPosition: 'right'
                 });
-                this._router.navigateByUrl("/table");
+                // this._router.navigateByUrl("/table");
               } else if (respuesta2.message = 'created') {
                 console.log("Error al crear usuario prro");
 
@@ -123,7 +123,7 @@ export class LoginComponent implements OnInit {
               duration: 5000,
               horizontalPosition: 'right'
             });
-            this._router.navigateByUrl("/table");
+            // this._router.navigateByUrl("/table");
           } else if (respuesta.message === 'error') {
             console.log("Usuario no resgistrado");
             let usu = {
@@ -144,7 +144,7 @@ export class LoginComponent implements OnInit {
                   duration: 5000,
                   horizontalPosition: 'right'
                 });
-                this._router.navigateByUrl("/table");
+                // this._router.navigateByUrl("/table");
               } else if (respuesta2.message = 'created') {
                 console.log("Error al crear usuario prro");
 
@@ -181,7 +181,7 @@ export class LoginComponent implements OnInit {
             horizontalPosition: 'right'
           });
 
-          this._router.navigateByUrl("/table");
+          // this._router.navigateByUrl("/table");
         } else if (respuesta.message == "error") {
           this.click=false;
           this.objUsuario.usu_pass = '';
