@@ -76,7 +76,7 @@ export class NavbarComponent implements OnInit {
       this._sAuth.getUserLogged(this._sAuth.getUserDetails().usu_id).subscribe((res: any) => {
         this.user = res.content;
         this.p = res.content[0];
-        console.log(this.user[0])
+        // console.log(this.user[0])
         if (this.user[0].usu_tipo === "0") {
           // this._Router.navigateByUrl(`gest/${this.user[0].usu_id}`)
           this.userRest=true

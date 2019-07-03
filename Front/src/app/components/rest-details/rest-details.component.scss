@@ -7,7 +7,15 @@ agm-map {
 #mapa{
     height: 60vh;
 }
-
+.all{
+    background-image: url("./../../../assets/images/back.png");
+    background-size: 300px 300px;
+    min-height: 100vh;
+    height: 100%;
+    margin: 0;
+    min-width: 100vh;
+    width: auto;
+    }
 #rest-title{
     position:absolute;
     z-index: 2;
@@ -30,7 +38,7 @@ agm-map {
     align-content: center;
     margin: auto;
     padding: auto;
-    height: 400px;
+    height: 60vh;
     overflow: hidden;
     z-index: 3;
 }
@@ -38,7 +46,7 @@ agm-map {
     position: absolute;
     align-content: center;
     left: 50%;
-    height: 400px;
+    height: 60vh;
     width: 5px;
     background-color: #c42800;
 }
@@ -56,6 +64,11 @@ agm-map {
 }
 #panelHorarios{
     background-color: beige;
+}
+#avatar{
+    background:center;
+    background-size: cover;
+    transform: scale(1.8) translateY(5px);
 }
 
 @media (max-width:1000px){

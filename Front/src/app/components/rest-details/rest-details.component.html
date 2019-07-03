@@ -1,18 +1,19 @@
-<div style="background: rgb(242,222,162);
-background: linear-gradient(0deg, rgba(242,222,162,0) 0%, rgba(253,215,30,1) 50%, rgba(242,222,162,1) 100%);">
+<!-- <div style="background: rgb(242,222,162);
+background: linear-gradient(0deg, rgba(242,222,162,0) 0%, rgba(253,215,30,1) 50%, rgba(242,222,162,1) 100%);"> -->
+<div class="all">
   <div id="rest-title">
     <h1 class="ml-3">{{ title }}</h1>
   </div>
   <div id="rest-info" style="">
-    <h4  class="ml-3" >{{direccion}}</h4>
-    <h5 class="ml-3" >{{telefono}}</h5>
+    <h4 class="ml-3">{{direccion}}</h4>
+    <h5 class="ml-3">{{telefono}}</h5>
   </div>
   <agm-map [latitude]="lat" [longitude]="lng" [zoom]="16">
     <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
   </agm-map>
   <div class="container-fluid mt-5 text-center mb-5">
     <div class="row">
-      
+
       <div class="col-md-6">
         <div *ngIf="estado" id="estado"
           style="background: rgb(113,235,100);
@@ -29,7 +30,7 @@ background: linear-gradient(0deg, rgba(242,222,162,0) 0%, rgba(253,215,30,1) 50%
       </div>
       <div id="linea" class="text-center"></div>
       <div class="col-md-6">
-        <div class="mb-4" >
+        <div class="mb-4">
           <img *ngFor="let ruta of categoriasruta" [src]=ruta.ruta width="64" height="64" class="ml-5 mr-5" />
           <!-- <img src="./assets/images/hot-dog.png" class="ml-5 mr-5" />
           <img src="./assets/images/HAMBURGUESERIA.png" class="ml-5 mr-5" />
@@ -46,7 +47,7 @@ background: linear-gradient(0deg, rgba(242,222,162,0) 0%, rgba(253,215,30,1) 50%
               </mat-panel-title>
               <mat-panel-title style="color:white" *ngIf="!estado">
                 Cerrado:
-                <b style="color:white">&nbsp;&nbsp;&nbsp;abrimos a las  {{horarioaperturaActual}} &nbsp; &nbsp;</b>
+                <b style="color:white">&nbsp;&nbsp;&nbsp;abrimos a las {{horarioaperturaActual}} &nbsp; &nbsp;</b>
               </mat-panel-title>
               <mat-panel-description>
                 <h6 style="color:white">
@@ -65,14 +66,30 @@ background: linear-gradient(0deg, rgba(242,222,162,0) 0%, rgba(253,215,30,1) 50%
       </div>
     </div>
   </div>
+<div class="container-fluid mb-3" *ngIf="!calificaciones">
+  <div style="text-align: center;color: #5e1300">
+    <h2>Se el primero en calificarnos!!!</h2>
+  </div>
+</div>
+  <div class="container-fluid mb-5" *ngIf="calificaciones">
+    <div class="row mb-3">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <star-rating size="large" id="estrellas" [rating]="promediototal" [starType]="'icon'" [readOnly]="true">
+        </star-rating>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+  </div>
   <div class="container-fluid mb-5">
-
     <div class="row mb-3" *ngFor="let comentario of comentarios">
       <div class="col-md-12">
         <mat-card class="example-card">
           <mat-card-header>
-            <div mat-card-avatar style="background:center;background-size: 100% 100% " [ngStyle]="{ 'background-image': 'url(' + comentario.imagen + ')'}" class="example-header-image"></div>
+            <div mat-card-avatar id="avatar" [ngStyle]="{ 'background-image': 'url(' + comentario.imagen + ')'}"
+              class="example-header-image"></div>
             <mat-card-title>{{comentario.nombre}}</mat-card-title>
+            <mat-card-subtitle style="font-size: 80%">{{comentario.fecha}}</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
             <div class="row">
@@ -82,8 +99,8 @@ background: linear-gradient(0deg, rgba(242,222,162,0) 0%, rgba(253,215,30,1) 50%
                 </p>
               </div>
               <div class="col-md-4 mb-5 p-0">
-                <star-rating size="large" labelText={{comentario.rating}} [disabled]="true" [starType]="'icon'"
-                  [rating]="comentario.rating" [showHalfStars]="true">
+                <star-rating size="large" id="estrellas" labelText={{comentario.rating}} [readOnly]="true"
+                  [starType]="'icon'" [rating]="comentario.rating" [showHalfStars]="true">
                 </star-rating>
               </div>
             </div>
@@ -96,7 +113,8 @@ background: linear-gradient(0deg, rgba(242,222,162,0) 0%, rgba(253,215,30,1) 50%
     <div class="row mb-3">
       <div class="col-md-3"></div>
       <div class="col-md-6" (click)="openDialog()">
-        <star-rating size="large" id="estrellas" [starType]="'icon'" [hoverEnabled]="true" [showHalfStars]="true"></star-rating>
+        <star-rating size="large" id="estrellas" [starType]="'icon'" [hoverEnabled]="true" [showHalfStars]="true">
+        </star-rating>
       </div>
       <div class="col-md-3"></div>
     </div>

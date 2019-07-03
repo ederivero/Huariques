@@ -11,18 +11,23 @@ agm-map {
   transform:translate(-50%,-50%);
   font-size: 200%;
   text-align: center;
+  transition:.5s;
+  color: #5e1300;
 }
 .logo{
+  transition:.5s;
   position:absolute;
   top:45%;
   left:50%;
   transform:translate(-50%,-50%);
+  height: 55%
 }
 .all{
   background-image: url("./../../../assets/images/back.png");
   background-size: 300px 300px;
   min-height: 100vh;
   height: auto;
+  margin: 0;
   min-width: 100vh;
   width: auto;
 }
@@ -173,6 +178,28 @@ agm-map {
 }
 @media (max-width: 931px){
   #huariqueros{
-    top:98%;
+    font-size: 180%;
+    top:91%;
+  }
+  .logo{
+    top:40%;
+  }
+  .all{
+    position: relative;
+  }
+  .search{
+    top:76%;
+  }
+}
+@media (max-width: 674px){
+  .logo{
+    height: 50%;
+  }
+  .search.active{
+    width:80%;
+    
+  }
+  .all{
+    width: 100%;
   }
 }

@@ -13,6 +13,10 @@ import { LoginComponent } from '../login/login.component';
 })
 export class RestDetailsComponent implements OnInit {
   public innerWidth: any;
+  calificaciones=false;
+  sumapromedios = 0
+  i=0
+  promediototal=0;
   imagen = "https://firebasestorage.googleapis.com/v0/b/api-project-161182547768.appspot.com/o/restaurantes%2Ffotito.png?alt=media&token=9b1da490-016c-4c08-b7f2-69e07f8137e9";
   horarioaperturaActual = "12:00"
   horariofinActual = "12:00";
@@ -47,32 +51,12 @@ export class RestDetailsComponent implements OnInit {
   }]
 
   constructor(public dialog: MatDialog, private ruta: ActivatedRoute) {
-
-    var diaAct = new Date();
-    // console.log(diaAct.getFullYear());
-    // console.log(diaAct.getMonth()+1);
-    // console.log(diaAct.getDate());
-    // console.log(diaAct.getHours());
-    // console.log(diaAct.getMinutes());
-    // console.log(diaAct.getSeconds());
-    // console.log(`${diaAct.getFullYear()}/${diaAct.getMonth()+1}/${diaAct.getDate()} ${diaAct.getHours()}:${diaAct.getMinutes()}:${diaAct.getSeconds()}`)
-    // console.log(diaAct.getTime())
-    // console.log(this.categorias)
-    // console.log(this.categoriasruta)
-    // console.log(ruta.snapshot.params.id)
     var rutaActual = ruta.snapshot.params.id - 1;
     fetch(`https://huariquesback.herokuapp.com/api/restcategoria/rest/${rutaActual + 1}`).then(response => {
       return response.json()
     }).then(datacat => {
       // console.log(datacat.content)
       datacat.content.forEach(idcat => {
-        // fetch(`https://huariquesback.herokuapp.com/api/categoria/encontrarporid/${idcat.cat_id}`).then(response=>{
-        //   return response.json()
-        // }).then(data=>{
-        //   // console.log(data.content[0])
-        //   this.categoriasruta.push({ruta:`./assets/images/${data.content[0].cat_nom}.png`})
-        // })
-        // console.log(idcat.cat_id)
         this.categoriasruta.push({ ruta: "./assets/images/" + idcat.cat_id + ".png" })
       })
     })
@@ -83,6 +67,7 @@ export class RestDetailsComponent implements OnInit {
     }).then(datareg => {
       // console.log(datareg.content)
       datareg.content.forEach(registro => {
+        // console.log(registro)
         fetch(`https://huariquesback.herokuapp.com/api/puntuacion/mostrar/${registro.regCliente_id}`).then(response => {
           return response.json()
         }).then(data1 => {
@@ -91,8 +76,31 @@ export class RestDetailsComponent implements OnInit {
             fetch(`https://huariquesback.herokuapp.com/api/usuario/traerporid/${registro.usu_id}`).then(response => {
               return response.json();
             }).then(data => {
-              console.log(data.content)
+              var año = new Date(registro.regCliente_fecha).getFullYear()
+              var mes1 = new Date(registro.regCliente_fecha).getMonth()
+              var dia1 = new Date(registro.regCliente_fecha).getDate()
+              var dia
+              var mes
+              if(dia1<10){
+                dia="0"+dia1.toString()
+              }else{
+                dia=dia1
+              }
+              if(mes1<10){
+                mes="0"+mes1.toString()
+              }else{
+                mes=mes1
+              }
+              var date:string= `${dia}/${mes}/${año}`
+              this.i++
+              this.sumapromedios+=data1.content[0].punt_total
+              this.promediototal=this.sumapromedios/this.i
+              if(this.promediototal!=NaN||this.promediototal!=0){
+                this.calificaciones=true
+              }
+              // console.log(data.content)
               this.comentarios.push({
+                fecha:date,
                 imagen:data.content[0].usu_img,
                 id: registro.usu_id,
                 nombre: data.content[0].usu_nom,
