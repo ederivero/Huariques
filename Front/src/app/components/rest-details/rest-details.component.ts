@@ -81,7 +81,7 @@ export class RestDetailsComponent implements OnInit {
     fetch(`https://huariquesback.herokuapp.com/api/regcli/encontrarporrest/${rutaActual + 1}`).then(response => {
       return response.json();
     }).then(datareg => {
-      console.log(datareg.content)
+      // console.log(datareg.content)
       datareg.content.forEach(registro => {
         fetch(`https://huariquesback.herokuapp.com/api/puntuacion/mostrar/${registro.regCliente_id}`).then(response => {
           return response.json()
@@ -91,8 +91,9 @@ export class RestDetailsComponent implements OnInit {
             fetch(`https://huariquesback.herokuapp.com/api/usuario/traerporid/${registro.usu_id}`).then(response => {
               return response.json();
             }).then(data => {
-              // console.log(data.content[0])
+              console.log(data.content)
               this.comentarios.push({
+                imagen:data.content[0].usu_img,
                 id: registro.usu_id,
                 nombre: data.content[0].usu_nom,
                 comentario: data1.content[0].punt_coment,
