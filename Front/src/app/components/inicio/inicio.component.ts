@@ -32,7 +32,7 @@ export class InicioComponent implements OnInit {
     this.contador()
   }
   contadorfinalizado(){
-    console.log("se paro el contador")
+    // console.log("se paro el contador")
   }
 
   status: boolean = true;
@@ -48,7 +48,7 @@ export class InicioComponent implements OnInit {
       //   .then(response => {
       //     return response.json()
       //   }).then(data => {
-      //     console.log(data.content)
+      // //     console.log(data.content)
       //     this.buscar(data.content);
       //   })
     } else {
@@ -58,7 +58,7 @@ export class InicioComponent implements OnInit {
       // .then(response => {
       //   return response.json()
       // }).then(data => {
-      //   console.log(data.content)
+      // //   console.log(data.content)
       //   this.buscar(data.content);
       // })
     }

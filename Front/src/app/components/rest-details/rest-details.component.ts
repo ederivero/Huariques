@@ -53,6 +53,7 @@ export class RestDetailsComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private ruta: ActivatedRoute) {
     var rutaActual = ruta.snapshot.params.id - 1;
+    console.log(rutaActual);
     fetch(`https://huariquesback.herokuapp.com/api/restcategoria/rest/${rutaActual + 1}`).then(response => {
       return response.json()
     }).then(datacat => {
@@ -114,25 +115,25 @@ export class RestDetailsComponent implements OnInit {
       });
       // console.log(this.comentarios)
     })
-    fetch('https://huariquesback.herokuapp.com/api/restaurante/traertodos').then((response) => {
+    fetch(`https://huariquesback.herokuapp.com/api/restaurante/getById/${rutaActual+1}`).then((response) => {
       return response.json()
     }).then((data) => {
       // console.log(data.content[rutaActual])
-      this.imagen = data.content[rutaActual].rest_img;
+      this.imagen = data.content[0].rest_img;
       if (!this.imagen) {
         this.imagen = "https://firebasestorage.googleapis.com/v0/b/api-project-161182547768.appspot.com/o/restaurantes%2Ffotito.png?alt=media&token=9b1da490-016c-4c08-b7f2-69e07f8137e9"
       }
-      this.telefono = data.content[rutaActual].rest_telefono;
-      this.direccion = data.content[rutaActual].rest_direccion;
-      this.title = data.content[rutaActual].rest_rSocial;
-      this.lat = +data.content[rutaActual].rest_lat;
-      this.lng = +data.content[rutaActual].rest_lng;
-      // console.log(data.content[rutaActual].rest_dAtencion.split(','))
-      data.content[rutaActual].rest_dAtencion.split(',').forEach(dia => {
+      this.telefono = data.content[0].rest_telefono;
+      this.direccion = data.content[0].rest_direccion;
+      this.title = data.content[0].rest_rSocial;
+      this.lat = +data.content[0].rest_lat;
+      this.lng = +data.content[0].rest_lng;
+      // console.log(data.content[0].rest_dAtencion.split(','))
+      data.content[0].rest_dAtencion.split(',').forEach(dia => {
         this.horarios.push({
           rest_dAtencion: dia,
-          rest_hApertura: data.content[rutaActual].rest_hApertura,
-          rest_hCierre: data.content[rutaActual].rest_hCierre
+          rest_hApertura: data.content[0].rest_hApertura,
+          rest_hCierre: data.content[0].rest_hCierre
         });
       });
       this.obtenerDiaActual();

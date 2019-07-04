@@ -73,10 +73,10 @@ export class TablemapComponent implements OnInit {
       })
     } else {
       this.suscriptor = this._sRest.buscarpopalabra(rutaActual).subscribe((resp: any) => {
-        console.log(resp.content);
+        // console.log(resp.content);
         this.markers = resp.content;
         this.markers.forEach((element: any) => {
-          console.log(element);
+          // console.log(element);
           let dias = element.rest_dAtencion.split(',');
           element.dias = dias;
           let cont = 0;
@@ -93,7 +93,7 @@ export class TablemapComponent implements OnInit {
           element.rating = this.rating(proProd).toString();
         });
         this.restList = resp.content;
-        console.log(this.restList[0]);
+        // console.log(this.restList[0]);
 
         this.rests = new MatTableDataSource(this.restList);
       })
@@ -128,10 +128,10 @@ export class TablemapComponent implements OnInit {
         })
       } else {
         this.suscriptor = this._sRest.buscarpopalabra(rutaActual).subscribe((resp: any) => {
-          console.log(resp.content);
+          // console.log(resp.content);
           this.markers = resp.content;
           this.markers.forEach((element: any) => {
-            console.log(element);
+            // console.log(element);
             let dias = element.rest_dAtencion.split(',');
             element.dias = dias;
             let cont = 0;
@@ -148,7 +148,7 @@ export class TablemapComponent implements OnInit {
             element.rating = this.rating(proProd).toString();
           });
           this.restList = resp.content;
-          console.log(this.restList[0]);
+          // console.log(this.restList[0]);
 
           this.rests = new MatTableDataSource(this.restList);
         })
@@ -191,7 +191,7 @@ export class TablemapComponent implements OnInit {
   }
   openWindow(id) {
     let l = this.markers.find(rest => rest.rest_id == id);
-    this.lat = +l.rest_lat + 0.002;
+    this.lat = +l.rest_lat + 0.03;
     this.lng = +l.rest_lng;
     this.openedWindow = id;
   }
