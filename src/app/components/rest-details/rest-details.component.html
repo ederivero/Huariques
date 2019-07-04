@@ -1,0 +1,115 @@
+<!-- <div style="background: rgb(242,222,162);
+background: linear-gradient(0deg, rgba(242,222,162,0) 0%, rgba(253,215,30,1) 50%, rgba(242,222,162,1) 100%);"> -->
+<div class="all">
+  <div id="rest-title">
+    <h1 class="ml-3">{{ title }}</h1>
+  </div>
+  <div id="rest-info">
+    <h4 class="ml-3">{{direccion}}</h4>
+    <h5 class="ml-3">{{telefono}}</h5>
+  </div>
+  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="16">
+    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+  </agm-map>
+  <div class="container-fluid mt-5 text-center mb-5">
+    <div class="row">
+      <div class="col-md-6">
+          <star-rating *ngIf="calificaciones"  size="large" id="estrellas" [rating]="promediototal" [starType]="'icon'"
+          [readOnly]="true">
+        </star-rating>
+        <div *ngIf="estado" id="estado"
+          style="background: rgb(113,235,100);
+      background: linear-gradient(90deg, rgba(113,235,100,0) 0%, rgba(81,218,79,1) 25%, rgba(56,204,62,1) 50%, rgba(35,188,40,1) 75%, rgba(5,167,9,0) 100%);">
+          <b>abierto</b></div>
+        <div *ngIf="!estado" id="estado"
+          style="background: rgb(184,0,0);
+      background: linear-gradient(90deg, rgba(184,0,0,0) 0%, rgba(184,0,0,1) 25%, rgba(184,0,0,1) 50%, rgba(184,0,0,1) 75%, rgba(184,0,0,0) 100%);">
+          <b>cerrado</b></div>
+        <div id="imagen-huarique-detail-div" class="text-center">
+          <img [src]="imagen" style="max-width:100%;
+          max-height:100%;" alt="">
+        </div>
+      </div>
+      <div id="linea" class="text-center"></div>
+      <div class="col-md-6">
+        <div class="mb-4">
+          <img *ngFor="let ruta of categoriasruta" [src]=ruta.ruta width="64" height="64" class="ml-5 mr-5" />
+          <!-- <img src="./assets/images/hot-dog.png" class="ml-5 mr-5" />
+          <img src="./assets/images/HAMBURGUESERIA.png" class="ml-5 mr-5" />
+          <img src="./assets/images/pizza-slice.png" class="ml-5 mr-5" />
+          <img src="./assets/images/ice-cream.png" class="ml-5 mr-5" />
+          <img src="./assets/images/POLLERIA.png" class="ml-5 mr-5" /> -->
+        </div>
+        <div>
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" id="panelHorarios">
+            <mat-expansion-panel-header class="" style="background: rgba(196,40,0,1);">
+              <mat-panel-title style="color:white" *ngIf="estado">
+                Atencion:
+                <b style="color:white">&nbsp;&nbsp;&nbsp;Abierto hasta las {{horariofinActual}} &nbsp; &nbsp;</b>
+              </mat-panel-title>
+              <mat-panel-title style="color:white" *ngIf="!estado">
+                Cerrado:
+                <b style="color:white">&nbsp;&nbsp;&nbsp;abrimos a las {{horarioaperturaActual}} &nbsp; &nbsp;</b>
+              </mat-panel-title>
+              <mat-panel-description>
+                <h6 style="color:white">
+                  {{panelOpenState ? 'Cerrar' : 'ver mas horarios'}}
+                </h6>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="mt-3 row text-justify">
+              <div class="col-md-12 mb-2">Abierto: </div>
+              <div class="col-md-12 mb-2" *ngFor="let horario of horarios">{{horario.rest_dAtencion}} desde las
+                {{horario.rest_hApertura}} hasta las
+                {{horario.rest_hCierre}}</div>
+            </div>
+          </mat-expansion-panel>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid mb-3" *ngIf="!calificaciones">
+    <div style="text-align: center;color: #5e1300">
+      <h2>Se el primero en calificarnos!!!</h2>
+    </div>
+  </div>
+
+  <div class="container-fluid mb-5">
+    <div class="row mb-3" *ngFor="let comentario of comentarios">
+      <div class="col-md-12">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <div mat-card-avatar id="avatar" [ngStyle]="{ 'background-image': 'url(' + comentario.imagen + ')'}"
+              class="example-header-image"></div>
+            <mat-card-title>{{comentario.nombre}}</mat-card-title>
+            <mat-card-subtitle style="font-size: 80%">{{comentario.fecha}}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="row">
+              <div class="col-md-8">
+                <p class="ml-5">
+                  {{comentario.comentario}}
+                </p>
+              </div>
+              <div class="col-md-4 mb-5 p-0">
+                <star-rating size="large" id="estrellas" labelText={{comentario.rating}} [readOnly]="true"
+                  [starType]="'icon'" [rating]="comentario.rating" [showHalfStars]="true">
+                </star-rating>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+      </div>
+
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-3"></div>
+      <div class="col-md-6" (click)="openDialog()">
+        <star-rating size="large" id="estrellas" [starType]="'icon'" [hoverEnabled]="true" [showHalfStars]="true">
+        </star-rating>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+  </div>
+</div>

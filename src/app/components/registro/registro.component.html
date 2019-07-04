@@ -1,0 +1,106 @@
+<div *ngIf="enviando">
+
+</div>
+<mat-horizontal-stepper linear #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup" style="text-align: center">
+      <ng-template matStepLabel>Datos Básicos</ng-template>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nombre del local</mat-label>
+        <input matInput type="text" formControlName="firstCtrl" [(ngModel)]="objRestaurante.sol_rSocial"
+          name="sol_rSocial" required>
+        <mat-icon matSuffix>restaurant</mat-icon>
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Dirección</mat-label>
+        <input matInput type="text" formControlName="firstCtrl" [(ngModel)]="objRestaurante.sol_direccion"
+          name="sol_direccion" required>
+        <mat-icon matSuffix>my_location</mat-icon>
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Teléfono</mat-label>
+        <input matInput type="number" formControlName="firstCtrl" [(ngModel)]="objRestaurante.sol_telefono" name="sol_telefono"
+          required>
+        <mat-icon matSuffix>local_phone</mat-icon>
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Correo Electronico</mat-label>
+        <input matInput type="email" formControlName="firstCtrl" [(ngModel)]="objRestaurante.sol_email" name="sol_email"
+          required>
+        <mat-icon matSuffix>mail</mat-icon>
+      </mat-form-field>
+      <br>
+      <mat-label>Soy </mat-label>
+      <mat-radio-group formControlName="tipo" required>
+        <mat-radio-button class="example-margin" value="0">Dueño</mat-radio-button>
+        <mat-radio-button class="example-margin" value="1">Consumidor</mat-radio-button>
+      </mat-radio-group>
+      <div>
+        <button mat-button matStepperNext>Siguiente</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup" style="text-align: center">
+      <ng-template matStepLabel>Queremos saber más de ti</ng-template>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Danos una descripcion</mat-label>
+        <textarea matInput rows="2" formControlName="secondCtrl" [(ngModel)]="objRestaurante.sol_info"
+        name="sol_info" style="resize: none" maxlength="100" required>
+          </textarea>
+        <mat-icon matSuffix>comment</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Danos una referencia de ubicacion</mat-label>
+        <textarea matInput rows="2" formControlName="secondCtrl" [(ngModel)]="objRestaurante.sol_refUbicacion"
+        name="sol_refUbicacion" style="resize: none" maxlength="100" required>
+          </textarea>
+      </mat-form-field>
+      <div>
+        <mat-label>Dias de Atencion:</mat-label>
+        <br>
+        <mat-checkbox formControlName="Lun">Lunes</mat-checkbox>&nbsp;
+        <mat-checkbox formControlName="Mar">Martes</mat-checkbox>&nbsp;
+        <mat-checkbox formControlName="Mie">Miercoles</mat-checkbox>&nbsp;
+        <mat-checkbox formControlName="Jue">Jueves</mat-checkbox>&nbsp;
+        <mat-checkbox formControlName="Vie">Viernes</mat-checkbox>&nbsp;
+        <mat-checkbox formControlName="Sab">Sabado</mat-checkbox>&nbsp;
+        <mat-checkbox formControlName="Dom">Domingo</mat-checkbox>
+      </div>
+      <agm-map [latitude]="objRestaurante.sol_lat" [longitude]=" objRestaurante.sol_lng" [zoom]="16">
+        <agm-marker [latitude]="objRestaurante.sol_lat" [longitude]=" objRestaurante.sol_lng" [markerDraggable]="true">
+        </agm-marker>
+      </agm-map>
+      <!-- <p>{{objRestaurante.sol_lat}}</p> -->
+      <br>
+      <label for="rest_hApertura">hora de apertura</label>
+      <input type="time" formControlName="secondCtrl" [(ngModel)]="objRestaurante.sol_hApertura"
+      name="sol_hApertura" class="form-control" id="rest_hApertura" required>
+      <label for="rest_hCierre">hora de cierre</label>
+      <input type="time" formControlName="secondCtrl" [(ngModel)]="objRestaurante.sol_hCierre"
+      name="sol_hCierre" class="form-control" id="rest_hCierre" required>
+      <br>
+      
+      <input type="file" formControlName="secondCtrl" (change)="onFileChange($event)" accept="image/*" required>
+      <mat-icon>fastfood</mat-icon>
+      <!-- <button mat-raised-button class="botones">
+      </button> -->
+      <div>
+        <button mat-button matStepperPrevious>Atrás</button>
+        <button mat-button matStepperNext>Siguiente</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Finalizar</ng-template>
+    Excelente, gracias por ayudar a crecer esta comunidad que solo busca descubrir nuevos lugares para comer.
+    <div>
+      <button mat-button [disabled]="!enviando" matStepperPrevious>Atrás</button>
+      <button mat-button [disabled]="!enviando" (click)="stepper.reset()">Reiniciar</button>
+      <button mat-button [disabled]="!enviando" (click)="enviar()">Enviar</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

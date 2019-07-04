@@ -1,0 +1,98 @@
+
+agm-map {
+    
+    height: 60vh;
+    z-index: 1;
+}
+#mapa{
+    height: 60vh;
+}
+.all{
+    background-image: url("./../../../assets/images/back.png");
+    background-size: 300px 300px;
+    min-height: 100vh;
+    height: 100%;
+    margin: 0;
+    min-width: 100vh;
+    width: auto;
+    }
+#rest-title{
+    position:absolute;
+    z-index: 2;
+    width: 50%;
+    color: #000000;
+    // background: rgba(235,104,100,30%);
+    background: rgb(235,104,100);
+    background: linear-gradient(90deg, rgba(235,104,100,60%) 0%,rgba(235,104,100,60%) 50%, rgba(167,5,5,0) 100%);
+}
+#rest-info{
+    position:absolute;
+    z-index: 2; transform: translateY(52px);
+    width: 50%;
+    color: #000000;
+    background: rgb(235,104,100);
+    background: linear-gradient(90deg, rgba(235,104,100,60%) 0%,rgba(235,104,100,60%) 50%, rgba(167,5,5,0) 100%);
+}
+#imagen-huarique-detail-div{
+    width: 80%;
+    align-content: center;
+    margin: auto;
+    padding: auto;
+    height: 60vh;
+    overflow: hidden;
+    z-index: 3;
+}
+#linea{
+    position: absolute;
+    align-content: center;
+    left: 50%;
+    height: 60vh;
+    width: 5px;
+    background-color: #c42800;
+}
+#estado{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    z-index: 4;
+}
+#panelHorarios{
+    background-color: beige;
+}
+#avatar{
+    background:center;
+    background-size: cover;
+    transform: scale(1.8) translateY(5px);
+}
+
+@media (max-width:1000px){
+    #rest-title{
+        position:absolute;
+        z-index: 2;
+        width: 100%;
+        color: #000000;
+    }
+    #rest-info{
+        z-index: 2;
+        width: 100%;
+        color: #000000;
+        transform: translateY(41px);
+    }
+    #linea{
+        position: absolute;
+        align-content: center;
+        left: 50%;
+        height: 0px;
+        width: 5px;
+        background-color: rgb(235, 104, 100);
+    }
+    h1{
+        font-size: 30px
+    }
+}

@@ -6,8 +6,8 @@ import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { StarRatingComponent } from 'ng-starrating';
 
 @Component({
   selector: 'app-tablemap',
@@ -37,7 +37,9 @@ export class TablemapComponent implements OnInit {
   mark: Node;
   openedWindow: number = 0;
   currentRate = 3;
-
+  ratingLabel =["S/0 - S/5","S/5 - S/10","S/10 - S/15","S/15 - S/20","< S/20"];
+  rtActual=this.ratingLabel[2];
+  labelRating=this.rtActual;
   @ViewChild(MatPaginator, { static: false }) set matSort(content: MatPaginator) {
     this.paginator = content;
     if (this.paginator) {
@@ -50,27 +52,108 @@ export class TablemapComponent implements OnInit {
       this.rests.sort = this.sort;
     }
   }
-  constructor(private _sRest: RestService) { }
+  constructor(private _sRest: RestService, private ruta: ActivatedRoute, private _Router: Router) {
+    var rutaActual = this.ruta.snapshot.params.nombre;
+    this.ratingStar();
+    if (rutaActual === "todos" || rutaActual === '') {
+      this.suscriptor = this._sRest.getRest().subscribe((resp: any) => {
+        this.markers = resp.content;
+        this.markers.forEach((element: any) => {
+          let dias = element.rest_dAtencion.split(',');
+          element.dias = dias;
+          let cont = 0;
+          let promedio = 0;
+          element.t_productos.forEach((product: any) => {
+            promedio = +product.prod_precio + promedio;
+            cont++;
+          })
+          let proProd = promedio / cont;
+          element.rating = this.rating(proProd).toString();
+        });
+        this.restList = resp.content;
+        this.rests = new MatTableDataSource(this.restList);
+      })
+    } else {
+      this.suscriptor = this._sRest.buscarpopalabra(rutaActual).subscribe((resp: any) => {
+        console.log(resp.content);
+        this.markers = resp.content;
+        this.markers.forEach((element: any) => {
+          console.log(element);
+          let dias = element.rest_dAtencion.split(',');
+          element.dias = dias;
+          let cont = 0;
+          let promedio = 0;
+          element.t_productos.forEach((product: any) => {
+            promedio = +product.prod_precio + promedio;
+            cont++;
+          })
+          let proProd
+          if (cont != 0) { proProd = promedio / cont; }
+          else {
+            proProd = 0;
+          }
+          element.rating = this.rating(proProd).toString();
+        });
+        this.restList = resp.content;
+        console.log(this.restList[0]);
+
+        this.rests = new MatTableDataSource(this.restList);
+      })
+    }
+
+  }
 
   displayedColumns: string[] = ['rest_rSocial', 'rating'];
 
+
+
   ngOnInit() {
-    this.suscriptor = this._sRest.getRest().subscribe((resp: any) => {
-      this.markers = resp.content;
-      this.markers.forEach((element: any) => {
-        let dias = element.rest_dAtencion.split(',');
-        element.dias = dias;
-        let cont = 0;
-        let promedio = 0;
-        element.t_productos.forEach((product: any) => {
-          promedio = +product.prod_precio + promedio;
-          cont++;
+    this.ruta.params.subscribe(params => {
+      var rutaActual = this.ruta.snapshot.params.nombre;
+      if (rutaActual === "todos" || rutaActual === '') {
+        this.suscriptor = this._sRest.getRest().subscribe((resp: any) => {
+          this.markers = resp.content;
+          this.markers.forEach((element: any) => {
+            let dias = element.rest_dAtencion.split(',');
+            element.dias = dias;
+            let cont = 0;
+            let promedio = 0;
+            element.t_productos.forEach((product: any) => {
+              promedio = +product.prod_precio + promedio;
+              cont++;
+            })
+            let proProd = promedio / cont;
+            element.rating = this.rating(proProd).toString();
+          });
+          this.restList = resp.content;
+          this.rests = new MatTableDataSource(this.restList);
         })
-        let proProd = promedio / cont;
-        element.rating = this.rating(proProd).toString();
-      });
-      this.restList = resp.content;
-      this.rests = new MatTableDataSource(this.restList);
+      } else {
+        this.suscriptor = this._sRest.buscarpopalabra(rutaActual).subscribe((resp: any) => {
+          console.log(resp.content);
+          this.markers = resp.content;
+          this.markers.forEach((element: any) => {
+            console.log(element);
+            let dias = element.rest_dAtencion.split(',');
+            element.dias = dias;
+            let cont = 0;
+            let promedio = 0;
+            element.t_productos.forEach((product: any) => {
+              promedio = +product.prod_precio + promedio;
+              cont++;
+            })
+            let proProd
+            if (cont != 0) { proProd = promedio / cont; }
+            else {
+              proProd = 0;
+            }
+            element.rating = this.rating(proProd);
+          });
+          this.restList = resp.content;
+
+          this.rests = new MatTableDataSource(this.restList);
+        })
+      }
     })
   }
   rating(p) {
@@ -81,21 +164,15 @@ export class TablemapComponent implements OnInit {
     } else if (11 < p && p <= 15) {
       return 3;
     } else if (16 < p && p <= 20) {
-      return 3;
-    } else if (21 < p && p <= 25) {
       return 4;
-    } else if (26 < p) {
+    } else if (21 < p ) {
       return 5;
     } else {
       return 0;
     }
   }
-  
-  onRate($event: { oldValue: number, newValue: number, starRating: StarRatingComponent }) {
-    this.applyFilter($event.newValue.toString())
-    console.log($event.newValue.toString());
-    
-  }
+
+
   applyFilter(filterValue: string) {
     this.rests.filter = filterValue.trim().toLowerCase();
 
@@ -117,9 +194,24 @@ export class TablemapComponent implements OnInit {
     this.lng = +l.rest_lng;
     this.openedWindow = id;
   }
-
+  verAgachadito() {
+    this._Router.navigateByUrl(`rest-details/${this.openedWindow}`)
+  }
   isInfoWindowOpen(id) {
-    return this.openedWindow == id; 
+    return this.openedWindow == id;
+  }
+  ratingStar(){
+    
+  }
+  cambio(x){
+    let rating:string = x.toString();
+    this.labelRating=this.ratingLabel[x-1];
+    
+    this.applyFilter(rating);
+    
+  }
+  cambioHover(x){
+    
   }
 
 }

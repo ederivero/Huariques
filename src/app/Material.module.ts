@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MatButtonModule, MatCheckboxModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule} from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -15,16 +15,29 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatExpansionModule } from '@angular/material/expansion';
+
+import { ChartsModule } from 'ng2-charts';
+import { MatSelectModule } from '@angular/material/select';
+
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatRadioModule } from '@angular/material/radio';
+
 
 
 @NgModule({
   declarations: [],
   imports: [
-    MatSnackBarModule,
+    MatStepperModule,
+    MatRadioModule,
+    ChartsModule,
+    MatSelectModule,
+    MatExpansionModule,
     MatButtonModule,
     MatCheckboxModule,
     MatCardModule,
     MatDialogModule,
+    MatSnackBarModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
@@ -39,10 +52,15 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatAutocompleteModule
   ],
   exports: [
-    MatSnackBarModule,
+    MatStepperModule,
+    MatRadioModule,
+    ChartsModule,
+    MatSelectModule,
+    MatExpansionModule,
     MatButtonModule,
     MatCheckboxModule,
     MatCardModule,
+    MatSnackBarModule,
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,

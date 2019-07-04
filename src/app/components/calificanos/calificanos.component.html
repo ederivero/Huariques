@@ -1,0 +1,45 @@
+<mat-card class="example-card">
+  <mat-card-header>
+
+    <mat-card-title>Calificanos!!!</mat-card-title>
+    <mat-card-subtitle>que te parecio el lugar</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="example-container">
+      <form>
+        <div class="row">
+          <div class="col-md-6">
+            Calidad
+          </div>
+          <div class="col-m6-6">
+            <star-rating id="estrellas" size="large" [starType]="'icon'" [hoverEnabled]="true" [showHalfStars]="true" (starClickChange)="onClick1($event)"></star-rating>
+          </div>
+          <div class="col-md-6">
+            Cantidad
+          </div>
+          <div class="col-m6-6">
+            <star-rating id="estrellas" size="large" [starType]="'icon'" [hoverEnabled]="true" [showHalfStars]="true" (starClickChange)="onClick2($event)"></star-rating>
+          </div>
+          <div class="col-md-6">
+            Limpieza
+          </div>
+          <div class="col-m6-6">
+            <star-rating id="estrellas" size="large" [starType]="'icon'" [hoverEnabled]="true" [showHalfStars]="true" (starClickChange)="onClick3($event)"></star-rating>
+          </div>
+        </div>
+      </form>
+      <mat-form-field appearance="outline" (submit)="Buscar($event)">
+        <mat-label>Comentarios</mat-label>
+        <textarea class="search" [ngClass]="status ? 'active' : 'inactive'" id="textarea"(keyup)="onKey($event)" matInput type="text" rows="5"></textarea>
+      </mat-form-field>
+    </div>
+
+  </mat-card-content>
+  <mat-card-actions>
+    <div class="container-fluid">
+      <div class="row"><button mat-raised-button [disabled]="!enviando" class="btn btn-block btn-success" (click)="Puntuacion()">Enviar Comentario</button></div>
+      <div class="row">
+      <button mat-raised-button class="btn btn-block btn-primary" (click)="onNoClick()">Cancelar</button></div>
+    </div>
+  </mat-card-actions>
+</mat-card>

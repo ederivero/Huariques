@@ -1,0 +1,120 @@
+<br>
+<h4 class="ml-2"> Agregue sus Productos</h4>
+<br>
+<form action="" (ngSubmit)="crearProducto($event)">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3">
+        <!-- <img id="muestra" src="http://placehold.it/310x217" alt=""> -->
+        <button type="button" class="btn btn-block" mat-raised-button style="background-color: #ffE61D;color: #5E1300 "  (click)="fileInput.click()">
+          Elige una Foto para tu Producto
+        </button>
+        <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
+
+      </div>
+
+      <div class="col-md-3">
+
+        <mat-form-field>
+          <input [(ngModel)]="producto.prod_nombre" #prod_nombre name="prod_nombre" matInput
+            placeholder="Nombre del Producto" value="Taco al Pastor">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input [(ngModel)]="producto.prod_precio" name="prod_precio" matInput type="number"
+            placeholder="Precio del producto" value="S/. 4.00">
+        </mat-form-field>
+        <br>
+        <small style="color:green">*Sus precios no seran publicados</small>
+
+      </div>
+
+      <div class="col-md-4">
+        <mat-form-field id="textDesc">
+          <textarea [(ngModel)]="producto.prod_desc" name="prod_desc" rows="5" matInput
+            placeholder="Descripción del producto"
+            value="Sus ingredientes principales son carne adobada, asada, servida en finas rebanadas sobre pequeñas tortillas de maíz, la carne puede ser una combinación de carne de cerdo y carne de ternera, aunque lo mas común es que sea solo carne de puerco."></textarea>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-2">
+        <br>
+        <br>
+        <br>
+
+        <div class="example-button-row">
+          <button class="btn-block m-10" type="submit" mat-raised-button style="background-color: #ffE61D;color: #5E1300 " > <strong> Agregar Producto </strong></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<hr>
+
+
+
+<!-- TABLA -->
+
+<!-- <app-tabla-producto></app-tabla-producto> -->
+
+<mat-form-field class="m-3" *ngIf="load">
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+
+<div class="mat-elevation-z8 m-2" *ngIf="load">
+  <table mat-table [dataSource]="dataSource" matSort class="ancho">
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="Id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+      <td mat-cell *matCellDef="let row"> {{row.prod_id}} </td>
+    </ng-container>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="Nombre">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+      <td mat-cell *matCellDef="let row"> {{row.prod_nom}} </td>
+    </ng-container>
+
+    <!-- Progress Column -->
+    <ng-container matColumnDef="Precio">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio </th>
+      <td mat-cell *matCellDef="let row"> S/. {{row.prod_precio}} </td>
+    </ng-container>
+
+    <!-- Color Column -->
+    <ng-container matColumnDef="Descripción">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </th>
+      <td mat-cell *matCellDef="let row"> {{row.prod_desc}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Imagen">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Imagen </th>
+      <td mat-cell *matCellDef="let row"> <img id="imgTab" [src]="row.prod_img" alt=""> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Disponibilidad">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Disponibilidad </th>
+      <td mat-cell *matCellDef="let row"> {{row.prod_disp}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Editar">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Editar </th>
+        <td mat-cell *matCellDef="let row"> <button mat-raised-button color="warn" (click)="editProd(row.prod_id)"  > Editar</button> </td>
+      </ng-container>
+
+    <!-- <ng-container matColumnDef="Editar">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Disponibilidad </th>
+      <td mat-cell > <button>ffgg</button> </td>
+    </ng-container> -->
+
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+    </tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[1, 2, 5]"></mat-paginator>
+</div>
