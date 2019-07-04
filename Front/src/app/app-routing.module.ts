@@ -25,7 +25,7 @@ const routes: Routes = [
     component: TablemapComponent
   },
   {
-    path:'gest/:id',
+    path:'gest',
     component: GestRestComponent
   },
   {

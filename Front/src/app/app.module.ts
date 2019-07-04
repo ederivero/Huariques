@@ -30,6 +30,7 @@ import { FormsModule } from '@angular/forms';
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoginRegistroComponent } from './components/loginRegistro/loginRegistro.component';
 
 let configLogin = new AuthServiceConfig([
   {
@@ -52,6 +53,7 @@ export function provideConfig() {
     AppComponent,
     GestRestComponent,
     McrearRestComponent,
+    LoginRegistroComponent,
     InicioComponent,
     PromocionesComponent,
     LoginComponent,
@@ -78,7 +80,7 @@ export function provideConfig() {
     FormsModule,
   ],
   entryComponents:[
-    
+    LoginRegistroComponent,
     McrearRestComponent,
     LoginComponent,
     CalificanosComponent

@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { AuthServiceLocal } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from "@angular/material";
@@ -10,6 +10,7 @@ import { AuthService } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 import { SocialUser } from "angularx-social-login";
 import { Subscription } from 'rxjs';
+import { LoginRegistroComponent } from '../loginRegistro/loginRegistro.component';
 
 @Component({
   selector: 'app-login',
@@ -17,8 +18,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
-  click:boolean =false;
+  user = false;
+  click: boolean = false;
 
   objUsuario = {
     usu_email: '',
@@ -37,6 +38,7 @@ export class LoginComponent implements OnInit {
   ]);
   socialLogin: Subscription;
   localLogin: Subscription;
+  p: any;
 
   ngOnInit() {
   }
@@ -46,9 +48,10 @@ export class LoginComponent implements OnInit {
 
   constructor(private dialogRef: MatDialogRef<LoginComponent>,
     private _sAuth: AuthServiceLocal,
-    private _router: Router,
+    private _Router: Router,
     public snackBar: MatSnackBar,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    public dialog: MatDialog) { }
 
   signInWithGoogle(): void {
 
@@ -70,7 +73,7 @@ export class LoginComponent implements OnInit {
             });
             // this._router.navigateByUrl("/table");
           } else if (respuesta.message === 'error') {
-            console.log("Usuario no resgistrado");
+            // console.log("Usuario no resgistrado");
             let usu = {
               usu_email: user.email,
               usu_nom: user.firstName,
@@ -80,7 +83,7 @@ export class LoginComponent implements OnInit {
               usu_pass: 'huariques'
             }
             this._sAuth.userCreate(usu).subscribe(respuesta2 => {
-              console.log(respuesta2);
+              // console.log(respuesta2);
 
               if (respuesta2.message = 'created' && respuesta2.token) {
                 this._sAuth.saveToken(respuesta2.token);
@@ -91,7 +94,7 @@ export class LoginComponent implements OnInit {
                 });
                 // this._router.navigateByUrl("/table");
               } else if (respuesta2.message = 'created') {
-                console.log("Error al crear usuario prro");
+                // console.log("Error al crear usuario prro");
 
               }
             })
@@ -125,7 +128,7 @@ export class LoginComponent implements OnInit {
             });
             // this._router.navigateByUrl("/table");
           } else if (respuesta.message === 'error') {
-            console.log("Usuario no resgistrado");
+            // console.log("Usuario no resgistrado");
             let usu = {
               usu_email: user.email,
               usu_nom: user.firstName,
@@ -135,7 +138,7 @@ export class LoginComponent implements OnInit {
               usu_pass: 'huariques'
             }
             this._sAuth.userCreate(usu).subscribe(respuesta2 => {
-              console.log(respuesta2);
+              // console.log(respuesta2);
 
               if (respuesta2.message = 'created' && respuesta2.token) {
                 this._sAuth.saveToken(respuesta2.token);
@@ -146,7 +149,7 @@ export class LoginComponent implements OnInit {
                 });
                 // this._router.navigateByUrl("/table");
               } else if (respuesta2.message = 'created') {
-                console.log("Error al crear usuario prro");
+                // console.log("Error al crear usuario prro");
 
               }
             })
@@ -161,15 +164,48 @@ export class LoginComponent implements OnInit {
   }
 
   onNoClick(): void {
-    
+
     this.dialogRef.close();
     this.socialLogin.unsubscribe();
     this.localLogin.unsubscribe();
   }
+  openDialogLoginRegistro(): void {
+    const dialogRef = this.dialog.open(LoginRegistroComponent, {
+      width: '30%',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      // // console.log('The dialog was closed');
 
+      if (localStorage.getItem('token')) {
+
+        this.dialogRef.close();
+        this.user = null;
+        this._sAuth.getUserLogged(this._sAuth.getUserDetails().usu_id).subscribe((res: any) => {
+          this.user = res.content;
+          this.p = res.content[0];
+          // // console.log(this.user[0].usu_id)
+          if (this.user[0].usu_tipo === "0") {
+            this._Router.navigateByUrl(`gest/${this.user[0].usu_id}`)
+          }
+        })
+      } else {
+        this._sAuth.userLogged().subscribe((resp: any) => {
+          this.user = null;
+          if (resp == "false") {
+            this.user = false;
+          } else {
+            this._sAuth.getUserLogged(resp).subscribe((res: any) => {
+              this.user = res.content;
+              this.p = res.content[0];
+            })
+          }
+        })
+      }
+    });
+  }
   login() {
-    if ((this.objUsuario.usu_email != '' && this.objUsuario.usu_pass != '') && this.click==false ) {
-      this.click=true;
+    if ((this.objUsuario.usu_email != '' && this.objUsuario.usu_pass != '') && this.click == false) {
+      this.click = true;
       this.localLogin = this._sAuth.login(this.objUsuario).subscribe((respuesta) => {
         if (respuesta.message == "ok" && respuesta.token) {
           this._sAuth.updateUserLogged(this.objUsuario.usu_email)
@@ -183,7 +219,7 @@ export class LoginComponent implements OnInit {
 
           // this._router.navigateByUrl("/table");
         } else if (respuesta.message == "error") {
-          this.click=false;
+          this.click = false;
           this.objUsuario.usu_pass = '';
           this.snackBar.open(`Usuario o contraseña incorrecta`, "OK", {
             duration: 5000,

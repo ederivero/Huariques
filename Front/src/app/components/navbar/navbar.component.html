@@ -1,5 +1,6 @@
 <nav id="navbar" class="navbar navbar-expand-lg navbar-dark" style="background-color:#c42800">
-  <a class="navbar-brand" (click)="resetInicio()" [routerLink]="['']"><img src="../../../assets/images/titulo2.png" style="height: 6vh;" alt=""></a>
+  <!-- <a class="navbar-brand" (click)="resetInicio()" [routerLink]="['']"><img src="../../../assets/images/titulo2.png" style="height: 6vh; background-image: url(../../../assets/images/titulo2.png)" alt=""></a> -->
+  <a class="navbar-brand" (click)="resetInicio()" [routerLink]="['']" class="imgnav"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
     aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -12,11 +13,11 @@
             class="sr-only">(current)</span></a>
       </li>
     </ul>
-    <form (submit)="Buscar($event)" *ngIf="!inicio">
+    <form class="mt-1" (submit)="Buscar($event)" *ngIf="!inicio">
       <mat-form-field>
         <input placeholder="Buscar" matInput (keyup)="onKey($event)"  type="text">
       </mat-form-field>
-      <button class="btn btn-secondary my-2 my-sm-0 ml-3" type="button" style="background-color: #ffE61D;color: #5E1300 " (click)="Buscar($event)">Buscar</button>
+      <button class="btn btn-secondary my-2 my-sm-0 ml-3 border-0"  type="button" style="background-color: #ffE61D;color: #5E1300;height: 6.5vh " (click)="Buscar($event)"> <i class="material-icons mt-1">search</i></button>
     </form>
     <!-- <form id="nose"[formGroup]="stateForm"  *ngIf="!inicio">
       <mat-form-field appearance="outline" class="mr-3">
@@ -34,8 +35,11 @@
         </mat-autocomplete>
       </mat-form-field>
     </form> -->
-    <button *ngIf="user==false" class="btn btn-secondary my-2 my-sm-0 ml-3" type="button" style="background-color: #ffE61D;color: #5E1300 " (click)="openDialog()">Iniciar
+    <button *ngIf="user==false" class="btn btn-secondary my-2 my-sm-0 ml-3 border-0" type="button" style="background-color: #ffE61D;color: #5E1300 " (click)="openDialog()">Iniciar
       Sesión
+    </button>
+    <button *ngIf="user==false" class="btn btn-secondary my-2 my-sm-0 ml-3" type="button"
+      style="background-color: #ffE61D;color: #5E1300 " (click)="openDialogLoginRegistro()">Registro
     </button>
     <div *ngIf="user==null"></div>
     <button  *ngIf="user" class="btn_user ml-1 mr-3" mat-button [matMenuTriggerFor]="menu">

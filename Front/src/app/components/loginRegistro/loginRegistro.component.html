@@ -1,0 +1,75 @@
+<mat-card class="example-card">
+  <mat-card-header class="centrar">
+    <img class="logo" alt="" >
+  </mat-card-header>
+  <mat-card-content>
+    <div class="example-container" ng-submit="login()">
+      <mat-form-field>
+        <input matInput [formControl]="nombreFormControl" type="text" placeholder="Nombre"
+          [(ngModel)]="objUsuario.usu_nom" name="usu_nom">
+        <mat-error *ngIf="nombreFormControl.hasError('required')">
+          Su nombre es <strong>requerido</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput [formControl]="apellidoFormControl" type="text" placeholder="Apellidos"
+          [(ngModel)]="objUsuario.usu_ape" name="usu_ape">
+        <mat-error *ngIf="apellidoFormControl.hasError('required')">
+          Apellidos son <strong>requeridos</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput [formControl]="emailFormControl" type="email" placeholder="Correo"
+          [(ngModel)]="objUsuario.usu_email" name="usu_email">
+        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+          Su Email es <strong>requerida</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput [formControl]="telefonoFormControl" type="text" placeholder="Ingrese su Telefono (opcional)"
+          [(ngModel)]="objUsuario.usu_tel" name="usu_tel">
+      </mat-form-field>
+
+      <div style="position:relative;">
+        <input type="file" formControlName="secondCtrl" [(ngModel)]="imagen"
+        name="imagen" (change)="onFileChange($event)" accept="image/*" required>
+      </div>
+
+      <mat-form-field>
+        <input matInput [formControl]="passwordFormControl" type="password" placeholder="Contraseña"
+          [(ngModel)]="objUsuario.usu_pass" name="usu_pass">
+        <mat-error *ngIf="passwordFormControl.hasError('required')">
+          Su contraseña es <strong>requerida</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput [formControl]="confirmpasswordFormControl" type="password" placeholder="Confirma tu Contraseña"
+          [(ngModel)]="usu_passConfirm" name="usu_passConfirm">
+        <mat-error *ngIf="confirmpasswordFormControl.hasError('required')">
+          Confirme su <strong>contraseña</strong>
+        </mat-error>
+      </mat-form-field>
+      
+    </div>
+    <div class="container mt-3">
+
+      <div class="row">
+        <div class="col-6">
+          <button #myButton class="ml-3" mat-stroked-button (click)="enviarRegistro()">Registrar</button>
+        </div>
+        <div class="col-6">
+          <button mat-stroked-button (click)="onNoClick()">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+  </mat-card-content>
+
+</mat-card>

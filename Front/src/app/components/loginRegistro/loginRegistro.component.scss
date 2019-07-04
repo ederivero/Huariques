@@ -1,11 +1,11 @@
-.example-card {
+  .example-card {
     max-width: 100%;
     margin: 0;
   }
-  .registrate{
-    font-size:102%;
-    cursor: pointer;
-    color: #3B5998;
+  .logo{
+    content:url("../../../assets/images/logoSinFondo.png");
+    width: 100px;
+    margin-left: 25%;
   }
   .fa {
     font-size: 15px;
@@ -28,4 +28,9 @@
     background: #dd4b39;
     color: white;
   }
+
+  $custom-file-text: (
+  en: "Browse",
+  es: "Elegir"
+);
   

@@ -1,25 +1,24 @@
-
 <mat-drawer-container class="example-container" autosize>
-  <mat-drawer #drawer class="example-sidenav" mode="side" opened style="background-color: #ffe61d">
+  <mat-drawer #drawer class="example-sidenav" mode="side" opened style="background-color: #edebe8">
 
     <div *ngIf="!restList">
       <mat-spinner></mat-spinner>
     </div>
-    <div *ngIf="restList" >
+    <div *ngIf="restList">
 
       <!-- table -->
-      <ng-template #t let-fill="fill" >
+      <ng-template #t let-fill="fill">
         <span class="star" [class.full]="fill === 100">
           <span class="half" [style.width.%]="fill">&#x24;</span>&#x24;
         </span>
-      </ng-template>  
-      
+      </ng-template>
+
       <!-- <ngb-rating [(rate)]="currentRate" [starTemplate]="t" [readonly]="false" max="5"></ngb-rating> -->
-<br>
+      <br>
       <mat-form-field class="ml-3">
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Nombre">
       </mat-form-field>
-      <table mat-table [dataSource]="rests" matSort multiTemplateDataRows style="background-color: #ffe61d">
+      <table mat-table [dataSource]="rests" matSort multiTemplateDataRows style="background-color: #edebe8">
 
         <!-- Position Column -->
         <ng-container matColumnDef="rest_rSocial">
@@ -38,8 +37,9 @@
                 </span>
               </ng-template>
               <ngb-rating [(rate)]="objPlaya.rating" [starTemplate]="t" [readonly]="true" max="5"></ngb-rating>
-          </div>
-      <br> </td>
+            </div>
+            <br>
+          </td>
         </ng-container>
 
 
@@ -50,14 +50,16 @@
             <div class="example-element-detail"
               [@detailExpand]="objPlaya == expandedElement ? 'expanded' : 'collapsed'">
 
-              <div class="card info container mt-2 mb-2" style="background-color: #ffe61d">
+              <div class="card info container mt-2 mb-2" style="background-color:#edebe8">
                 <div class="row">
                   <div class="col-6">
                     <div class=" card-subtitle " style="color: #5e130f">Horario de atención:</div>
-                    <div class="ml-1 mb-2 d-inline-block btn btn-primary hora" role="button" style="background-color: #c42800">{{objPlaya.rest_hApertura}}</div>
+                    <div class="ml-1 mb-2 d-inline-block btn btn-primary hora" role="button"
+                      style="background-color: #c42800">{{objPlaya.rest_hApertura}}</div>
                     <span class="d-inline-block card-subtitle  ml-1 mr-1" style="color: #5e130f"> a </span>
-                    <div class="mb-2 d-inline-block btn btn-primary hora" style="background-color: #c42800" role="button">{{objPlaya.rest_hCierre}}</div>
-                    
+                    <div class="mb-2 d-inline-block btn btn-primary hora" style="background-color: #c42800"
+                      role="button">{{objPlaya.rest_hCierre}}</div>
+
                   </div>
                   <div class="col-6 align-self-center ubicacion">
                     <button type="button" (click)="openWindow(objPlaya.rest_id)"
@@ -68,9 +70,10 @@
                   </div>
                 </div>
                 <div>
-                    <div class="mt-1 card-subtitle " style="color: #5e130f">Dias de atención:</div>
-                    <div *ngFor="let dia of objPlaya.dias" style="background-color: #c42800" class="d-inline-block btn btn-primary hora mr-1" role="button">{{dia}}</div>
-                    
+                  <div class="mt-1 card-subtitle " style="color: #5e130f">Dias de atención:</div>
+                  <div *ngFor="let dia of objPlaya.dias" style="background-color: #c42800"
+                    class="d-inline-block btn btn-primary hora mr-1" role="button">{{dia}}</div>
+
                 </div>
               </div>
 
@@ -83,7 +86,7 @@
         </ng-container>
         <!-- /CONTENIDO -->
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row"
           [class.example-expanded-row]="expandedElement === element"
           (click)="expandedElement = expandedElement === element ? null : element">
@@ -91,7 +94,7 @@
         <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
       </table>
 
-      <mat-paginator style="background-color: #ffe61d"  [pageSizeOptions]="[10, 25, 50]"></mat-paginator>
+      <mat-paginator style="background-color: #edebe8" [pageSizeOptions]="[10, 25, 50]"></mat-paginator>
     </div>
 
     <div #nombreDelDiv>
@@ -119,15 +122,18 @@
             <h4 class="card-title">{{item.rest_rSocial}}</h4>
 
             <div class="d-inline-block card-subtitle text-muted ">Horario de atención:</div>
-            <div class="ml-1 mb-2 d-inline-block btn btn-primary hora"style="background-color: #c42800" role="button">{{item.rest_hApertura}}</div>
-             <span class="d-inline-block card-subtitle text-muted ml-1 mr-1"> a </span>
-            <div class="mb-2 d-inline-block btn btn-primary hora"style="background-color: #c42800" role="button">{{item.rest_hCierre}}</div>
+            <div class="ml-1 mb-2 d-inline-block btn btn-primary hora" style="background-color: #c42800" role="button">
+              {{item.rest_hApertura}}</div>
+            <span class="d-inline-block card-subtitle text-muted ml-1 mr-1"> a </span>
+            <div class="mb-2 d-inline-block btn btn-primary hora" style="background-color: #c42800" role="button">
+              {{item.rest_hCierre}}</div>
 
           </div>
           <img src={{item.rest_img}} class="restImg" alt="imagen del Agachadito">
           <div class="card-body">
             <p class="card-text "> {{item.rest_refUbicacion}}</p>
-            <button type="button" (click)="verAgachadito()" style="background-color: #c42800" class="shadow-none btn btn-primary btn-lg btn-block  ">
+            <button type="button" (click)="verAgachadito()" style="background-color: #c42800"
+              class="shadow-none btn btn-primary btn-lg btn-block  ">
               Ver Agachadito <i class="ml-1 fa fa-sign-in" aria-hidden="true"></i>
             </button>
           </div>

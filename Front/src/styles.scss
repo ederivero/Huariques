@@ -9,3 +9,10 @@ html, body {
     #estrellas #estrellas:focus{
         outline: 0
     }
+    ngb-rating{
+        outline: none;
+    }.mat-column-rest_rSocial{
+        width: 250px;
+    }.mat-column-rating{
+        width: 250px;
+    }

@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ModelInforestComponent } from '../../vistv/components/model-inforest/model-inforest.component';
 import { McrearRestComponent } from '../mcrear-rest/mcrear-rest.component';
 import { ActivatedRoute, Router } from "@angular/router";
 import { RestService } from 'src/app/services/rest.service';

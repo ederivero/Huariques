@@ -8,6 +8,7 @@ import { startWith, map } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { InicioService } from 'src/app/services/inicio.service';
 import { Location } from '@angular/common';
+import { LoginRegistroComponent } from '../loginRegistro/loginRegistro.component';
 export interface DialogData {
   animal: string;
   name: string;
@@ -56,7 +57,7 @@ export class NavbarComponent implements OnInit {
   }];
 
   stateGroupOptions: Observable<StateGroup[]>;
-  userRest=false;
+  userRest = false;
   user = false;
   p;
   busqueda: string;
@@ -64,14 +65,14 @@ export class NavbarComponent implements OnInit {
   constructor(public dialog: MatDialog,
     private _sAuth: AuthServiceLocal,
     private _formBuilder: FormBuilder,
-    private _Router: Router,private ruta:ActivatedRoute,private _Sinicio:InicioService,private location:Location) {
-      _Router.events.subscribe(val=>{
-        if (location.path()==""||location.path()=="#") {
-          this.inicio=true
-        }else{
-          this.inicio=false
-        }
-      })
+    private _Router: Router, private ruta: ActivatedRoute, private _Sinicio: InicioService, private location: Location) {
+    _Router.events.subscribe(val => {
+      if (location.path() == "" || location.path() == "#") {
+        this.inicio = true
+      } else {
+        this.inicio = false
+      }
+    })
     // console.log(window.location.href);
     // console.log(window.location.href.split('/')[3])
     if (window.location.href.split('/')[3] === "" || window.location.href.split('/')[3] === "#") {
@@ -87,7 +88,7 @@ export class NavbarComponent implements OnInit {
         // console.log(this.user[0])
         if (this.user[0].usu_tipo === "0") {
           // this._Router.navigateByUrl(`gest/${this.user[0].usu_id}`)
-          this.userRest=true
+          this.userRest = true
         }
       })
     } else {
@@ -123,7 +124,40 @@ export class NavbarComponent implements OnInit {
             this._Router.navigateByUrl(`gest/${this.user[0].usu_id}`)
           }
         })
-      }else {
+      } else {
+        this._sAuth.userLogged().subscribe((resp: any) => {
+          this.user = null;
+          if (resp == "false") {
+            this.user = false;
+          } else {
+            this._sAuth.getUserLogged(resp).subscribe((res: any) => {
+              this.user = res.content;
+              this.p = res.content[0];
+            })
+          }
+        })
+      }
+    });
+  }
+  openDialogLoginRegistro(): void {
+    const dialogRef = this.dialog.open(LoginRegistroComponent, {
+      width: '30%',
+      data: { name: this.name, animal: this.animal }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (localStorage.getItem('token')) {
+        this.user = null;
+        this._sAuth.getUserLogged(this._sAuth.getUserDetails().usu_id).subscribe((res: any) => {
+          this.user = res.content;
+          this.p = res.content[0];
+          console.log(this.user[0].usu_id)
+          if (this.user[0].usu_tipo === "0") {
+            this._Router.navigateByUrl(`gest/${this.user[0].usu_id}`)
+          }
+        })
+      } else {
         this._sAuth.userLogged().subscribe((resp: any) => {
           this.user = null;
           if (resp == "false") {
@@ -139,7 +173,7 @@ export class NavbarComponent implements OnInit {
     });
   }
   ngOnInit() {
-    this.ruta.params.subscribe((params)=>{
+    this.ruta.params.subscribe((params) => {
       this.inicio = this._Sinicio.getiniciovar()
       console.log(params)
       if (window.location.href.split('/')[3] === "" || window.location.href.split('/')[3] === "#") {
@@ -163,10 +197,10 @@ export class NavbarComponent implements OnInit {
 
     return this.stateGroups;
   }
-  resetInicio(){
+  resetInicio() {
     // this.inicio=true
   }
-  gestRest(){
+  gestRest() {
     this._Router.navigateByUrl(`gest/${this.user[0].usu_id}`)
     // this.inicio=false
   }
@@ -175,7 +209,7 @@ export class NavbarComponent implements OnInit {
   }
   Buscar($event) {
     $event.preventDefault()
-    if (this.busqueda === ""||this.busqueda === undefined) {
+    if (this.busqueda === "" || this.busqueda === undefined) {
       this._Router.navigate([`busqueda/todos`]);
     } else {
       this._Router.navigate([`busqueda/${this.busqueda}`]);
@@ -185,7 +219,7 @@ export class NavbarComponent implements OnInit {
     this._sAuth.cerrarSesion();
     this._Router.navigateByUrl(``);
     // this.inicio=true
-    this.user=false;
+    this.user = false;
   }
 
 }

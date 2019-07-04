@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialogModule } from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ModelInforestComponent } from '../model-inforest/model-inforest.component';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthServiceLocal } from 'src/app/services/auth.service';
 import { RestService } from 'src/app/services/rest.service';
@@ -278,16 +278,7 @@ export class BlankComponent implements OnInit {
     // console.log(this.listHorarios);
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(ModelInforestComponent, {
-      width: '550px',
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
-    });
-  };
+  
 
   getElementByPosition(array, position) {
 
