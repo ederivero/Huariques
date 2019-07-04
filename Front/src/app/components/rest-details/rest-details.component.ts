@@ -15,7 +15,8 @@ export class RestDetailsComponent implements OnInit {
   public innerWidth: any;
   calificaciones=false;
   sumapromedios = 0
-  i=0
+  i=0;
+  panelOpenState=false
   promediototal=0;
   imagen = "https://firebasestorage.googleapis.com/v0/b/api-project-161182547768.appspot.com/o/restaurantes%2Ffotito.png?alt=media&token=9b1da490-016c-4c08-b7f2-69e07f8137e9";
   horarioaperturaActual = "12:00"

@@ -20,16 +20,16 @@ export class CalificanosComponent implements OnInit {
   onClickResult3: ClickEvent;
   onClick1 = ($calidad: ClickEvent) => {
     this.onClickResult = $calidad;
-    // console.log('onClick $calidad: ', $calidad.rating);
-    // console.log('onclick result ', this.onClickResult.rating);
+    // // console.log('onClick $calidad: ', $calidad.rating);
+    // // console.log('onclick result ', this.onClickResult.rating);
   };
   onClick2 = ($cantidad: ClickEvent) => {
     this.onClickResult2 = $cantidad;
-    // console.log('onclick result 2: ', this.onClickResult2.rating);
+    // // console.log('onclick result 2: ', this.onClickResult2.rating);
   };
   onClick3 = ($limpieza: ClickEvent) => {
     this.onClickResult3 = $limpieza;
-    // console.log('onClick $limpieza: ', $limpieza.rating);
+    // // console.log('onClick $limpieza: ', $limpieza.rating);
   };
   user: any;
   p: any;
@@ -50,7 +50,7 @@ export class CalificanosComponent implements OnInit {
         punt_total: this.TOTAL,
         punt_coment: this.Comentario,
       }
-      console.log(objPunt)
+      // console.log(objPunt)
     }
   }*/
   Puntuacion() {
@@ -71,13 +71,13 @@ export class CalificanosComponent implements OnInit {
         ('00' + date.getUTCHours()).slice(-2) + ':' +
         ('00' + date.getUTCMinutes()).slice(-2) + ':' +
         ('00' + date.getUTCSeconds()).slice(-2);
-      console.log(date);
+      // console.log(date);
       let objreg = {
         regCliente_fecha: date,
         usu_id: this.userId,
         rest_id: +this.rutaActual
       }
-      console.log(objreg)
+      // console.log(objreg)
       let headersReg = {
         method: 'POST',
         headers: {
@@ -89,7 +89,7 @@ export class CalificanosComponent implements OnInit {
       fetch('https://huariquesback.herokuapp.com/api/regcli/crear', headersReg).then(Response => {
         return Response.json()
       }).then(data => {
-        console.log(data.content);
+        // console.log(data.content);
         let objPunt = {
           punt_cali: this.onClickResult.rating,
           punt_cant: this.onClickResult2.rating,
@@ -98,7 +98,7 @@ export class CalificanosComponent implements OnInit {
           punt_coment: this.Comentario,
           regCliente_id: +data.content.regCliente_id,
         }
-        console.log(objPunt)
+        // console.log(objPunt)
         let headersPunt = {
           method: 'POST',
           headers: {
@@ -108,18 +108,18 @@ export class CalificanosComponent implements OnInit {
           body: JSON.stringify(objPunt)
         };
         fetch('https://huariquesback.herokuapp.com/api/puntuacion/crear', headersPunt).then(Response => {
-          console.log(Response)
+          // console.log(Response)
           return Response.json()
         }).then(data => {
-          console.log(data);
+          // console.log(data);
           this.dialogRef.close();
           this.enviando = true;
         })
       })
     }
-    /*console.log( this.onClickResult.rating)
+    // /*console.log( this.onClickResult.rating)
     this.TOTAL = (this.onClickResult.rating + this.onClickResult2.rating + this.onClickResult3.rating) / 3;
-    console.log( this.TOTAL);
+    // console.log( this.TOTAL);
     let obj = {
       punt_cali: this.onClickResult.rating,
       punt_cant: this.onClickResult2.rating,
@@ -137,15 +137,15 @@ export class CalificanosComponent implements OnInit {
       body: JSON.stringify(obj)
     };
     fetch('https://huariquesback.herokuapp.com/api/puntuacion/crear', headers).then(Response => {
-      console.log(Response)
+      // console.log(Response)
       return Response.json()
     })
       .then(data => {
-        console.log(data);
+        // console.log(data);
         this.dialogRef.close();
         this.enviando = true;
       })
-    console.log(obj);*/
+    // console.log(obj);*/
   }
   constructor(public dialogRef: MatDialogRef<CalificanosComponent>, private _sAuth:AuthServiceLocal) {
     if (localStorage.getItem('token')) {
@@ -153,7 +153,7 @@ export class CalificanosComponent implements OnInit {
       this._sAuth.getUserLogged(this._sAuth.getUserDetails().usu_id).subscribe((res: any) => {
         this.user = res.content;
         this.p = res.content[0];
-        console.log(this.user[0].usu_id)
+        // console.log(this.user[0].usu_id)
         this.userId=this.user[0].usu_id
       })
     } else {
@@ -175,7 +175,7 @@ export class CalificanosComponent implements OnInit {
     this.dialogRef.close();
   }
   ngOnInit() {
-    console.log(this.rutaActual)
+    // console.log(this.rutaActual)
   }
 
 }

@@ -89,10 +89,10 @@ export class MenuComponent implements OnInit {
 
     if (localStorage.getItem('idR')) {
       this.restId = JSON.parse(localStorage.getItem('idR'));
-      console.log(this.restId);
+      // console.log(this.restId);
 
       this._sRest.getProductosByRestId(this.restId).subscribe((dataprod: any) => {
-        console.log(dataprod.content);
+        // console.log(dataprod.content);
 
         dataprod.content.forEach(idForProd => {
 
@@ -108,7 +108,7 @@ export class MenuComponent implements OnInit {
             rest_id: idForProd.rest_id
           })
         });
-        console.log(this.p_cadauno);
+        // console.log(this.p_cadauno);
 
       })
 
@@ -116,25 +116,25 @@ export class MenuComponent implements OnInit {
     } else {
 
       this.restId = this._sRest.getIdRest();
-      console.log(this.restId);
+      // console.log(this.restId);
 
       this._authServ.getUserLogged(this._authServ.getUserDetails().usu_id).subscribe((res: any) => {
         this.user = res.content;
-        console.log(this.user);
+        // console.log(this.user);
         this.user.forEach((e) => {
           this.usuId = e.usu_id
         })
-        console.log(this.usuId);
+        // console.log(this.usuId);
 
         this.suscriptor = this._sRest.getRestByUsuId(this.usuId).subscribe((datarest: any) => {
-          console.log(datarest.content);
+          // console.log(datarest.content);
 
           this.restId = this._sRest.getIdRest();
 
-          console.log(this.restId);
+          // console.log(this.restId);
 
           this._sRest.getProductosByRestId(this.restId).subscribe((dataprod: any) => {
-            console.log(dataprod.content);
+            // console.log(dataprod.content);
 
             dataprod.content.forEach(idForProd => {
 
@@ -151,7 +151,7 @@ export class MenuComponent implements OnInit {
 
               })
             });
-            console.log(this.p_cadauno);
+            // console.log(this.p_cadauno);
 
           })
 
@@ -203,7 +203,7 @@ export class MenuComponent implements OnInit {
 
       reader.onload = (e: any) => {
         this.srcResult = e.target.result;
-        console.log(this.srcResult);
+        // console.log(this.srcResult);
 
       };
 
@@ -212,21 +212,21 @@ export class MenuComponent implements OnInit {
   }
 
   editProd(prod_id){
-    console.log(prod_id);
+    // console.log(prod_id);
     this.nprod = this._sRest.setIdProd(prod_id);
     this.openDialog();
-    console.log(this.nprod);
+    // console.log(this.nprod);
     return this.nprod
   }
 
   crearProducto(e, prod_nombre) {
-    console.log(e);
+    // console.log(e);
 
     let objProducto = this.producto;
     this.listProductos.push(objProducto);
     localStorage.setItem("productos", JSON.stringify(this.listProductos));
 
-    console.log(this.listProductos);
+    // console.log(this.listProductos);
 
 
 
@@ -256,7 +256,7 @@ export class MenuComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
       this.animal = result;
     });
   }

@@ -84,26 +84,26 @@ export class MapaDatasensibleComponent implements OnInit {
 
       if (localStorage.getItem('idR')) {
         this.restId = JSON.parse(localStorage.getItem('idR'));
-        console.log(this.restId);
+        // console.log(this.restId);
         
   
         this._authServ.getUserLogged(this._authServ.getUserDetails().usu_id).subscribe((res: any) => {
           this.user = res.content;
-          console.log(this.user);
+          // console.log(this.user);
           this.user.forEach((e) => {
             this.usuId = e.usu_id;
             this.tipoUsu = e.usu_tipo;
           })
-          console.log(this.usuId);
+          // console.log(this.usuId);
     
           if (this.tipoUsu == 0) {
             this.suscriptor = this._sRest.getRestByUsuId(this.usuId).subscribe((datarest: any) => {
     
               // this.restId = this._sRest.recibirRest()
-              // console.log(this.restId);
+              // // console.log(this.restId);
     
               this.infoRest = this._sRest.getInfoRest(this.restId).subscribe((dataInfoRest: any) => {
-                console.log(dataInfoRest.content);
+                // console.log(dataInfoRest.content);
     
                 dataInfoRest.content.forEach(idForRest => {
     
@@ -132,7 +132,7 @@ export class MapaDatasensibleComponent implements OnInit {
     
     
                 });
-                console.log(this.resultDat);
+                // console.log(this.resultDat);
                 
     
                 this.load = true;
@@ -154,25 +154,25 @@ export class MapaDatasensibleComponent implements OnInit {
       }else{
   
       this.restId = this._sRest.getIdRest();  
-      console.log(this.restId);
+      // console.log(this.restId);
 
       this._authServ.getUserLogged(this._authServ.getUserDetails().usu_id).subscribe((res: any) => {
         this.user = res.content;
-        console.log(this.user);
+        // console.log(this.user);
         this.user.forEach((e) => {
           this.usuId = e.usu_id;
           this.tipoUsu = e.usu_tipo;
         })
-        console.log(this.usuId);
+        // console.log(this.usuId);
   
         if (this.tipoUsu == 0) {
           this.suscriptor = this._sRest.getRestByUsuId(this.usuId).subscribe((datarest: any) => {
   
             // this.restId = this._sRest.recibirRest()
-            // console.log(this.restId);
+            // // console.log(this.restId);
   
             this.infoRest = this._sRest.getInfoRest(this.restId).subscribe((dataInfoRest: any) => {
-              console.log(dataInfoRest.content);
+              // console.log(dataInfoRest.content);
   
               dataInfoRest.content.forEach(idForRest => {
   
@@ -199,7 +199,7 @@ export class MapaDatasensibleComponent implements OnInit {
   
   
               });
-              console.log(this.resultDat);
+              // console.log(this.resultDat);
               
   
               this.load = true;
@@ -239,15 +239,15 @@ export class MapaDatasensibleComponent implements OnInit {
 
     // fetch(`https://huariquesback.herokuapp.com/api/restaurante/getByUsuId/${this.usuIdM}`)
     //   .then(resp => {
-    //     // console.log("SFsfsgsgs");
+    // //     // console.log("SFsfsgsgs");
     //     return resp.json()
     //   }).then(datR => {
-    //     // console.log(datR.content);
-    //     // console.log(usuId);
-    //     // console.log(restId);
+    // //     // console.log(datR.content);
+    // //     // console.log(usuId);
+    // //     // console.log(restId);
 
     //     this.resultDat = this.getElementByPosition(datR.content,this.pos)
-    //     console.log(this.resultDat);
+    // //     console.log(this.resultDat);
         
 
     //     this.cargado = true
@@ -267,22 +267,22 @@ export class MapaDatasensibleComponent implements OnInit {
     //       // })
 
     //     });
-    //     // console.log(this.r_soc);
+    // //     // console.log(this.r_soc);
 
     //   })
 
     //   fetch(`https://huariquesback.herokuapp.com/api/producto/porIdRest/${this.restIdM}`)
     //   .then(response => {
-    //     // console.log("productos");
+    // //     // console.log("productos");
     //     return response.json()
     //   }).then(dataprod => {
 
-    //     // console.log(dataprod.content);
+    // //     // console.log(dataprod.content);
 
     //     dataprod.content.forEach(idForProd => {
-    //       // console.log(idForRest);
+    // //       // console.log(idForRest);
 
-    //       console.log(this.id_prod = idForProd.prod_id);
+    // //       console.log(this.id_prod = idForProd.prod_id);
     //       this.p_desc = idForProd.prod_desc;
     //       this.p_disp = idForProd.prod_disp;
     //       this.p_nomb = idForProd.prod_nom;
@@ -307,7 +307,7 @@ export class MapaDatasensibleComponent implements OnInit {
 
     //     })
 
-    //     // console.log(this.p_cadauno);
+    // //     // console.log(this.p_cadauno);
     //     // 
 
 
@@ -318,8 +318,11 @@ export class MapaDatasensibleComponent implements OnInit {
   
 
   ngOnInit() {
-    // console.log(this.objMarcador);
+    // // console.log(this.objMarcador);
 
+  }
+  modDataSen(){
+    
   }
 
   getElementByPosition(array, position) {
@@ -328,18 +331,18 @@ export class MapaDatasensibleComponent implements OnInit {
     if (position>1) {
       var reem = position - 1
       elemento = array[reem];
-      console.log(reem);
+      // console.log(reem);
     
-      // console.log(elemento);
+      // // console.log(elemento);
 
       // this.load = true;
       return elemento;
 
     } else {
       elemento = array[position];
-      // console.log(position);
+      // // console.log(position);
     
-      // console.log(elemento);
+      // // console.log(elemento);
       // this.load = true;
       return elemento;
 

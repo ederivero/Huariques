@@ -1,10 +1,10 @@
 <!-- <h1 mat-dialog-title>Hi {{data.name}}</h1> -->
 <div mat-dialog-content id="modalAct">
   <form action="">
-    <button type="button" class="btn btn-block" mat-raised-button color="info" (click)="fileInput.click()">
+    <button type="button" class="btn btn-block" mat-raised-button color="info" (click)=" onFileChange($event)">
       Elige una Foto para tu Producto
     </button>
-    <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
+    <!-- <input hidden (change)="onFileSelected()" #fileInput type="file" id="file"> -->
     <br>
     <br>
     <mat-form-field>

@@ -28,9 +28,9 @@
           </div>
         </div>
       </form>
-      <mat-form-field appearance="outline" (submit)="Buscar($event)">
+      <mat-form-field appearance="outline">
         <mat-label>Comentarios</mat-label>
-        <textarea class="search" [ngClass]="status ? 'active' : 'inactive'" id="textarea"(keyup)="onKey($event)" matInput type="text" rows="5"></textarea>
+        <textarea class="search"  id="textarea"(keyup)="onKey($event)" matInput type="text" rows="5"></textarea>
       </mat-form-field>
     </div>
 
