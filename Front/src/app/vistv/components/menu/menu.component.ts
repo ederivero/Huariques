@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { MatDialogModule } from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ModalProductoComponent } from '../modal-producto/modal-producto.component';
@@ -65,7 +66,7 @@ export class MenuComponent implements OnInit {
 
   Tabla;
 
-  displayedColumns: string[] = ['Id', 'Nombre', 'Precio', 'Descripción', 'Imagen', 'Disponibilidad','Editar'];
+  displayedColumns: string[] = ['Id', 'Nombre', 'Precio', 'Descripción', 'Imagen', 'Disponibilidad', 'Editar'];
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -80,12 +81,51 @@ export class MenuComponent implements OnInit {
   nprod: void;
 
 
+
+  // INICIO NUEVO
+
+  click: boolean = false;
+  usu_passConfirm: '';
+  imagen: any[];
+
+  objProduct = {
+    prod_nom: '',
+    prod_desc: '',
+    prod_precio: '',
+    prod_disp: '1',
+    rest_id: ''
+  }
+
+  telefonoFormControl = new FormControl('', [
+
+  ]);
+  nombreFormControl = new FormControl('', [
+    Validators.required,
+  ]);
+  apellidoFormControl = new FormControl('', [
+    Validators.required,
+  ]);
+  emailFormControl = new FormControl('', [
+    Validators.required,
+  ]);
+  // passwordFormControl = new FormControl('', [
+  //   Validators.required
+  // ]);
+  // confirmpasswordFormControl = new FormControl('', [
+  //   Validators.required
+  // ]);
+
+
+  localLogin: Subscription;
+
+
+
   constructor(public dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private ruta: ActivatedRoute,
     private _authServ: AuthServiceLocal,
     private _sRest: RestService
-    ) {
+  ) {
 
     if (localStorage.getItem('idR')) {
       this.restId = JSON.parse(localStorage.getItem('idR'));
@@ -182,6 +222,7 @@ export class MenuComponent implements OnInit {
 
   }
 
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -195,23 +236,28 @@ export class MenuComponent implements OnInit {
     }
   }
 
-  onFileSelected() {
-    const inputNode: any = document.querySelector('#file');
+  // onFileSelected() {
+  //   const inputNode: any = document.querySelector('#file');
 
-    if (typeof (FileReader) !== 'undefined') {
-      const reader = new FileReader();
+  //   if (typeof (FileReader) !== 'undefined') {
+  //     const reader = new FileReader();
 
-      reader.onload = (e: any) => {
-        this.srcResult = e.target.result;
-        // console.log(this.srcResult);
+  //     reader.onload = (e: any) => {
+  //       this.srcResult = e.target.result;
+  //       // console.log(this.srcResult);
 
-      };
+  //     };
 
-      reader.readAsArrayBuffer(inputNode.files[0]);
-    }
+  //     reader.readAsArrayBuffer(inputNode.files[0]);
+  //   }
+  // }
+  onFileChange(event) {
+    this.imagen = event.target.files;
+    // console.log(this.imagen);
   }
 
-  editProd(prod_id){
+
+  editProd(prod_id) {
     // console.log(prod_id);
     this.nprod = this._sRest.setIdProd(prod_id);
     this.openDialog();
@@ -237,11 +283,53 @@ export class MenuComponent implements OnInit {
     } else {
       this._snackBar.open("No hay producto", "", {
         duration: 2000,
-      }); 
+      });
     }
 
 
   };
+
+  enviarRegistro() {
+
+
+    if ((this.objProduct.prod_nom != '' && this.objProduct.prod_desc != '') &&
+      (this.objProduct.prod_precio != '') && this.click == false) {
+      var formData = new FormData();
+      if (this.imagen == undefined) {
+        formData.append('usu_img', "https://firebasestorage.googleapis.com/v0/b/api-project-161182547768.appspot.com/o/usuarios%2Fdefault-forum-user.png?alt=media&token=229b408f-57dd-4e5c-98b0-a4704fda1063")
+      } else {
+        formData.append('imagen',
+          this.imagen[0],
+          this.imagen[0].name);
+      }
+      formData.append('prod_nom', this.objProduct.prod_nom)
+      formData.append('prod_desc', this.objProduct.prod_desc)
+      formData.append('prod_precio', this.objProduct.prod_precio)
+      formData.append('prod_disp', this.objProduct.prod_disp)
+      formData.append('rest_id', this.restId)
+      console.log(formData);
+
+      let headersRest = {
+        method: 'POST',
+        body: formData
+      };
+      this.click = true;
+      fetch('https://huariquesback.herokuapp.com/api/producto/crear', headersRest)
+        .then(response => {
+          // console.log(response)
+          return response.json();
+        }).then(respuesta => {
+          console.log(respuesta);
+
+        })
+    }
+
+  }
+
+
+
+
+
 
   openSnackBar() {
     this._snackBar.openFromComponent(SnackbarProductComponent, {

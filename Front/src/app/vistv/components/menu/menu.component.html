@@ -1,27 +1,87 @@
 <br>
 <h4 class="ml-2"> Agregue sus Productos</h4>
 <br>
-<form action="" (ngSubmit)="crearProducto($event,producto.prod_nombre)">
+
+<div class="example-container" ng-submit="login()">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3 ">
+        <div style="position:relative;">
+          <input type="file" formControlName="secondCtrl" [(ngModel)]="imagen" name="imagen"
+            (change)="onFileChange($event)" accept="image/*" required>
+        </div>
+
+      </div>
+      <div class="col-md-3">
+        <mat-form-field>
+          <input matInput [formControl]="nombreFormControl" type="text" placeholder="Nombre del Producto"
+            [(ngModel)]="objProduct.prod_nom" name="prod_nom">
+          <mat-error *ngIf="nombreFormControl.hasError('required')">
+            Nombre del Producto <strong>requerido</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [formControl]="emailFormControl" type="number" placeholder="Precio del Producto"
+            [(ngModel)]="objProduct.prod_precio" name="prod_precio">
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            El precio es <strong>requerido</strong>
+          </mat-error>
+        </mat-form-field>
+
+      </div>
+      <div class="col-md-4" >
+
+        <mat-form-field>
+            <textarea rows="5" matInput [formControl]="apellidoFormControl" type="text" placeholder="Descripcion del Producto"
+            [(ngModel)]="objProduct.prod_desc" name="prod_desc"> </textarea>
+          <mat-error *ngIf="apellidoFormControl.hasError('required')">
+            Descripción del producto <strong>requerido</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+        <button style="background-color: #ffE61D;color: #5E1300 "  #myButton class=" btn btn-block" mat-stroked-button (click)="enviarRegistro()">
+          <strong> Registrar </strong>
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+
+<!-- <div class="container mt-3">
+
+  <div class="row">
+    <div class="col-6">
+      <button #myButton class="ml-3" mat-stroked-button (click)="enviarRegistro()">Registrar</button>
+    </div>
+  </div>
+</div> -->
+
+
+
+<!-- <form action="" (ngSubmit)="crearProducto($event,producto.prod_nombre)">
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-3">
-        <!-- <img id="muestra" src="http://placehold.it/310x217" alt=""> -->
-        <button type="button" class="btn btn-block" mat-raised-button style="background-color: #ffE61D;color: #5E1300 "  (click)="fileInput.click()">
-          Elige una Foto para tu Producto
-        </button>
-        <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
-
+              <div style="position:relative;">
+        <input type="file" formControlName="secondCtrl" [(ngModel)]="imagen"
+        name="imagen" (change)="onFileChange($event)" accept="image/*" required>
+      </div>
       </div>
 
       <div class="col-md-3">
 
         <mat-form-field>
-          <input [(ngModel)]="producto.prod_nombre" #prod_nombre name="prod_nombre" matInput
+          <input [(ngModel)]="objProduct.prod_nombre" #prod_nombre name="prod_nombre" matInput
             placeholder="Nombre del Producto" value="Taco al Pastor">
         </mat-form-field>
 
         <mat-form-field>
-          <input [(ngModel)]="producto.prod_precio" name="prod_precio" matInput type="number"
+          <input [(ngModel)]="objProduct.prod_precio" name="prod_precio" matInput type="number"
             placeholder="Precio del producto" value="S/. 4.00">
         </mat-form-field>
         <br>
@@ -31,7 +91,7 @@
 
       <div class="col-md-4">
         <mat-form-field id="textDesc">
-          <textarea [(ngModel)]="producto.prod_desc" name="prod_desc" rows="5" matInput
+          <textarea [(ngModel)]="objProduct.prod_desc" name="prod_desc" rows="5" matInput
             placeholder="Descripción del producto"
             value="Sus ingredientes principales son carne adobada, asada, servida en finas rebanadas sobre pequeñas tortillas de maíz, la carne puede ser una combinación de carne de cerdo y carne de ternera, aunque lo mas común es que sea solo carne de puerco."></textarea>
         </mat-form-field>
@@ -48,7 +108,7 @@
       </div>
     </div>
   </div>
-</form>
+</form> -->
 
 <hr>
 
@@ -100,9 +160,10 @@
     </ng-container>
 
     <ng-container matColumnDef="Editar">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Editar </th>
-        <td mat-cell *matCellDef="let row"> <button mat-raised-button color="warn" (click)="editProd(row.prod_id)"  > Editar</button> </td>
-      </ng-container>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Editar </th>
+      <td mat-cell *matCellDef="let row"> <button mat-raised-button color="warn" (click)="editProd(row.prod_id)">
+          Editar</button> </td>
+    </ng-container>
 
     <!-- <ng-container matColumnDef="Editar">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Disponibilidad </th>
@@ -116,5 +177,5 @@
     </tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[1, 2, 5]"></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[15,20, 25]"></mat-paginator>
 </div>

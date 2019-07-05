@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { StarRatingModule } from 'angular-star-rating';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CommonModule } from '@angular/common';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -66,16 +68,18 @@ export function provideConfig() {
   imports: [
     BrowserModule,
     AppRoutingModule,
+    CommonModule,
     BrowserAnimationsModule,
     MaterialModule,
     NgbModule,
+    ReactiveFormsModule,
     CountUpModule,
     StarRatingModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBcjhtE0FIFEO92Z_7xKQWODx3I_QXq33E'
     }),
     SocialLoginModule,
-    ReactiveFormsModule,
+    
     HttpClientModule,
     FormsModule,
   ],

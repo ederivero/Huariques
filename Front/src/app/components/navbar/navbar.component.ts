@@ -121,7 +121,7 @@ export class NavbarComponent implements OnInit {
           this.p = res.content[0];
           console.log(this.user[0].usu_id)
           if (this.user[0].usu_tipo === "0") {
-            this._Router.navigateByUrl(`gest/${this.user[0].usu_id}`)
+            this._Router.navigateByUrl(`gest`)
           }
         })
       } else {
@@ -154,7 +154,7 @@ export class NavbarComponent implements OnInit {
           this.p = res.content[0];
           console.log(this.user[0].usu_id)
           if (this.user[0].usu_tipo === "0") {
-            this._Router.navigateByUrl(`gest/${this.user[0].usu_id}`)
+            this._Router.navigateByUrl(`gest`)
           }
         })
       } else {
@@ -201,7 +201,7 @@ export class NavbarComponent implements OnInit {
     // this.inicio=true
   }
   gestRest() {
-    this._Router.navigateByUrl(`gest/${this.user[0].usu_id}`)
+    this._Router.navigateByUrl(`gest`)
     // this.inicio=false
   }
   onKey(event) {
