@@ -114,7 +114,7 @@ export class NavbarComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
       if (localStorage.getItem('token')) {
         this.user = null;
         this._sAuth.getUserLogged(this._sAuth.getUserDetails().usu_id).subscribe((res: any) => {
@@ -123,6 +123,7 @@ export class NavbarComponent implements OnInit {
           console.log(this.user[0].usu_id)
           if (this.user[0].usu_tipo === "0") {
             this._Router.navigateByUrl(`gest`)
+            this.userRest=true
           }
         })
       } else {
@@ -134,6 +135,9 @@ export class NavbarComponent implements OnInit {
             this._sAuth.getUserLogged(resp).subscribe((res: any) => {
               this.user = res.content;
               this.p = res.content[0];
+              if (this.user[0].usu_tipo === "0") {
+                this.userRest = true
+              }
             })
           }
         })
@@ -156,6 +160,7 @@ export class NavbarComponent implements OnInit {
           console.log(this.user[0].usu_id)
           if (this.user[0].usu_tipo === "0") {
             this._Router.navigateByUrl(`gest`)
+            this.userRest=true
           }
         })
       } else {
@@ -167,6 +172,9 @@ export class NavbarComponent implements OnInit {
             this._sAuth.getUserLogged(resp).subscribe((res: any) => {
               this.user = res.content;
               this.p = res.content[0];
+              if (this.user[0].usu_tipo === "0") {
+                this.userRest = true
+              }
             })
           }
         })

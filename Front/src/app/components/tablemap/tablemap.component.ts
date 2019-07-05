@@ -191,7 +191,7 @@ export class TablemapComponent implements OnInit {
   }
   openWindow(id) {
     let l = this.markers.find(rest => rest.rest_id == id);
-    this.lat = +l.rest_lat + 0.03;
+    this.lat = +l.rest_lat + 0.04;
     this.lng = +l.rest_lng;
     this.openedWindow = id;
   }

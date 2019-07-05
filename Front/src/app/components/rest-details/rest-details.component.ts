@@ -55,12 +55,12 @@ export class RestDetailsComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private ruta: ActivatedRoute) {
     var rutaActual = ruta.snapshot.params.id - 1;
-    console.log(rutaActual);
+    // console.log(rutaActual);
     fetch(`https://huariquesback.herokuapp.com/api/producto/porIdRest/${rutaActual + 1}`)
     .then(response=>{
       return response.json()
     }).then(dataprod=>{
-      console.log(dataprod.content)
+      // console.log(dataprod.content)
       if(dataprod.content!=""){
         this.hayproductos=true
       }
@@ -73,7 +73,7 @@ export class RestDetailsComponent implements OnInit {
           })
         }
       });
-      console.log(this.productos)
+      // console.log(this.productos)
     })
     fetch(`https://huariquesback.herokuapp.com/api/restcategoria/rest/${rutaActual + 1}`).then(response => {
       return response.json()
@@ -163,7 +163,7 @@ export class RestDetailsComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.innerWidth = window.innerWidth;
-    console.log(this.innerWidth)
+    // console.log(this.innerWidth)
   }
   ngOnInit() {
     this.innerWidth = window.innerWidth
@@ -176,7 +176,7 @@ export class RestDetailsComponent implements OnInit {
         });
         dialogRef.componentInstance.rutaActual = this.ruta.snapshot.params.id
         dialogRef.afterClosed().subscribe(() => {
-          console.log('The dialog was closed');
+          // console.log('The dialog was closed');
         });
       } else {
         const dialogRef = this.dialog.open(CalificanosComponent, {
@@ -184,7 +184,7 @@ export class RestDetailsComponent implements OnInit {
         });
         dialogRef.componentInstance.rutaActual = this.ruta.snapshot.params.id
         dialogRef.afterClosed().subscribe(() => {
-          console.log('The dialog was closed');
+          // console.log('The dialog was closed');
         });
       }
 
@@ -194,14 +194,14 @@ export class RestDetailsComponent implements OnInit {
           width: '50%'
         });
         dialogRef.afterClosed().subscribe(() => {
-          console.log('The dialog was closed');
+          // console.log('The dialog was closed');
         });
       } else {
         const dialogRef = this.dialog.open(LoginComponent, {
           width: '30%'
         });
         dialogRef.afterClosed().subscribe(() => {
-          console.log('The dialog was closed');
+          // console.log('The dialog was closed');
         });
       }
 

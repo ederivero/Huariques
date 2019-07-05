@@ -129,7 +129,9 @@
               {{item.rest_hCierre}}</div>
 
           </div>
-          <img src={{item.rest_img}} class="restImg" alt="imagen del Agachadito">
+          <div class="imgcontain text-center">
+            <img src={{item.rest_img}} class="restImg" alt="imagen del Agachadito">
+          </div>
           <div class="card-body">
             <p class="card-text "> {{item.rest_refUbicacion}}</p>
             <button type="button" (click)="verAgachadito()" style="background-color: #c42800"
