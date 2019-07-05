@@ -42,6 +42,21 @@ agm-map {
     overflow: hidden;
     z-index: 3;
 }
+#carouselExampleIndicators{
+    position: relative;
+    top:7.5vh;
+    z-index: 2;
+}
+#itemcarousel{
+    align-content: center;
+    height: 60vh;
+    overflow: hidden
+}
+.carousel-item{
+    vertical-align:middle;
+    max-height: 50vh;
+    align-content: center;
+}
 #linea{
     position: absolute;
     align-content: center;

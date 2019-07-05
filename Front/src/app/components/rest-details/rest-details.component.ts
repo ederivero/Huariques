@@ -32,6 +32,8 @@ export class RestDetailsComponent implements OnInit {
   categorias = []
   dias: Array<String> = ["Lun", "Mar", "Mier", "Jue", "Vier", "Sab", "Dom"]
   horarios: Array<any> = []
+  hayproductos:boolean=false;
+  productos:Array<any>=[]
   comentarios: Array<any> = [{
     id: 1,
     nombre: "Joel",
@@ -54,6 +56,25 @@ export class RestDetailsComponent implements OnInit {
   constructor(public dialog: MatDialog, private ruta: ActivatedRoute) {
     var rutaActual = ruta.snapshot.params.id - 1;
     console.log(rutaActual);
+    fetch(`https://huariquesback.herokuapp.com/api/producto/porIdRest/${rutaActual + 1}`)
+    .then(response=>{
+      return response.json()
+    }).then(dataprod=>{
+      console.log(dataprod.content)
+      if(dataprod.content!=""){
+        this.hayproductos=true
+      }
+      dataprod.content.forEach(producto => {
+        if (producto.prod_disp!="0") {
+          this.productos.push({
+            prod_nom:producto.prod_nom,
+            prod_desc:producto.prod_desc,
+            prod_img:producto.prod_img
+          })
+        }
+      });
+      console.log(this.productos)
+    })
     fetch(`https://huariquesback.herokuapp.com/api/restcategoria/rest/${rutaActual + 1}`).then(response => {
       return response.json()
     }).then(datacat => {
