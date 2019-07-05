@@ -28,7 +28,7 @@ export interface DialogData {
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-
+  i=0;
   nombre;
   precio;
   cat;
@@ -137,8 +137,10 @@ export class MenuComponent implements OnInit {
         dataprod.content.forEach(idForProd => {
 
           this.load = true;
+          this.i = this.i + 1,
 
           this.p_cadauno.push({
+            id:this.i,
             prod_id: idForProd.prod_id,
             prod_desc: idForProd.prod_desc,
             prod_disp: idForProd.prod_disp,
@@ -179,8 +181,10 @@ export class MenuComponent implements OnInit {
             dataprod.content.forEach(idForProd => {
 
               this.load = true;
+              this.i=this.i+1
 
               this.p_cadauno.push({
+                id:this.i,
                 prod_id: idForProd.prod_id,
                 prod_desc: idForProd.prod_desc,
                 prod_disp: idForProd.prod_disp,
